@@ -11,6 +11,24 @@
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_home.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_login.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3489583333333333" />
+        <entry key="app/src/main/res/drawable/bg_rounded_corner.xml" value="0.15703125" />
+        <entry key="app/src/main/res/drawable/bg_rounded_corner_grey.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/bg_rounded_corner_white.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/ic_amico.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_apple.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_close.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/ic_facebook.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_failed.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/ic_google.xml" value="0.209375" />
+        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/ic_mail.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/drawable/ic_success.xml" value="0.13223684210526315" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12203947368421053" />
+        <entry key="app/src/main/res/layout/bg_rounded_corner_white.xml" value="0.12203947368421053" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.12533783783783783" />
+        <entry key="app/src/main/res/layout/fragment_register_failed.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_register_success.xml" value="0.19322916666666667" />
       </map>
     </option>
   </component>

@@ -3,4 +3,16 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
+    <string name="label_sign_up">Sign Up</string>
+    <string name="label_sign_with_email">Or Sign Up with email…</string>
+    <string name="label_fullname">Fullname</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_confirm_password">Confirm Password</string>
+    <string name="label_register">Register</string>
+    <string name="label_success">Success!</string>
+    <string name="description_success">Your account has been created.</string>
+    <string name="label_continue">Continue</string>
+    <string name="label_failed">Opps!</string>
+    <string name="description_failed">Something went wrong</string>
 </resources>
