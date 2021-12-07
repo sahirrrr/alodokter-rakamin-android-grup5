@@ -78,77 +78,98 @@
             android:textSize="@dimen/font_12"
             app:layout_constraintTop_toBottomOf="@id/iv_google" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edt_fullname"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_16"
             android:layout_marginEnd="@dimen/dimens_16"
-            android:background="@drawable/bg_rounded_corner"
-            android:drawableStart="@drawable/ic_profile"
-            android:drawablePadding="@dimen/dimens_20"
             android:hint="@string/label_fullname"
             android:inputType="text"
-            android:padding="@dimen/dimens_16"
             android:textColorHint="@color/text_black"
+            app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+            app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+            app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+            app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_sign_with_email"
-            tools:ignore="Autofill" />
+            app:startIconDrawable="@drawable/ic_profile">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="@dimen/dimens_379"
+                android:layout_height="@dimen/dimens_56" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edt_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_17"
             android:layout_marginEnd="@dimen/dimens_16"
-            android:background="@drawable/bg_rounded_corner"
-            android:drawableStart="@drawable/ic_mail"
-            android:drawablePadding="@dimen/dimens_20"
             android:hint="@string/label_email"
             android:inputType="textEmailAddress"
-            android:padding="@dimen/dimens_16"
             android:textColorHint="@color/text_black"
+            app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+            app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+            app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+            app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edt_fullname"
-            tools:ignore="Autofill" />
+            app:startIconDrawable="@drawable/ic_mail">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="@dimen/dimens_379"
+                android:layout_height="@dimen/dimens_56" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edt_password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_17"
             android:layout_marginEnd="@dimen/dimens_16"
-            android:background="@drawable/bg_rounded_corner"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawablePadding="@dimen/dimens_20"
             android:hint="@string/label_password"
             android:inputType="textPassword"
-            android:padding="@dimen/dimens_16"
             android:textColorHint="@color/text_black"
+            app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+            app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+            app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+            app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edt_email"
-            tools:ignore="Autofill" />
+            app:startIconDrawable="@drawable/ic_lock">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="@dimen/dimens_379"
+                android:layout_height="@dimen/dimens_56" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edt_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_17"
             android:layout_marginEnd="@dimen/dimens_16"
-            android:background="@drawable/bg_rounded_corner"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawablePadding="@dimen/dimens_20"
             android:hint="@string/label_confirm_password"
             android:inputType="textPassword"
-            android:padding="@dimen/dimens_16"
             android:textColorHint="@color/text_black"
+            app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+            app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+            app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+            app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edt_password"
-            tools:ignore="Autofill" />
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="@dimen/dimens_379"
+                android:layout_height="@dimen/dimens_56" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_register"
