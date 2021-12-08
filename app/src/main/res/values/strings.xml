@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
+    <string name="title_on_boarding">Choose The Doctor \nYou Want</string>
+    <string name="desc_on_boarding">Anytime, anywhere &amp; anycondition \nAlodokter with you.</string>
+    <string name="btn_get_started">Get Started</string>
+    <string name="onboarding_illustration">OnBoarding Illustration</string>
 </resources>
