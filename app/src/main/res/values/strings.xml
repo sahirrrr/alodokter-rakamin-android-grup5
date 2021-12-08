@@ -3,4 +3,17 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
+    <string name="hello">Hello</string>
+    <string name="guest_user">Guest User</string>
+    <string name="query_hint">Search for a doctor...</string>
+    <string name="appointment_today">Appointment Today</string>
+    <string name="doctor_name">Dr. Bagas</string>
+    <string name="doctor_specialist">Spesialis Jantung</string>
+    <string name="icon_schedule">Icon Schedule</string>
+    <string name="booking_schedule">Monday, 28 Des</string>
+    <string name="booking_time">11.00-12.30 PM</string>
+    <string name="article">Article</string>
+    <string name="see_more">See More</string>
+    <string name="dummy_tag">Kesehatan</string>
+    <string name="dummy_title">Pentingan mengajarkan kesehatan gigi dan mulut</string>
 </resources>
