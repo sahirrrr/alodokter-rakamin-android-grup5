@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@id/iv_google" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_fullname"
+            android:id="@+id/til_fullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
@@ -97,13 +97,14 @@
             app:startIconDrawable="@drawable/ic_profile">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_fullname"
                 android:layout_width="@dimen/dimens_379"
                 android:layout_height="@dimen/dimens_56" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_email"
+            android:id="@+id/til_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
@@ -117,16 +118,17 @@
             app:boxCornerRadiusTopEnd="@dimen/dimens_20"
             app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_fullname"
+            app:layout_constraintTop_toBottomOf="@id/til_fullname"
             app:startIconDrawable="@drawable/ic_mail">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_email"
                 android:layout_width="@dimen/dimens_379"
                 android:layout_height="@dimen/dimens_56" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_password"
+            android:id="@+id/til_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
@@ -140,16 +142,17 @@
             app:boxCornerRadiusTopEnd="@dimen/dimens_20"
             app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_email"
+            app:layout_constraintTop_toBottomOf="@id/til_email"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
                 android:layout_width="@dimen/dimens_379"
                 android:layout_height="@dimen/dimens_56" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_confirm_password"
+            android:id="@+id/til_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
@@ -163,10 +166,11 @@
             app:boxCornerRadiusTopEnd="@dimen/dimens_20"
             app:boxCornerRadiusTopStart="@dimen/dimens_20"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_password"
+            app:layout_constraintTop_toBottomOf="@id/til_password"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_confirm_password"
                 android:layout_width="@dimen/dimens_379"
                 android:layout_height="@dimen/dimens_56" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -179,9 +183,10 @@
             android:layout_marginTop="@dimen/dimens_32"
             android:layout_marginEnd="@dimen/dimens_16"
             android:backgroundTint="@color/button"
+            android:enabled="false"
             android:text="@string/label_register"
             android:textAllCaps="false"
-            app:layout_constraintTop_toBottomOf="@id/edt_confirm_password" />
+            app:layout_constraintTop_toBottomOf="@id/til_confirm_password" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -15,4 +15,8 @@
     <string name="label_continue">Continue</string>
     <string name="label_failed">Opps!</string>
     <string name="description_failed">Something went wrong</string>
+    <string name="empty_field">Field cannot be empty</string>
+    <string name="email_not_valid">Email not valid!</string>
+    <string name="password_minimal">Password length must be more than 6 characters1</string>
+    <string name="password_not_match">The password confirmation does not match!</string>
 </resources>

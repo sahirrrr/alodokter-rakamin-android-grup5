@@ -26,7 +26,8 @@
         <entry key="app/src/main/res/drawable/ic_success.xml" value="0.13223684210526315" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12203947368421053" />
         <entry key="app/src/main/res/layout/bg_rounded_corner_white.xml" value="0.12203947368421053" />
-        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.12533783783783783" />
+        <entry key="app/src/main/res/layout/fragment_booking.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_register_failed.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_register_success.xml" value="0.19322916666666667" />
       </map>
