@@ -32,7 +32,7 @@ class RegisterFragment : Fragment() {
         val fullNameStream = RxTextView.textChanges(binding.edtFullname)
             .skipInitialValue()
             .map { name ->
-                name.trim().isEmpty()
+                name.isEmpty()
             }
         fullNameStream.subscribe { it1 ->
             showFullnameEmptyAlert(it1)
@@ -84,6 +84,10 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    private fun showFullnameEmptyAlert(isNotValid: Boolean) {
+        binding.edtFullname.error = if (isNotValid) getString(R.string.empty_field) else null
+    }
+
     private fun showEmailExistAlert(isNotValid: Boolean) {
         binding.edtEmail.error = if (isNotValid) getString(R.string.email_not_valid) else null
     }
@@ -95,10 +99,6 @@ class RegisterFragment : Fragment() {
     private fun showPasswordConfirmAlert(isNotValid: Boolean) {
         binding.edtConfirmPassword.error =
             if (isNotValid) getString(R.string.password_not_match) else null
-    }
-
-    private fun showFullnameEmptyAlert(isNotValid: Boolean) {
-        binding.edtFullname.error = if (isNotValid) getString(R.string.empty_field) else null
     }
 
     override fun onDestroy() {
