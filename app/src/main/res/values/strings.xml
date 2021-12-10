@@ -11,4 +11,7 @@
     <string name="label_forgot"><U>Forgot Password?</U></string>
     <string name="label_register">New to Alodokter? <b>Register</b></string>
     <string name="hello_blank_fragment">tes</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="label_skip_login">Skip Login..</string>
 </resources>
