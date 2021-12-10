@@ -3,6 +3,10 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
+    <string name="label_enter_name">Enter the email associated with your account and we’ll send an email with instruction to reset your password.</string>
+    <string name="label_send_instruction">Send Instruction</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="email">Email</string>
     <string name="hello">Hello</string>
     <string name="guest_user">Guest User</string>
     <string name="query_hint">Search for a doctor...</string>
