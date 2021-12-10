@@ -3,6 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
+    <string name="personal_data">Personal Data</string>
+    <string name="help">Help</string>
+    <string name="log_out">Log Out</string>
+    <string name="label_name">Sahir Syatha</string>
+    <string name="label_number">+6287785255146</string>
     <string name="title_on_boarding">Choose The Doctor \nYou Want</string>
     <string name="desc_on_boarding">Anytime, anywhere &amp; anycondition \nAlodokter with you.</string>
     <string name="btn_get_started">Get Started</string>
