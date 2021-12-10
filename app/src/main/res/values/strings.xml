@@ -7,4 +7,8 @@
     <string name="desc_on_boarding">Anytime, anywhere &amp; anycondition \nAlodokter with you.</string>
     <string name="btn_get_started">Get Started</string>
     <string name="onboarding_illustration">OnBoarding Illustration</string>
+    <string name="label_login">Login</string>
+    <string name="label_forgot"><U>Forgot Password?</U></string>
+    <string name="label_register">New to Alodokter? <b>Register</b></string>
+    <string name="hello_blank_fragment">tes</string>
 </resources>
