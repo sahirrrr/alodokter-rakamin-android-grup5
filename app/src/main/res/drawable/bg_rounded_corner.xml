@@ -5,5 +5,4 @@
         android:width="@dimen/dimens_1"
         android:color="@color/black" />
     <corners android:radius="@dimen/dimens_20" />
-
 </shape>
