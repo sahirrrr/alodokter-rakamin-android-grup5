@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
+    <string name="personal_data">Personal Data</string>
     <string name="label_sign_up">Sign Up</string>
     <string name="label_sign_with_email">Or Sign Up with email…</string>
     <string name="label_fullname">Fullname</string>
