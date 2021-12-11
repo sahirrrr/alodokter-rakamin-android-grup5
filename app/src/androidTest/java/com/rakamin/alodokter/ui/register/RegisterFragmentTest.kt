@@ -35,7 +35,7 @@ class RegisterFragmentTest {
         val password = "1122334"
         val confirmPassword = "1111111"
 
-        onView(withId(R.id.edt_fullname)).perform(typeText(name))
+        onView(withId(R.id.edt_full_name)).perform(typeText(name))
         onView(withId(R.id.edt_email)).perform(typeText(email))
         onView(withId(R.id.edt_password)).perform(typeText(password))
         onView(withId(R.id.edt_confirm_password)).perform(typeText(confirmPassword))
