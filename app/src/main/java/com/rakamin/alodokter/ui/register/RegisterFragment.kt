@@ -15,56 +15,65 @@ import io.reactivex.Observable
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
+    private var root : View? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        return binding.root
+        root = binding?.root
+        return root
     }
 
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fullNameStream = RxTextView.textChanges(binding.edtFullname)
-            .skipInitialValue()
-            .map { name ->
-                name.isEmpty()
-            }
-        fullNameStream.subscribe { it1 ->
-            showFullnameEmptyAlert(it1)
+        val fullNameStream = binding?.edtFullName?.let {
+            RxTextView.textChanges(it)
+                .skipInitialValue()
+                .map { name ->
+                    name.isEmpty()
+                }
+        }
+        fullNameStream?.subscribe { it1 ->
+            showFullNameEmptyAlert(it1)
         }
 
-        val emailStream = RxTextView.textChanges(binding.edtEmail)
-            .skipInitialValue()
-            .map { email ->
-                !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-            }
-        emailStream.subscribe { it2 ->
+        val emailStream = binding?.edtEmail?.let {
+            RxTextView.textChanges(it)
+                .skipInitialValue()
+                .map { email ->
+                    !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                }
+        }
+        emailStream?.subscribe { it2 ->
             showEmailExistAlert(it2)
         }
 
-        val passwordStream = RxTextView.textChanges(binding.edtPassword)
-            .skipInitialValue()
-            .map { password ->
-                password.length < 8
-            }
-        passwordStream.subscribe { it3 ->
+        val passwordStream = binding?.edtPassword?.let {
+            RxTextView.textChanges(it)
+                .skipInitialValue()
+                .map { password ->
+                    password.length < 8
+                }
+        }
+        passwordStream?.subscribe { it3 ->
             showPasswordMinimalAlert(it3)
         }
 
         val passwordConfirmStream = Observable.merge(
-            RxTextView.textChanges(binding.edtPassword)
-                .map { password ->
-                    password.toString() != binding.edtConfirmPassword.text.toString()
-                },
-            RxTextView.textChanges(binding.edtConfirmPassword)
-                .map { confirmPassword ->
-                    confirmPassword.toString() != binding.edtPassword.text.toString()
-                }
+            binding?.edtPassword?.let {
+                RxTextView.textChanges(it)
+                    .map { password ->
+                        password.toString() != binding?.edtConfirmPassword?.text.toString()
+                    }
+            },
+            binding?.edtConfirmPassword?.let {
+                RxTextView.textChanges(it)
+                    .map { confirmPassword ->
+                        confirmPassword.toString() != binding?.edtPassword?.text.toString()
+                    }
+            }
         )
         passwordConfirmStream.subscribe { it4 ->
             showPasswordConfirmAlert(it4)
@@ -80,29 +89,29 @@ class RegisterFragment : Fragment() {
             })
 
         invalidFieldStream.subscribe { isValid ->
-            binding.btnRegister.isEnabled = isValid
+            binding?.btnRegister?.isEnabled = isValid
         }
     }
 
-    private fun showFullnameEmptyAlert(isNotValid: Boolean) {
-        binding.edtFullname.error = if (isNotValid) getString(R.string.empty_field) else null
+    private fun showFullNameEmptyAlert(isNotValid: Boolean) {
+        binding?.edtFullName?.error = if (isNotValid) getString(R.string.empty_field) else null
     }
 
     private fun showEmailExistAlert(isNotValid: Boolean) {
-        binding.edtEmail.error = if (isNotValid) getString(R.string.email_not_valid) else null
+        binding?.edtEmail?.error = if (isNotValid) getString(R.string.email_not_valid) else null
     }
 
     private fun showPasswordMinimalAlert(isNotValid: Boolean) {
-        binding.edtPassword.error = if (isNotValid) getString(R.string.password_minimal) else null
+        binding?.edtPassword?.error = if (isNotValid) getString(R.string.password_minimal) else null
     }
 
     private fun showPasswordConfirmAlert(isNotValid: Boolean) {
-        binding.edtConfirmPassword.error =
-            if (isNotValid) getString(R.string.password_not_match) else null
+        binding?.edtConfirmPassword?.error = if (isNotValid) getString(R.string.password_not_match) else null
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        root = null
     }
 }
