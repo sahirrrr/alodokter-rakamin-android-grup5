@@ -51,22 +51,21 @@ class AlodokterRepository(
             }
 
             override fun shouldFetch(data: List<ArticleModel>?): Boolean {
-                return data == null || data.isEmpty()
-
+                return true
             }
 
 
             override fun saveCallResult(data: ArticleResponse) {
                 val article = DataMapper.mapArticleResponseToArticleEntities(data)
                 localDataSource.insertArticle(article).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
-
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
             }
 
             override fun createCall(): Flowable<ApiResponse<ArticleResponse>> {
                 return remoteDataSource.getArticle()
             }
-
         }.asFlowAble()
 
     override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> =

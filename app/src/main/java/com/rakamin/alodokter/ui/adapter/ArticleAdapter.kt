@@ -1,6 +1,5 @@
 package com.rakamin.alodokter.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,29 +11,13 @@ import java.util.ArrayList
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     private val listArticle = ArrayList<ArticleModel>()
-    inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: ArticleModel) {
-            with(binding) {
-                tvTag.text = article.judul
-                tvTitleArticle.text = article.konten
-                Glide.with(itemView.context)
-                    .load(R.drawable.ic_article_image)
-                    .into(ivArticle)
 
-
-            }
-        }
-
-
-    }
     fun setArticle(article: List<ArticleModel>?) {
         if (article == null) return
         this.listArticle.clear()
         this.listArticle.addAll(article)
         notifyDataSetChanged()
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -44,11 +27,22 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = listArticle[position]
         holder.bind(article)
-
     }
 
     override fun getItemCount(): Int {
         return listArticle.size
+    }
+
+    inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: ArticleModel) {
+            with(binding) {
+                tvTag.text = article.judul
+                tvTitleArticle.text = article.konten
+                Glide.with(itemView.context)
+                    .load(R.drawable.ic_article_image)
+                    .into(ivArticle)
+            }
+        }
     }
 
 }

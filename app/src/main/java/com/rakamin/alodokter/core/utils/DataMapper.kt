@@ -6,7 +6,6 @@ import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
 import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
 import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
 import com.rakamin.alodokter.domain.model.LoginModel
 import com.rakamin.alodokter.domain.model.RegisterModel
@@ -54,10 +53,10 @@ object DataMapper {
                 it.createdAt,
                 it.judul
             )
-
         }
-        
-    fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>) : List<RegisterModel> {
+    }
+
+    fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>): List<RegisterModel> {
         return data.map {
             with(it) {
                 RegisterModel(
@@ -67,7 +66,7 @@ object DataMapper {
         }
     }
 
-    fun mapRegisterResponseToEntities(data: RegisterResponse) : List<RegisterEntity> {
+    fun mapRegisterResponseToEntities(data: RegisterResponse): List<RegisterEntity> {
         val userRegister = ArrayList<RegisterEntity>()
         with(data) {
             val user = RegisterEntity(
@@ -95,7 +94,7 @@ object DataMapper {
                 )
                 listArticle.add(article)
             }
+            return listArticle
         }
-        return listArticle
     }
 }
