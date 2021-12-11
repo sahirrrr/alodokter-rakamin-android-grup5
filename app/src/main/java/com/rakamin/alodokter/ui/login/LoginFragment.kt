@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.EXTRA_DATA
 import com.rakamin.alodokter.databinding.FragmentLoginBinding
 import com.rakamin.alodokter.session.SessionRepository
 import org.koin.android.ext.android.inject
@@ -49,14 +50,11 @@ class LoginFragment : Fragment() {
                         if (dataArray != null) {
                             for (data in dataArray) {
                                 binding?.progressBar?.visibility = View.GONE
-                                data.id?.let { sessionRepository.loginUser(it) }
                                 val mBundle = Bundle()
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Login Successfully!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                                data.id?.let { mBundle.putInt(EXTRA_DATA, it) }
+                                data.id?.let { sessionRepository.loginUser(it) }
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment, mBundle)
+                                Toast.makeText(requireContext(), "Login Successfully!", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

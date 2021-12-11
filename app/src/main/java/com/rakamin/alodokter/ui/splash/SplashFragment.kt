@@ -17,11 +17,7 @@ class SplashFragment : Fragment() {
 
     private val sessionRepository: SessionRepository by inject()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Handler(Looper.getMainLooper()).postDelayed({
             if (sessionRepository.isOnBoardingFinish()) {
                 if (sessionRepository.isLogin()) {

@@ -1,14 +1,11 @@
 package com.rakamin.alodokter
 
-import android.app.Activity
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.jaeger.library.StatusBarUtil
 import com.rakamin.alodokter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
