@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.REGISTER_USER_STATUS
+import com.rakamin.alodokter.core.utils.TAG_STATUS_DIALOG
 import com.rakamin.alodokter.databinding.FragmentLoginBinding
+import com.rakamin.alodokter.ui.dialog.StatusDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -29,11 +32,25 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (arguments != null) {
+            val registerStatus = requireArguments().getBoolean(REGISTER_USER_STATUS)
+            showDialogStatus(REGISTER_USER_STATUS, registerStatus)
+        }
+
+
         binding?.btnLogin?.setOnClickListener {
             val email = binding?.edtEmail?.text.toString().trim()
             val password = binding?.edtPassword?.text.toString().trim()
 
             userLogin(email, password)
+        }
+
+        binding?.tvRegister?.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        binding?.tvSkipLogin?.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
     }
 
@@ -53,6 +70,14 @@ class LoginFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun showDialogStatus(key: String, value: Boolean) {
+        val mBundle = Bundle()
+        val dialog = StatusDialogFragment()
+        mBundle.putBoolean(key, value)
+        dialog.arguments = mBundle
+        dialog.show(childFragmentManager, TAG_STATUS_DIALOG)
     }
 
     override fun onDestroyView() {
