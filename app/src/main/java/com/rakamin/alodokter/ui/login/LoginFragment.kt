@@ -9,15 +9,15 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
-import com.rakamin.alodokter.core.utils.REGISTER_USER_STATUS
-import com.rakamin.alodokter.core.utils.TAG_STATUS_DIALOG
 import com.rakamin.alodokter.databinding.FragmentLoginBinding
-import com.rakamin.alodokter.ui.dialog.StatusDialogFragment
+import com.rakamin.alodokter.session.SessionRepository
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
     private val viewModel : LoginViewModel by viewModel()
+    private val sessionRepository : SessionRepository by inject()
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
@@ -32,25 +32,11 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments != null) {
-            val registerStatus = requireArguments().getBoolean(REGISTER_USER_STATUS)
-            showDialogStatus(REGISTER_USER_STATUS, registerStatus)
-        }
-
-
         binding?.btnLogin?.setOnClickListener {
             val email = binding?.edtEmail?.text.toString().trim()
             val password = binding?.edtPassword?.text.toString().trim()
 
             userLogin(email, password)
-        }
-
-        binding?.tvRegister?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
-
-        binding?.tvSkipLogin?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
     }
 
@@ -59,8 +45,20 @@ class LoginFragment : Fragment() {
             if (userLogin != null) {
                 when(userLogin) {
                     is Resource.Success -> {
-                        Toast.makeText(requireContext(), "Login Successfully!", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        val dataArray = userLogin.data
+                        if (dataArray != null) {
+                            for (data in dataArray) {
+                                binding?.progressBar?.visibility = View.GONE
+                                data.id?.let { sessionRepository.loginUser(it) }
+                                val mBundle = Bundle()
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Login Successfully!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            }
+                        }
                     }
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
@@ -70,14 +68,6 @@ class LoginFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun showDialogStatus(key: String, value: Boolean) {
-        val mBundle = Bundle()
-        val dialog = StatusDialogFragment()
-        mBundle.putBoolean(key, value)
-        dialog.arguments = mBundle
-        dialog.show(childFragmentManager, TAG_STATUS_DIALOG)
     }
 
     override fun onDestroyView() {
