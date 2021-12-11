@@ -4,8 +4,10 @@ import com.rakamin.alodokter.core.data.source.local.LocalDataSource
 import com.rakamin.alodokter.core.data.source.remote.RemoteDataSource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.LoginModel
+import com.rakamin.alodokter.domain.model.ProfileModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,4 +39,29 @@ class AlodokterRepository(
                 return remoteDataSource.postUserLogin(email, password)
             }
         }.asFlowAble()
+
+    override fun getProfile(idUser: String): Flowable<Resource<List<ProfileModel>>> =
+        object : NetworkBoundResource<List<ProfileModel>, ProfileResponse>() {
+            override fun loadFromDB(): Flowable<List<ProfileModel>> {
+                return localDataSource.getUserProfile().map { DataMapper.mapProfileEntitiesToDomain(it) }
+            }
+
+            override fun shouldFetch(data: List<ProfileModel>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+
+            override fun saveCallResult(data: ProfileResponse) {
+                val userProfile = DataMapper.mapProfileResponseToEntities(data)
+                localDataSource.insertUserProfile(userProfile)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+
+            override fun createCall(): Flowable<ApiResponse<ProfileResponse>> {
+                return remoteDataSource.getUserProfile(idUser)
+            }
+        }.asFlowAble()
+
+
 }
