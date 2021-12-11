@@ -37,7 +37,7 @@
         android:layout_height="@dimen/dimens_50"
         android:layout_marginTop="@dimen/dimens_16"
         android:layout_marginEnd="@dimen/dimens_16"
-        android:src="@drawable/profile"
+        android:src="@drawable/photo"
         app:riv_corner_radius="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
