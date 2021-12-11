@@ -1,14 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.EditProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+<Toolbar
+    android:id="@+id/tb_edit_profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_arrow"
+        android:contentDescription="@string/icon_back" />
+
+    <TextView
+        android:id="@+id/tv_personal_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/personal_data"/>
+
+</Toolbar>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_edit_profile"
+        android:layout_width="@dimen/dimens_100"
+        android:layout_height="@dimen/dimens_100"
+        android:src="@drawable/photo"
+        android:layout_marginTop="@dimen/dimens_36"
+        app:layout_constraintTop_toBottomOf="@id/tb_edit_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:riv_corner_radius="@dimen/dimens_10"
+        android:contentDescription="@string/profile_picture" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_36"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:hint="@string/name"
+        app:startIconDrawable="@drawable/ic_profile"
+        app:boxCornerRadiusTopStart="@dimen/dimens_20"
+        app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+        app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+        app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+        app:layout_constraintTop_toBottomOf="@id/iv_edit_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_phone_number"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_16"
+        app:startIconDrawable="@drawable/ic_call"
+        app:boxCornerRadiusTopStart="@dimen/dimens_20"
+        app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+        app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+        app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        app:layout_constraintTop_toBottomOf="@id/til_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/phone_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_birthday"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        app:startIconDrawable="@drawable/ic_calandar"
+        app:boxCornerRadiusTopStart="@dimen/dimens_20"
+        app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+        app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+        app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+        app:layout_constraintTop_toBottomOf="@id/til_phone_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/birthday">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_city"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        app:startIconDrawable="@drawable/ic_location"
+        app:boxCornerRadiusTopStart="@dimen/dimens_20"
+        app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+        app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+        app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+        app:layout_constraintTop_toBottomOf="@id/til_birthday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/city">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/buttonRounded"
+        android:layout_width="@dimen/dimens_150"
+        android:layout_height="@dimen/dimens_56"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginBottom="@dimen/dimens_36"
+        android:text="@string/save"
+        android:backgroundTint="@color/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
