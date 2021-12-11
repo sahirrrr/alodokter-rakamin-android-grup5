@@ -30,6 +30,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        var idUser = sessionRepository.getIdUser()
+        if (idUser == 0) idUser = requireArguments().getInt(EXTRA_DATA)
+
+        binding?.tvName?.text = idUser.toString()
+        //Back press Close App
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // handle back event
+            activity?.finishAndRemoveTask()
+        }
+        
         showArticleList()
         showRvArticle()
 
@@ -74,7 +85,6 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        
     }
-
-
 }

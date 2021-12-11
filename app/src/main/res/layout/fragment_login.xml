@@ -99,10 +99,10 @@
         android:id="@+id/btn_login"
         style="@style/buttonRounded"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_56"
+        android:layout_height="@dimen/dimens_64"
         android:layout_marginStart="@dimen/dimens_16"
         android:layout_marginTop="@dimen/dimens_48"
-        android:layout_marginEnd="@dimen/dimens_1"
+        android:layout_marginEnd="@dimen/dimens_16"
         android:backgroundTint="@color/button"
         android:text="@string/label_login"
         android:textAllCaps="false"
@@ -188,7 +188,7 @@
         android:contentDescription="@string/icon_google" />
 
     <TextView
-        android:id="@+id/label_register"
+        android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"

@@ -82,4 +82,5 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="city">City</string>
     <string name="save">Save</string>
     <string name="reset_password">Reset Password</string>
+    <string name="already_have_an_account_login">Already have an account ? <b>Login</b></string>
 </resources>

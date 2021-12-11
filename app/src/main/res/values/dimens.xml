@@ -45,4 +45,5 @@
     <dimen name="weight_500">500</dimen>
     <dimen name="dimens_60">60dp</dimen>
     <dimen name="dimens_100">100dp</dimen>
+    <dimen name="dimens_64">64dp</dimen>
 </resources>
