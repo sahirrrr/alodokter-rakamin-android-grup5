@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.databinding.FragmentProfileBinding
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class ProfileFragment : Fragment() {
     private val viewModel : ProfileViewModel by viewModel()
@@ -28,34 +28,33 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showProfile()
-
-
-
     }
 
     private fun showProfile() {
         viewModel.userProfile("1").observe(viewLifecycleOwner,{ showProfile ->
             if (showProfile != null) {
                 when(showProfile) {
-                    is Resource.Success ->{
+                    is Resource.Success -> {
                         val dataArray = showProfile.data
                         if (dataArray != null) {
                             for (data in dataArray) {
+                                binding?.progressBar?.visibility = View.GONE
                                 binding?.tvName?.text = data.nama
                                 binding?.tvNumber?.text = data.noHp
                             }
                         }
-
                     }
-                    is Resource.Error -> TODO()
-                    is Resource.Loading -> TODO()
-
+                    is Resource.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.tvName?.text = getString(R.string.guest_user)
+                        binding?.tvNumber?.text = ""
+                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
             }
         })
     }
-
-
 }
 
 

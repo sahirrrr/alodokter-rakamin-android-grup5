@@ -16,10 +16,7 @@ interface ApiService {
 
 
     @GET("pasien/detail/{id_user}")
-    fun showProfile(
-        @Path("id_user") id_user : String,
-
-        ): Flowable<ProfileResponse>
+    fun showProfile(@Path("id_user") id_user : String): Flowable<ProfileResponse>
 }
 
 
