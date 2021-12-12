@@ -16,66 +16,57 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class ArticleFragment : Fragment() {
-    private var binding: FragmentArticleBinding? = null
+
     private val viewModel: ArticleViewModel by viewModel()
     private val articleAdapter = ArticleAdapter()
+
+    private var _binding: FragmentArticleBinding? = null
+    private val binding get() = _binding
     private var root: View? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentArticleBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentArticleBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         showArticleList()
-        showRvArticle()
     }
 
     private fun showArticleList() {
-        viewModel.getArticle().observe(viewLifecycleOwner, { article ->
+        viewModel.getArticle().observe(viewLifecycleOwner,{ article ->
             if (article != null) {
-                when (article) {
+                when(article) {
                     is Resource.Success -> {
                         val articles = article.data
                         articleAdapter.setArticle(articles)
-                        binding?.let { it.progressBar.visibility = View.GONE }
+                        binding?.progressBar?.visibility = View.GONE
+                        showRvArticle()
                     }
                     is Resource.Error -> {
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT)
-                            .show()
-
+                        binding?.progressBar?.visibility = View.GONE
+                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
                     }
-                    is Resource.Loading -> {
-                        binding?.let { it.progressBar.visibility = View.VISIBLE }
-
-                    }
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
-
             }
         })
-
-
     }
 
-    private fun showRvArticle() {
-        binding?.rvArticle?.let {
-            it.layoutManager = LinearLayoutManager(context)
-            it.setHasFixedSize(true)
-            it.adapter = articleAdapter
+    private fun showRvArticle(){
+        with(binding?.rvArticle) {
+            this?.layoutManager = LinearLayoutManager(context)
+            this?.setHasFixedSize(true)
+            this?.adapter = articleAdapter
         }
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
         root = null
     }
 }

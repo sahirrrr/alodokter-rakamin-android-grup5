@@ -13,36 +13,37 @@ import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.EXTRA_DATA
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
+import com.rakamin.alodokter.domain.model.LoginModel
+import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class HomeFragment : Fragment() {
+
     private val viewModel : HomeViewModel by viewModel()
-    private var binding : FragmentHomeBinding? = null
+    private val sessionRepository: SessionRepository by inject()
     private val articleAdapter = ArticleAdapter()
+
+    private var _binding : FragmentHomeBinding? = null
+    private val binding get() = _binding
     private var root : View? = null
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         root = binding?.root
+
+        val idUser = if (arguments != null) { requireArguments().getInt(EXTRA_DATA)
+        } else sessionRepository.getIdUser()
+
+        binding?.tvName?.text = idUser.toString()
+
         return root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var idUser = sessionRepository.getIdUser()
-        if (idUser == 0) idUser = requireArguments().getInt(EXTRA_DATA)
-
-        binding?.tvName?.text = idUser.toString()
         //Back press Close App
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // handle back event
@@ -50,57 +51,43 @@ class HomeFragment : Fragment() {
         }
 
         showArticleList()
-        showRvArticle()
-        binding?.let { it.tvSeeMore.setOnClickListener {
+
+        binding?.tvSeeMore?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
-
-
-        } }
+        }
     }
 
     private fun showArticleList() {
         viewModel.getArticle().observe(viewLifecycleOwner,{ article ->
-            if (article != null){
-                when(article){
+            if (article != null) {
+                when(article) {
                     is Resource.Success -> {
                         val articles = article.data
                         articleAdapter.setArticle(articles)
-                        binding?.let { it.progressBar.visibility = View.GONE }
-
-
+                        binding?.progressBar?.visibility = View.GONE
+                        showRvArticle()
                     }
                     is Resource.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
                         Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
-
                     }
-                    is Resource.Loading -> {
-                        binding?.let { it.progressBar.visibility = View.VISIBLE }
-
-                    }
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
-
             }
         })
-
-
-
     }
 
     private fun showRvArticle(){
-        binding?.rvArticle?.let {
-            it.layoutManager = LinearLayoutManager(context)
-            it.setHasFixedSize(true)
-            it.adapter = articleAdapter
+        with(binding?.rvArticle) {
+            this?.layoutManager = LinearLayoutManager(context)
+            this?.setHasFixedSize(true)
+            this?.adapter = articleAdapter
         }
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
         root = null
     }
-
-
 }
