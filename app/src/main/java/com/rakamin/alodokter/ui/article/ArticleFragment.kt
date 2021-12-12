@@ -1,4 +1,4 @@
-package com.rakamin.alodokter.ui.home
+package com.rakamin.alodokter.ui.article
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,53 +6,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.addCallback
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
-import com.rakamin.alodokter.core.utils.EXTRA_DATA
+import com.rakamin.alodokter.databinding.FragmentArticleBinding
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
-import com.rakamin.alodokter.domain.model.LoginModel
-import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
 
+class ArticleFragment : Fragment() {
+
+    private val viewModel: ArticleViewModel by viewModel()
     private val articleAdapter = ArticleAdapter()
-    private val viewModel : HomeViewModel by viewModel()
-    private val sessionRepository: SessionRepository by inject()
 
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding
-    private var root : View? = null
+    private var root: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentArticleBinding.inflate(inflater, container, false)
         root = binding?.root
-
-        val idUser = if (arguments != null) { requireArguments().getInt(EXTRA_DATA)
-        } else sessionRepository.getIdUser()
-
-        binding?.tvName?.text = idUser.toString()
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Back press Close App
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            // handle back event
-            activity?.finishAndRemoveTask()
-        }
         showArticleList()
-
-        binding?.tvSeeMore?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
-        }
     }
 
     private fun showArticleList() {

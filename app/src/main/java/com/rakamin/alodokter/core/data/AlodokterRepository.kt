@@ -54,7 +54,6 @@ class AlodokterRepository(
                 return true
             }
 
-
             override fun saveCallResult(data: ArticleResponse) {
                 val article = DataMapper.mapArticleResponseToArticleEntities(data)
                 localDataSource.insertArticle(article).subscribeOn(Schedulers.io())

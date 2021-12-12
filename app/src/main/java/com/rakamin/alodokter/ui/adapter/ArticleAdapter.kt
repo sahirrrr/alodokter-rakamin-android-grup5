@@ -2,6 +2,7 @@ package com.rakamin.alodokter.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
@@ -42,7 +43,9 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                     .load(R.drawable.ic_article_image)
                     .into(ivArticle)
             }
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context,"You Clicked ${article.judul}",Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
 }

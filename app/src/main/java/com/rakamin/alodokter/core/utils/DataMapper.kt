@@ -79,6 +79,20 @@ object DataMapper {
         return userRegister
     }
 
+    fun mapArticleEntitiesToDomain(data: List<ArticleEntity>): List<ArticleModel> {
+        return data.map {
+            ArticleModel(
+                it.id,
+                it.penulis,
+                it.foto,
+                it.updatedAt,
+                it.konten,
+                it.createdAt,
+                it.judul
+            )
+        }
+    }
+
     fun mapArticleResponseToArticleEntities(data: ArticleResponse): List<ArticleEntity> {
         val listArticle = ArrayList<ArticleEntity>()
         with(data.data) {
