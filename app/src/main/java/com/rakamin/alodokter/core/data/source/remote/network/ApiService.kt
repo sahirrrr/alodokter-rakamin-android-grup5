@@ -1,8 +1,11 @@
 package com.rakamin.alodokter.core.data.source.remote.network
 
+import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
 import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
+import io.reactivex.Flowable
+import retrofit2.http.*
 import io.reactivex.Flowable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -18,6 +21,9 @@ interface ApiService {
         @Field("password") password: String,
     ): Flowable<LoginResponse>
 
+    @GET("pasien/detail/{id_user}")
+    fun showProfile(@Path("id_user") id_user : String): Flowable<ProfileResponse>
+
     @GET("article")
     fun getArticles(): Flowable<ArticleResponse>
   
@@ -30,3 +36,4 @@ interface ApiService {
         @Field("password_confirmation") passwordConfirmation: String,
     ): Flowable<RegisterResponse>
 }
+

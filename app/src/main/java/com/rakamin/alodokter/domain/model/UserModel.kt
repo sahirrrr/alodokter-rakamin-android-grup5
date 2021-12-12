@@ -1,6 +1,6 @@
 package com.rakamin.alodokter.domain.model
 
-data class LoginModel(
+data class UserModel(
     val id: Int? = null,
 
     val nama: String? = null,

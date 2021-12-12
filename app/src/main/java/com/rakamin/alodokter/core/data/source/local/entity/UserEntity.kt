@@ -3,8 +3,8 @@ package com.rakamin.alodokter.core.data.source.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "login_table")
-data class LoginEntity(
+@Entity(tableName = "user_table")
+data class UserEntity(
     @PrimaryKey
     val id: Int? = null,
 
