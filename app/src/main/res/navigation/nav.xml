@@ -42,7 +42,9 @@
             app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
@@ -57,10 +59,22 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.rakamin.alodokter.ui.article.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article"
+        />
+    <fragment
         android:id="@+id/navigation_home"
         android:name="com.rakamin.alodokter.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_articleFragment"
+            app:destination="@+id/articleFragment"/>
+
+
+    </fragment>
     <fragment
         android:id="@+id/navigation_booking"
         android:name="com.rakamin.alodokter.ui.booking.BookingFragment"
