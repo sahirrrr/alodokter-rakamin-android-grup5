@@ -46,8 +46,7 @@ class AlodokterRepository(
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> =
         object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
             override fun loadFromDB(): Flowable<List<ArticleModel>> {
-                return localDataSource.getArticles()
-                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
+                return localDataSource.getArticles().map { DataMapper.mapArticleEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<ArticleModel>?): Boolean {

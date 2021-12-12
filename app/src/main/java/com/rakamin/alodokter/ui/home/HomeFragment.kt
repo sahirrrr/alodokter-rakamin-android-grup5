@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             // handle back event
             activity?.finishAndRemoveTask()
         }
+
         showArticleList()
 
         binding?.tvSeeMore?.setOnClickListener {

@@ -42,20 +42,6 @@ object DataMapper {
         return userLogin
     }
 
-    fun mapArticleEntitiesToDomain(data: List<ArticleEntity>): List<ArticleModel> {
-        return data.map {
-            ArticleModel(
-                it.id,
-                it.penulis,
-                it.foto,
-                it.updatedAt,
-                it.konten,
-                it.createdAt,
-                it.judul
-            )
-        }
-    }
-
     fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>): List<RegisterModel> {
         return data.map {
             with(it) {
