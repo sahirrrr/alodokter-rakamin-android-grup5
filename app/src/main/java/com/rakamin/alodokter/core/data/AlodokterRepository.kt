@@ -65,7 +65,6 @@ class AlodokterRepository(
             override fun createCall(): Flowable<ApiResponse<ArticleResponse>> {
                 return remoteDataSource.getArticle()
             }
-
         }.asFlowAble()
 
     override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> =

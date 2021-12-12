@@ -214,7 +214,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_article"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dimens_0"
         android:layout_marginStart="@dimen/dimens_16"
         android:layout_marginTop="@dimen/dimens_16"
         android:layout_marginEnd="@dimen/dimens_16"
@@ -222,6 +222,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_article"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_article" />
 
     <ProgressBar

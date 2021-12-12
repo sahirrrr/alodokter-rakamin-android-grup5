@@ -21,9 +21,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
+    private val articleAdapter = ArticleAdapter()
     private val viewModel : HomeViewModel by viewModel()
     private val sessionRepository: SessionRepository by inject()
-    private val articleAdapter = ArticleAdapter()
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding
@@ -37,7 +37,6 @@ class HomeFragment : Fragment() {
         } else sessionRepository.getIdUser()
 
         binding?.tvName?.text = idUser.toString()
-
         return root
     }
 
@@ -49,7 +48,6 @@ class HomeFragment : Fragment() {
             // handle back event
             activity?.finishAndRemoveTask()
         }
-
         showArticleList()
 
         binding?.tvSeeMore?.setOnClickListener {
