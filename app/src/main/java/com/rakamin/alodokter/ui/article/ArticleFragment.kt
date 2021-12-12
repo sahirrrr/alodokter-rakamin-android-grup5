@@ -1,4 +1,4 @@
-package com.rakamin.alodokter.ui.home
+package com.rakamin.alodokter.ui.article
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,58 +6,49 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.databinding.FragmentArticleBinding
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment() {
-    private val viewModel : HomeViewModel by viewModel()
-    private var binding : FragmentHomeBinding? = null
+class ArticleFragment : Fragment() {
+    private var binding: FragmentArticleBinding? = null
+    private val viewModel: ArticleViewModel by viewModel()
     private val articleAdapter = ArticleAdapter()
-    private var root : View? = null
-
+    private var root: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentArticleBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showArticleList()
         showRvArticle()
-        binding?.let { it.tvSeeMore.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
-
-
-        } }
     }
 
     private fun showArticleList() {
-        viewModel.getArticle().observe(viewLifecycleOwner,{ article ->
-            if (article != null){
-                when(article){
+        viewModel.getArticle().observe(viewLifecycleOwner, { article ->
+            if (article != null) {
+                when (article) {
                     is Resource.Success -> {
                         val articles = article.data
                         articleAdapter.setArticle(articles)
                         binding?.let { it.progressBar.visibility = View.GONE }
-
-
                     }
                     is Resource.Error -> {
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT)
+                            .show()
 
                     }
                     is Resource.Loading -> {
@@ -70,10 +61,9 @@ class HomeFragment : Fragment() {
         })
 
 
-
     }
 
-    private fun showRvArticle(){
+    private fun showRvArticle() {
         binding?.rvArticle?.let {
             it.layoutManager = LinearLayoutManager(context)
             it.setHasFixedSize(true)
@@ -88,6 +78,4 @@ class HomeFragment : Fragment() {
         binding = null
         root = null
     }
-
-
 }
