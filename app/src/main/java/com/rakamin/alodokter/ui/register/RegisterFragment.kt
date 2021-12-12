@@ -7,12 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.REGISTER_USER_STATUS
 import com.rakamin.alodokter.databinding.FragmentRegisterBinding
 import io.reactivex.Observable
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
+
+    private val viewModel: RegisterViewModel by viewModel()
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding
@@ -90,6 +96,32 @@ class RegisterFragment : Fragment() {
 
         invalidFieldStream.subscribe { isValid ->
             binding?.btnRegister?.isEnabled = isValid
+        }
+
+        binding?.btnRegister?.setOnClickListener {
+            val fullName = binding?.edtFullName?.text.toString().trim()
+            val email = binding?.edtEmail?.text.toString().trim()
+            val password = binding?.edtPassword?.text.toString().trim()
+            val passwordConfirmation = binding?.edtConfirmPassword?.text.toString().trim()
+
+            val mBundle = Bundle()
+            viewModel.userRegister(fullName, email, password, passwordConfirmation).observe(viewLifecycleOwner, { userRegister ->
+                if (userRegister != null) {
+                    when(userRegister) {
+                        is Resource.Success -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            mBundle.putBoolean(REGISTER_USER_STATUS, true)
+                            findNavController().navigate(R.id.action_registerFragment_to_loginFragment, mBundle)
+                        }
+                        is Resource.Error -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            mBundle.putBoolean(REGISTER_USER_STATUS, false)
+                            findNavController().navigate(R.id.action_registerFragment_to_loginFragment, mBundle)
+                        }
+                        is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
+                    }
+                }
+            })
         }
     }
 

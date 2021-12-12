@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.EXTRA_DATA
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,6 +38,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var idUser = sessionRepository.getIdUser()
+        if (idUser == 0) idUser = requireArguments().getInt(EXTRA_DATA)
+
+        binding?.tvName?.text = idUser.toString()
+        //Back press Close App
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // handle back event
+            activity?.finishAndRemoveTask()
+        }
+
         showArticleList()
         showRvArticle()
         binding?.let { it.tvSeeMore.setOnClickListener {
