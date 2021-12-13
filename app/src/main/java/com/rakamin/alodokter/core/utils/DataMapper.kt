@@ -39,7 +39,8 @@ object DataMapper {
         return userLogin
     }
 
-    fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>) : List<RegisterModel> {
+    fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>) :
+            List<RegisterModel> {
         return data.map {
             with(it) {
                 RegisterModel(
@@ -49,7 +50,8 @@ object DataMapper {
         }
     }
 
-    fun mapRegisterResponseToEntities(data: RegisterResponse) : List<RegisterEntity> {
+    fun mapRegisterResponseToEntities(data: RegisterResponse)
+    : List<RegisterEntity> {
         val userRegister = ArrayList<RegisterEntity>()
         with(data) {
             val user = RegisterEntity(
@@ -61,5 +63,6 @@ object DataMapper {
         }
         return userRegister
     }
+
 
 }

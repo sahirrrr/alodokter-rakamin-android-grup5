@@ -23,4 +23,5 @@ interface AlodokterDao {
 
     @Query("select * from register_table")
     fun getUserRegister() : Flowable<List<RegisterEntity>>
+
 }

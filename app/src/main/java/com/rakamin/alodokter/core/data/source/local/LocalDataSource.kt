@@ -14,4 +14,5 @@ class LocalDataSource(private val dao: AlodokterDao) {
     fun insertUserRegister(register : List<RegisterEntity>)  = dao.insertUserRegister(register)
 
     fun getUserRegister() : Flowable<List<RegisterEntity>> = dao.getUserRegister()
+
 }
