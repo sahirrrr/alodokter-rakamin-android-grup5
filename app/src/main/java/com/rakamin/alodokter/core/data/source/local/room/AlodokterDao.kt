@@ -21,17 +21,17 @@ interface AlodokterDao {
     fun getUserData() : Flowable<List<UserEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticle(article: List<ArticleEntity>) : Completable
-
-    @Query("SELECT * FROM article_table")
-    fun getArticle() : Flowable<List<ArticleEntity>>
-  
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUserRegister(login: List<RegisterEntity>) : Completable
 
     @Query("select * from register_table")
     fun getUserRegister() : Flowable<List<RegisterEntity>>
 
-    @Query ("DELETE FROM login_table")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertArticle(article: List<ArticleEntity>) : Completable
+
+    @Query("SELECT * FROM article_table")
+    fun getArticle() : Flowable<List<ArticleEntity>>
+
+    @Query ("DELETE FROM user_table")
     fun userLogout() : Single<Int>
 }

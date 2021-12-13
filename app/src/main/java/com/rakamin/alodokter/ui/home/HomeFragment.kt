@@ -28,17 +28,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding
     private var root : View? = null
 
-//    private var idUser : Int? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         root = binding?.root
-
-//        if (idUser == 0) viewModel.getUserData.observe(viewLifecycleOwner, { dataUser ->
-//            for (data in dataUser) {
-//                idUser = data.id!!
-//            }
-//        })
 
         return root
     }

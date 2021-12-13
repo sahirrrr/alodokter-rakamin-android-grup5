@@ -12,13 +12,13 @@ class LocalDataSource(private val dao: AlodokterDao) {
 
     fun getUserData() : Flowable<List<UserEntity>> = dao.getUserData()
 
-    fun insertArticle(article : List<ArticleEntity>) = dao.insertArticle(article)
-
-    fun getArticles() : Flowable<List<ArticleEntity>> = dao.getArticle()
-    
     fun insertUserRegister(register : List<RegisterEntity>)  = dao.insertUserRegister(register)
 
     fun getUserRegister() : Flowable<List<RegisterEntity>> = dao.getUserRegister()
+
+    fun insertArticle(article : List<ArticleEntity>) = dao.insertArticle(article)
+
+    fun getArticles() : Flowable<List<ArticleEntity>> = dao.getArticle()
 
     fun userLogout() = dao.userLogout()
 }

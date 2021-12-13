@@ -43,25 +43,6 @@ object DataMapper {
         return userLogin
     }
 
-    fun mapProfileResponseToEntities(data : ProfileResponse) : List<UserEntity> {
-        val userProfile = ArrayList<UserEntity>()
-        with(data) {
-            val user = UserEntity(
-                this.id,
-                this.nama,
-                this.email,
-                this.tanggalLahir,
-                this.umur,
-                this.jenisKelamin,
-                this.noHp,
-                this.foto,
-                this.kabupatenKota,
-            )
-            userProfile.add(user)
-        }
-        return userProfile
-    }
-
     fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>): List<RegisterModel> {
         return data.map {
             with(it) {
@@ -83,6 +64,25 @@ object DataMapper {
             userRegister.add(user)
         }
         return userRegister
+    }
+
+    fun mapProfileResponseToEntities(data : ProfileResponse) : List<UserEntity> {
+        val userProfile = ArrayList<UserEntity>()
+        with(data) {
+            val user = UserEntity(
+                this.id,
+                this.nama,
+                this.email,
+                this.tanggalLahir,
+                this.umur,
+                this.jenisKelamin,
+                this.noHp,
+                this.foto,
+                this.kabupatenKota,
+            )
+            userProfile.add(user)
+        }
+        return userProfile
     }
 
     fun mapArticleEntitiesToDomain(data: List<ArticleEntity>): List<ArticleModel> {

@@ -12,13 +12,9 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.databinding.FragmentProfileBinding
-import com.rakamin.alodokter.domain.model.LoginModel
 import com.rakamin.alodokter.session.SessionRepository
-import com.rakamin.alodokter.ui.login.LoginFragment
-import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 

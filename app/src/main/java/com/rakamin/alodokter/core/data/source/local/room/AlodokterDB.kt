@@ -6,7 +6,7 @@ import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
 
-@Database(entities = [UserEntity::class, ArticleEntity::class, RegisterEntity::class], version = 2, exportSchema = false)
+@Database(entities = [UserEntity::class, RegisterEntity::class, ArticleEntity::class], version = 1, exportSchema = false)
 abstract class AlodokterDB : RoomDatabase() {
     abstract fun alodokterDao(): AlodokterDao
 }

@@ -16,16 +16,16 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
         return alodokterRepositoryImp.getUserData()
     }
 
+    override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> {
+        return alodokterRepositoryImp.postRegister(name, email, password, passwordConfirmation)
+    }
+
     override fun getProfile(idUser: String): Flowable<Resource<List<UserModel>>> {
         return alodokterRepositoryImp.getProfile(idUser)   
     }
     
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> {
         return alodokterRepositoryImp.getArticle()
-    }
-    
-    override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> {
-        return alodokterRepositoryImp.postRegister(name, email, password, passwordConfirmation)
     }
 
     override fun userLogout() {

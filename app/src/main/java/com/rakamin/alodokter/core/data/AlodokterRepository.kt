@@ -43,6 +43,29 @@ class AlodokterRepository(
             }
         }.asFlowAble()
 
+    override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> =
+        object : NetworkBoundResource<List<RegisterModel>, RegisterResponse>() {
+            override fun loadFromDB(): Flowable<List<RegisterModel>> {
+                return localDataSource.getUserRegister().map { DataMapper.mapRegisterEntitiesToDomain(it) }
+            }
+
+            override fun shouldFetch(data: List<RegisterModel>?): Boolean {
+                return true
+            }
+
+            override fun saveCallResult(data: RegisterResponse) {
+                val userRegister = DataMapper.mapRegisterResponseToEntities(data)
+                localDataSource.insertUserRegister(userRegister)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+
+            override fun createCall(): Flowable<ApiResponse<RegisterResponse>> {
+                return remoteDataSource.postUserRegister(name, email, password, passwordConfirmation)
+            }
+        }.asFlowAble()
+
     override fun getUserData(): Flowable<List<UserModel>> {
         return localDataSource.getUserData().map { DataMapper.mapUserEntitiesToDomain(it) }
     }
@@ -90,29 +113,6 @@ class AlodokterRepository(
 
             override fun createCall(): Flowable<ApiResponse<ArticleResponse>> {
                 return remoteDataSource.getArticle()
-            }
-        }.asFlowAble()
-
-    override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> =
-        object : NetworkBoundResource<List<RegisterModel>, RegisterResponse>() {
-            override fun loadFromDB(): Flowable<List<RegisterModel>> {
-                return localDataSource.getUserRegister().map { DataMapper.mapRegisterEntitiesToDomain(it) }
-            }
-
-            override fun shouldFetch(data: List<RegisterModel>?): Boolean {
-                return true
-            }
-
-            override fun saveCallResult(data: RegisterResponse) {
-                val userRegister = DataMapper.mapRegisterResponseToEntities(data)
-                localDataSource.insertUserRegister(userRegister)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
-            }
-
-            override fun createCall(): Flowable<ApiResponse<RegisterResponse>> {
-                return remoteDataSource.postUserRegister(name, email, password, passwordConfirmation)
             }
         }.asFlowAble()
 
