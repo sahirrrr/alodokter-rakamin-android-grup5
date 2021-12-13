@@ -3,14 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
-    <string name="personal_data">Personal Data</string>
     <string name="label_sign_up">Sign Up</string>
     <string name="label_sign_with_email">Or Sign Up with email…</string>
-    <string name="label_fullname">Fullname</string>
+    <string name="label_full_name">Fullname</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
     <string name="label_confirm_password">Confirm Password</string>
-    <string name="label_register">Register</string>
     <string name="label_success">Success!</string>
     <string name="description_success">Your account has been created.</string>
     <string name="label_continue">Continue</string>
@@ -67,4 +65,22 @@ Ditulis oleh:
 
 Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
 (Dokter spesialis Bedah)</string>
+    <string name="image_article">Image Article</string>
+    <string name="icon_back">Icon Back</string>
+    <string name="illustration_login">Illustration Login</string>
+    <string name="icon_google">Icon Google</string>
+    <string name="icon_personal_data">Icon Personal Data</string>
+    <string name="icon_forward">Icon Forward</string>
+    <string name="icon_help">Icon Help</string>
+    <string name="illustration_register">Illustration Register</string>
+    <string name="btn_register">Register</string>
+    <string name="app_logo">App Logo</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="birthday">Birthday</string>
+    <string name="city">City</string>
+    <string name="save">Save</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="already_have_an_account_login">Already have an account ? <b>Login</b></string>
 </resources>
