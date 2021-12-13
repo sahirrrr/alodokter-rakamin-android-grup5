@@ -137,7 +137,7 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_profile" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/btn_logout"
         style="@style/buttonRounded"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimens_56"
