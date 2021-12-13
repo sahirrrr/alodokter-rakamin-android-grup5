@@ -19,4 +19,8 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
     override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> {
         return alodokterRepositoryImp.postRegister(name, email, password, passwordConfirmation)
     }
+
+    override fun userLogout() {
+        alodokterRepositoryImp.userLogout()
+    }
 }

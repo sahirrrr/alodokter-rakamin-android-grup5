@@ -14,4 +14,6 @@ interface IAlodokterRepository {
     fun getArticle() : Flowable<Resource<List<ArticleModel>>>
   
     fun postRegister(name: String, email: String, password: String, passwordConfirmation: String) : Flowable<Resource<List<RegisterModel>>>
+
+    fun userLogout()
 }

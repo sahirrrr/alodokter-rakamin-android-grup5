@@ -90,4 +90,11 @@ class AlodokterRepository(
                 return remoteDataSource.postUserRegister(name, email, password, passwordConfirmation)
             }
         }.asFlowAble()
+
+    override fun userLogout() {
+        localDataSource.userLogout()
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    }
 }
