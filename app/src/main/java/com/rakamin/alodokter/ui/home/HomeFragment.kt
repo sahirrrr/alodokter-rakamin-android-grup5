@@ -13,7 +13,6 @@ import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.EXTRA_DATA
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
-import com.rakamin.alodokter.domain.model.LoginModel
 import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import org.koin.android.ext.android.inject
@@ -29,32 +28,65 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding
     private var root : View? = null
 
+//    private var idUser : Int? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         root = binding?.root
 
-        val idUser = if (arguments != null) { requireArguments().getInt(EXTRA_DATA)
-        } else sessionRepository.getIdUser()
+//        if (idUser == 0) viewModel.getUserData.observe(viewLifecycleOwner, { dataUser ->
+//            for (data in dataUser) {
+//                idUser = data.id!!
+//            }
+//        })
 
-        binding?.tvName?.text = idUser.toString()
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val idUser = sessionRepository.getIdUser()
+        binding?.tvName?.text = idUser.toString()
+
+        showArticleList()
+        showProfile(idUser)
+
+        binding?.tvSeeMore?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
+        }
+
         //Back press Close App
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // handle back event
             activity?.finishAndRemoveTask()
         }
-
-        showArticleList()
-
-        binding?.tvSeeMore?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
-        }
     }
+
+    private fun showProfile(idUser: Int) {
+        viewModel.userProfile(idUser.toString()).observe(viewLifecycleOwner,{ showProfile ->
+            if (showProfile != null) {
+                when(showProfile) {
+                    is Resource.Success -> {
+                        val dataArray = showProfile.data
+                        if (dataArray != null) {
+                            for (data in dataArray) {
+                                binding?.progressBar?.visibility = View.GONE
+                                binding?.tvName?.text = data.nama
+                            }
+                        }
+                    }
+                    is Resource.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.tvName?.text = getString(R.string.guest_user)
+                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
+                }
+            }
+        })
+    }
+
 
     private fun showArticleList() {
         viewModel.getArticle().observe(viewLifecycleOwner,{ article ->

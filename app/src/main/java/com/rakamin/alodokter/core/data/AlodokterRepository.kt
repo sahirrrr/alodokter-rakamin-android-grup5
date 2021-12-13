@@ -6,13 +6,11 @@ import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
 import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
-import com.rakamin.alodokter.core.utils.DataMapper
-import com.rakamin.alodokter.domain.model.UserModel
-
 import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.domain.model.LoginModel
 import com.rakamin.alodokter.domain.model.RegisterModel
+import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,6 +43,10 @@ class AlodokterRepository(
             }
         }.asFlowAble()
 
+    override fun getUserData(): Flowable<List<UserModel>> {
+        return localDataSource.getUserData().map { DataMapper.mapUserEntitiesToDomain(it) }
+    }
+
     override fun getProfile(idUser: String): Flowable<Resource<List<UserModel>>> =
         object : NetworkBoundResource<List<UserModel>, ProfileResponse>() {
             override fun loadFromDB(): Flowable<List<UserModel>> {
@@ -61,7 +63,8 @@ class AlodokterRepository(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
-                
+            }
+
             override fun createCall(): Flowable<ApiResponse<ProfileResponse>> {
                 return remoteDataSource.getUserProfile(idUser)
             }

@@ -11,6 +11,8 @@ interface AlodokterUseCase {
 
     fun postLogin(email:String, password:String) : Flowable<Resource<List<UserModel>>>
 
+    fun getUserData() : Flowable<List<UserModel>>
+
     fun getProfile(idUser:String) : Flowable<Resource<List<UserModel>>>
 
     fun getArticle() : Flowable<Resource<List<ArticleModel>>>
