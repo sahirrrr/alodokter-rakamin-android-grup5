@@ -18,27 +18,25 @@ import io.reactivex.disposables.Disposables
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ProfileFragment : Fragment(), View.OnClickListener {
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding
+class ProfileFragment : Fragment() {
+
     private val viewModel :ProfileViewModel by viewModel()
     private val sessionRepository: SessionRepository by inject()
 
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding
+    private var root : View? = null
+
     override fun onCreateView( inflater: LayoutInflater,  container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding?.root
+        root = binding?.root
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btnLogout?.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View) {
-        when (v.id){
-            R.id.btn_logout -> {
-                userLogout()
-            }
+        binding?.btnLogout?.setOnClickListener {
+            userLogout()
         }
     }
 
@@ -46,9 +44,7 @@ private fun userLogout() {
     val builder = AlertDialog.Builder(requireContext())
     builder.setPositiveButton("YES") { _, _ ->
         binding?.progressBar?.visibility = View.VISIBLE
-        val mBundle = Bundle()
-        mBundle.putString("fromProfile", "FROM_PROFILE")
-        findNavController().navigate(R.id.action_navigation_profile_to_loginFragment, mBundle)
+        findNavController().navigate(R.id.action_navigation_profile_to_loginFragment)
 
         viewModel.userLogout()
         sessionRepository.logoutUser()
@@ -56,8 +52,8 @@ private fun userLogout() {
         Toast.makeText(requireContext(), "Logout Success", Toast.LENGTH_SHORT).show()
     }
 
-    builder.setNegativeButton("Cancel"){_,_ -> }
-    builder.setTitle("Logout From AloDokter?")
+    builder.setNegativeButton("Cancel") {_,_ -> }
+    builder.setTitle("Logout From Alodokter?")
     builder.setMessage("You Can Login Back anytime you want")
     builder.create().show()
 }
@@ -65,6 +61,7 @@ private fun userLogout() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        root = null
         Disposables.disposed()
     }
 }

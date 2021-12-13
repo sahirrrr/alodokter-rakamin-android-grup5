@@ -5,5 +5,5 @@ import com.rakamin.alodokter.domain.usecase.AlodokterUseCase
 
 class ProfileViewModel (private val alodokterUseCase : AlodokterUseCase) : ViewModel() {
 
-    fun userLogout() =alodokterUseCase.userLogout()
+    fun userLogout() = alodokterUseCase.userLogout()
 }
