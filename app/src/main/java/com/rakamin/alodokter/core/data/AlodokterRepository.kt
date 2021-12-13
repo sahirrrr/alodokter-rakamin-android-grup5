@@ -3,10 +3,7 @@ package com.rakamin.alodokter.core.data
 import com.rakamin.alodokter.core.data.source.local.LocalDataSource
 import com.rakamin.alodokter.core.data.source.remote.RemoteDataSource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.*
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.domain.model.RegisterModel
@@ -43,10 +40,16 @@ class AlodokterRepository(
             }
         }.asFlowAble()
 
-    override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> =
+    override fun postRegister(
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ): Flowable<Resource<List<RegisterModel>>> =
         object : NetworkBoundResource<List<RegisterModel>, RegisterResponse>() {
             override fun loadFromDB(): Flowable<List<RegisterModel>> {
-                return localDataSource.getUserRegister().map { DataMapper.mapRegisterEntitiesToDomain(it) }
+                return localDataSource.getUserRegister()
+                    .map { DataMapper.mapRegisterEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<RegisterModel>?): Boolean {
@@ -62,7 +65,12 @@ class AlodokterRepository(
             }
 
             override fun createCall(): Flowable<ApiResponse<RegisterResponse>> {
-                return remoteDataSource.postUserRegister(name, email, password, passwordConfirmation)
+                return remoteDataSource.postUserRegister(
+                    name,
+                    email,
+                    password,
+                    passwordConfirmation
+                )
             }
         }.asFlowAble()
 
@@ -92,11 +100,12 @@ class AlodokterRepository(
                 return remoteDataSource.getUserProfile(idUser)
             }
         }.asFlowAble()
-           
+
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> =
         object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
             override fun loadFromDB(): Flowable<List<ArticleModel>> {
-                return localDataSource.getArticles().map { DataMapper.mapArticleEntitiesToDomain(it) }
+                return localDataSource.getArticles()
+                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<ArticleModel>?): Boolean {
@@ -115,6 +124,31 @@ class AlodokterRepository(
                 return remoteDataSource.getArticle()
             }
         }.asFlowAble()
+
+    override fun getArticleById(id: Int): Flowable<Resource<List<ArticleModel>>> =
+        object : NetworkBoundResource<List<ArticleModel>, ArticleResult>() {
+            override fun loadFromDB(): Flowable<List<ArticleModel>> {
+                return localDataSource.getArticleById(id).map { DataMapper.mapArticleEntitiesToDomain(it) }
+            }
+
+            override fun shouldFetch(data: List<ArticleModel>?): Boolean {
+                return true
+            }
+
+            override fun saveCallResult(data: ArticleResult) {
+                val article = DataMapper.tes1(data)
+                localDataSource.insertArticle(article).subscribeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+
+            override fun createCall(): Flowable<ApiResponse<ArticleResult>> {
+                return remoteDataSource.getArticleById(id)
+            }
+
+        }.asFlowAble()
+
 
     override fun userLogout() {
         localDataSource.userLogout()

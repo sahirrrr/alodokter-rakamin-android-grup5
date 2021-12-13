@@ -1,17 +1,24 @@
 package com.rakamin.alodokter.ui.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.ui.article.ArticleFragmentDirections
 import java.util.ArrayList
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     private val listArticle = ArrayList<ArticleModel>()
+    private lateinit var context: Context
 
     fun setArticle(article: List<ArticleModel>?) {
         if (article == null) return
@@ -43,9 +50,13 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                     .load(R.drawable.ic_article_image)
                     .into(ivArticle)
             }
+            val id = article.id as Int
+            val action = ArticleFragmentDirections.actionArticleFragmentToArticleDetailFragment(id)
+
             itemView.setOnClickListener {
-                Toast.makeText(itemView.context,"You Clicked ${article.judul}",Toast.LENGTH_SHORT).show()
+                it.findNavController().navigate(action)
             }
+
         }
     }
 }

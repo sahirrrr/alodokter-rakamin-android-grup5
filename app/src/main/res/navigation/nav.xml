@@ -59,11 +59,26 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
+        android:id="@+id/detailArticleFragment"
+        android:name="com.rakamin.alodokter.ui.article.DetailArticleFragment"
+        android:label="detail_article_fragment"
+        tools:layout="@layout/fragment_detail_article">
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="2"/>
+
+    </fragment>
+    <fragment
         android:id="@+id/articleFragment"
         android:name="com.rakamin.alodokter.ui.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article"
-        />
+        >
+        <action
+            android:id="@+id/action_articleFragment_to_articleDetailFragment"
+            app:destination="@+id/detailArticleFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.rakamin.alodokter.ui.home.HomeFragment"
@@ -71,7 +86,14 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_articleFragment"
-            app:destination="@+id/articleFragment"/>
+            app:destination="@+id/articleFragment">
+        </action>
+        <action
+            android:id="@+id/action_home_to_detailFragment"
+            app:destination="@+id/detailArticleFragment">
+        </action>
+
+
 
 
     </fragment>

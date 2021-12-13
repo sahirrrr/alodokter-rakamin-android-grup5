@@ -3,10 +3,7 @@ package com.rakamin.alodokter.core.data.source.remote
 import android.annotation.SuppressLint
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.network.ApiService
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.*
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -72,6 +69,18 @@ class RemoteDataSource(private val apiService: ApiService) {
             responseBody.onNext(ApiResponse.Error(it.message.toString()))
         })
         return responseBody.toFlowable(BackpressureStrategy.BUFFER)
+    }
 
+    fun getArticleById(id: Int) : Flowable<ApiResponse<ArticleResult>>{
+        val responseBody = PublishSubject.create<ApiResponse<ArticleResult>>()
+        val client = apiService.getArticleById(id)
+        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                responseBody.onNext(ApiResponse.Success(it))
+            },{
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
+        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
     }
 }

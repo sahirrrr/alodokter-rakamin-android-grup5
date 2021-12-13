@@ -28,6 +28,10 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
         return alodokterRepositoryImp.getArticle()
     }
 
+    override fun getArticleById(id: Int): Flowable<Resource<List<ArticleModel>>> {
+        return alodokterRepositoryImp.getArticleById(id)
+    }
+
     override fun userLogout() {
         alodokterRepositoryImp.userLogout()
     }
