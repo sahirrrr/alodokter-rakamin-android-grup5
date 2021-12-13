@@ -5,11 +5,12 @@ import com.rakamin.alodokter.core.data.source.remote.RemoteDataSource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
 import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
 import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.domain.model.LoginModel
 import com.rakamin.alodokter.domain.model.RegisterModel
+import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,20 +20,19 @@ class AlodokterRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : IAlodokterRepository {
-    override fun postLogin(email: String, password: String): Flowable<Resource<List<LoginModel>>> =
-        object : NetworkBoundResource<List<LoginModel>, LoginResponse>() {
-            override fun loadFromDB(): Flowable<List<LoginModel>> {
-                return localDataSource.getUserLogin()
-                    .map { DataMapper.mapLoginEntitiesToDomain(it) }
+    override fun postLogin(email: String, password: String): Flowable<Resource<List<UserModel>>> =
+        object : NetworkBoundResource<List<UserModel>, LoginResponse>() {
+            override fun loadFromDB(): Flowable<List<UserModel>> {
+                return localDataSource.getUserData().map { DataMapper.mapUserEntitiesToDomain(it) }
             }
 
-            override fun shouldFetch(data: List<LoginModel>?): Boolean {
+            override fun shouldFetch(data: List<UserModel>?): Boolean {
                 return data == null || data.isEmpty()
             }
 
             override fun saveCallResult(data: LoginResponse) {
                 val userLogin = DataMapper.mapLoginResponseToEntities(data)
-                localDataSource.insertUserLogin(userLogin)
+                localDataSource.insertUserData(userLogin)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
@@ -43,17 +43,42 @@ class AlodokterRepository(
             }
         }.asFlowAble()
 
+    override fun getUserData(): Flowable<List<UserModel>> {
+        return localDataSource.getUserData().map { DataMapper.mapUserEntitiesToDomain(it) }
+    }
+
+    override fun getProfile(idUser: String): Flowable<Resource<List<UserModel>>> =
+        object : NetworkBoundResource<List<UserModel>, ProfileResponse>() {
+            override fun loadFromDB(): Flowable<List<UserModel>> {
+                return localDataSource.getUserData().map { DataMapper.mapUserEntitiesToDomain(it) }
+            }
+
+            override fun shouldFetch(data: List<UserModel>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+
+            override fun saveCallResult(data: ProfileResponse) {
+                val userProfile = DataMapper.mapProfileResponseToEntities(data)
+                localDataSource.insertUserData(userProfile)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+
+            override fun createCall(): Flowable<ApiResponse<ProfileResponse>> {
+                return remoteDataSource.getUserProfile(idUser)
+            }
+        }.asFlowAble()
+           
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> =
         object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
             override fun loadFromDB(): Flowable<List<ArticleModel>> {
-                return localDataSource.getArticles()
-                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
+                return localDataSource.getArticles().map { DataMapper.mapArticleEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<ArticleModel>?): Boolean {
                 return true
             }
-
 
             override fun saveCallResult(data: ArticleResponse) {
                 val article = DataMapper.mapArticleResponseToArticleEntities(data)

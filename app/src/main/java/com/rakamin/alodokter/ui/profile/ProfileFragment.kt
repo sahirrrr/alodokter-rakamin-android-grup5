@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.rakamin.alodokter.core.data.Resource
+import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.databinding.FragmentProfileBinding
@@ -35,33 +37,64 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+         showProfile()
+        
         binding?.btnLogout?.setOnClickListener {
             userLogout()
         }
     }
 
-private fun userLogout() {
-    val builder = AlertDialog.Builder(requireContext())
-    builder.setPositiveButton("YES") { _, _ ->
-        binding?.progressBar?.visibility = View.VISIBLE
-        findNavController().navigate(R.id.action_navigation_profile_to_loginFragment)
+    private fun userLogout() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("YES") { _, _ ->
+            binding?.progressBar?.visibility = View.VISIBLE
+            findNavController().navigate(R.id.action_navigation_profile_to_loginFragment)
 
-        viewModel.userLogout()
-        sessionRepository.logoutUser()
+            viewModel.userLogout()
+            sessionRepository.logoutUser()
 
-        Toast.makeText(requireContext(), "Logout Success", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Logout Success", Toast.LENGTH_SHORT).show()
+        }
+
+        builder.setNegativeButton("Cancel") {_,_ -> }
+        builder.setTitle("Logout From Alodokter?")
+        builder.setMessage("You Can Login Back anytime you want")
+        builder.create().show()
     }
 
-    builder.setNegativeButton("Cancel") {_,_ -> }
-    builder.setTitle("Logout From Alodokter?")
-    builder.setMessage("You Can Login Back anytime you want")
-    builder.create().show()
+    private fun showProfile() {
+        viewModel.userProfile("1").observe(viewLifecycleOwner,{ showProfile ->
+            if (showProfile != null) {
+                when(showProfile) {
+                    is Resource.Success -> {
+                        val dataArray = showProfile.data
+                        if (dataArray != null) {
+                            for (data in dataArray) {
+                                binding?.progressBar?.visibility = View.GONE
+                                binding?.tvName?.text = data.nama
+                                binding?.tvNumber?.text = data.noHp
+                            }
+                        }
+                    }
+                    is Resource.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.tvName?.text = getString(R.string.guest_user)
+                        binding?.tvNumber?.text = ""
+                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
+                }
+            }
+        })
+    }
+    
+      override fun onDestroyView() {
+          super.onDestroyView()
+          _binding = null
+          root = null
+          Disposables.disposed()
+      }
 }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        root = null
-        Disposables.disposed()
-    }
-}
+

@@ -1,32 +1,33 @@
 package com.rakamin.alodokter.core.utils
 
-import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.local.entity.LoginEntity
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
+import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
+import com.rakamin.alodokter.domain.model.UserModel
+import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
+import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
 import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
-import com.rakamin.alodokter.domain.model.LoginModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import java.util.ArrayList
 
 object DataMapper {
 
-    fun mapLoginEntitiesToDomain(data: List<LoginEntity>): List<LoginModel> {
+    fun mapUserEntitiesToDomain(data : List<UserEntity>) : List<UserModel> {
         return data.map {
             with(it) {
-                LoginModel(
+                UserModel(
                     id, nama, email, jenisKelamin, umur, tanggalLahir, noHp, kabupatenKota, foto
                 )
             }
         }
     }
 
-    fun mapLoginResponseToEntities(data: LoginResponse): List<LoginEntity> {
-        val userLogin = ArrayList<LoginEntity>()
+    fun mapLoginResponseToEntities(data : LoginResponse) : List<UserEntity> {
+        val userLogin = ArrayList<UserEntity>()
         with(data.user) {
-            val user = LoginEntity(
+            val user = UserEntity(
                 this?.id,
                 this?.nama,
                 this?.email,
@@ -42,18 +43,23 @@ object DataMapper {
         return userLogin
     }
 
-    fun mapArticleEntitiesToDomain(data: List<ArticleEntity>): List<ArticleModel> {
-        return data.map {
-            ArticleModel(
-                it.id,
-                it.penulis,
-                it.foto,
-                it.updatedAt,
-                it.konten,
-                it.createdAt,
-                it.judul
+    fun mapProfileResponseToEntities(data : ProfileResponse) : List<UserEntity> {
+        val userProfile = ArrayList<UserEntity>()
+        with(data) {
+            val user = UserEntity(
+                this.id,
+                this.nama,
+                this.email,
+                this.tanggalLahir,
+                this.umur,
+                this.jenisKelamin,
+                this.noHp,
+                this.foto,
+                this.kabupatenKota,
             )
+            userProfile.add(user)
         }
+        return userProfile
     }
 
     fun mapRegisterEntitiesToDomain(data: List<RegisterEntity>): List<RegisterModel> {
@@ -77,6 +83,20 @@ object DataMapper {
             userRegister.add(user)
         }
         return userRegister
+    }
+
+    fun mapArticleEntitiesToDomain(data: List<ArticleEntity>): List<ArticleModel> {
+        return data.map {
+            ArticleModel(
+                it.id,
+                it.penulis,
+                it.foto,
+                it.updatedAt,
+                it.konten,
+                it.createdAt,
+                it.judul
+            )
+        }
     }
 
     fun mapArticleResponseToArticleEntities(data: ArticleResponse): List<ArticleEntity> {
