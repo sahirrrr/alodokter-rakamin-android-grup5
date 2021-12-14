@@ -1,15 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_29"
+        android:layout_marginEnd="@dimen/dimens_29"
+        android:src="@drawable/ic_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/illustration_login" />
+
     <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="@dimen/font_32"
+        android:text="@string/label_login"
+        android:textAllCaps="false"
+        android:textColor="@color/text_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_29"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:hint="@string/hint_email"
+        app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+        app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+        app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+        app:boxCornerRadiusTopStart="@dimen/dimens_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login"
+        app:startIconDrawable="@drawable/ic_mail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:hint="@string/hint_password"
+        app:boxCornerRadiusBottomEnd="@dimen/dimens_20"
+        app:boxCornerRadiusBottomStart="@dimen/dimens_20"
+        app:boxCornerRadiusTopEnd="@dimen/dimens_20"
+        app:boxCornerRadiusTopStart="@dimen/dimens_20"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_email"
+        app:startIconDrawable="@drawable/ic_lock">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/label_forgot_password"
+        android:layout_width="118dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/label_forgot"
+        android:textSize="12sp"
+        android:textColor="@color/text_grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_password" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        style="@style/buttonRounded"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_64"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_48"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:backgroundTint="@color/button"
+        android:text="@string/label_login"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_password"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/tv_skip_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/label_skip_login"
+        android:textSize="@dimen/font_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <View
+        android:id="@+id/view_icon_google"
+        android:layout_width="@dimen/dimens_115"
+        android:layout_height="@dimen/dimens_56"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:background="@drawable/bg_icon"
+        app:layout_constraintTop_toBottomOf="@id/tv_skip_login"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_google_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_google"
+        app:layout_constraintEnd_toEndOf="@id/view_icon_google"
+        app:layout_constraintTop_toTopOf="@id/view_icon_google"
+        app:layout_constraintBottom_toBottomOf="@id/view_icon_google"
+        app:layout_constraintStart_toStartOf="@id/view_icon_google"
+        android:contentDescription="@string/icon_google" />
+
+    <View
+        android:id="@+id/view_icon_facebook"
+        android:layout_width="@dimen/dimens_115"
+        android:layout_height="@dimen/dimens_56"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:background="@drawable/bg_icon"
+        app:layout_constraintTop_toBottomOf="@id/tv_skip_login"
+        app:layout_constraintEnd_toStartOf="@id/view_icon_apple"
+        app:layout_constraintStart_toEndOf="@id/view_icon_google" />
+
+    <ImageView
+        android:id="@+id/iv_facebook_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintEnd_toEndOf="@id/view_icon_facebook"
+        app:layout_constraintTop_toTopOf="@id/view_icon_facebook"
+        app:layout_constraintBottom_toBottomOf="@id/view_icon_facebook"
+        app:layout_constraintStart_toStartOf="@id/view_icon_facebook"
+        android:contentDescription="@string/icon_google" />
+
+    <View
+        android:id="@+id/view_icon_apple"
+        android:layout_width="@dimen/dimens_115"
+        android:layout_height="@dimen/dimens_56"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:background="@drawable/bg_icon"
+        app:layout_constraintTop_toBottomOf="@id/tv_skip_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_icon_facebook" />
+
+    <ImageView
+        android:id="@+id/iv_apple_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_apple"
+        app:layout_constraintEnd_toEndOf="@id/view_icon_apple"
+        app:layout_constraintTop_toTopOf="@id/view_icon_apple"
+        app:layout_constraintBottom_toBottomOf="@id/view_icon_apple"
+        app:layout_constraintStart_toStartOf="@id/view_icon_apple"
+        android:contentDescription="@string/icon_google" />
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/label_register"
+        android:textSize="@dimen/font_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_icon_facebook" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

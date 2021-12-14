@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.article.ArticleFragment">
+
+    <TextView
+        android:id="@+id/tv_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/article"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/font_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <SearchView
+        android:id="@+id/sv_doctor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_24"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:background="@drawable/bg_search"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/query_hint"
+        android:searchIcon="@drawable/ic_search"
+        android:theme="@style/AppSearchView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_article" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sv_doctor"
+        tools:listitem="@layout/item_article" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/rv_article"
+        app:layout_constraintEnd_toEndOf="@id/rv_article"
+        app:layout_constraintStart_toStartOf="@+id/rv_article"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
