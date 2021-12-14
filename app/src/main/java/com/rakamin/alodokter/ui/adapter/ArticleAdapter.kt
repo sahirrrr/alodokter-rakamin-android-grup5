@@ -14,12 +14,15 @@ import com.rakamin.alodokter.R
 import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.ui.article.ArticleFragmentDirections
+import com.rakamin.alodokter.ui.home.HomeFragmentDirections
 import java.util.ArrayList
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     private val listArticle = ArrayList<ArticleModel>()
-    private lateinit var context: Context
-
+    private lateinit var onItemClickCallback: OnItemClickCallback
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
     fun setArticle(article: List<ArticleModel>?) {
         if (article == null) return
         this.listArticle.clear()
@@ -50,13 +53,16 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                     .load(R.drawable.ic_article_image)
                     .into(ivArticle)
             }
-            val id = article.id as Int
-            val action = ArticleFragmentDirections.actionArticleFragmentToArticleDetailFragment(id)
-
             itemView.setOnClickListener {
-                it.findNavController().navigate(action)
+                onItemClickCallback.onItemClicked(listArticle[adapterPosition])
             }
 
         }
     }
+    interface OnItemClickCallback {
+        fun onItemClicked(data: ArticleModel)
+
+    }
 }
+
+

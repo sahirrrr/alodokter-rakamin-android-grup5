@@ -126,24 +126,25 @@ class AlodokterRepository(
         }.asFlowAble()
 
     override fun getArticleById(id: Int): Flowable<Resource<List<ArticleModel>>> =
-        object : NetworkBoundResource<List<ArticleModel>, ArticleResult>() {
+        object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
             override fun loadFromDB(): Flowable<List<ArticleModel>> {
-                return localDataSource.getArticleById(id).map { DataMapper.mapArticleEntitiesToDomain(it) }
+                return localDataSource.getArticleById(id)
+                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<ArticleModel>?): Boolean {
                 return true
             }
 
-            override fun saveCallResult(data: ArticleResult) {
-                val article = DataMapper.tes1(data)
+            override fun saveCallResult(data: ArticleResponse) {
+                val article = DataMapper.mapArticleResponseToArticleEntities(data)
                 localDataSource.insertArticle(article).subscribeOn(Schedulers.io())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
             }
 
-            override fun createCall(): Flowable<ApiResponse<ArticleResult>> {
+            override fun createCall(): Flowable<ApiResponse<ArticleResponse>> {
                 return remoteDataSource.getArticleById(id)
             }
 

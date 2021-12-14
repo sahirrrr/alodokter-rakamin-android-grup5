@@ -20,7 +20,7 @@ class DetailArticleFragment : Fragment() {
     private var _binding: FragmentDetailArticleBinding? = null
     private val binding get() = _binding
     private var root: View? = null
-    private val args : DetailArticleFragmentArgs by navArgs()
+    private val args: DetailArticleFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,31 +34,32 @@ class DetailArticleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = args.id
-        showArticle(id)
+        val idArticle = args.id
+        showArticle(idArticle)
 
     }
 
     private fun showArticle(id: Int) {
-        viewModel.getArticleById(id).observe(viewLifecycleOwner,{article ->
+        viewModel.getArticleById(id).observe(viewLifecycleOwner, { article ->
             if (article != null) {
-                when(article) {
+                when (article) {
                     is Resource.Success -> {
                         val articles = article.data
-                        if (articles != null){
-                            for (data in articles){
-                                binding?.tvArticleTitle?.text =data.judul
-                                binding?.tvArticleContent?.text =data.konten
-                                
-
+                        binding?.progressBar?.visibility = View.GONE
+                        if (articles != null) {
+                            for (data in articles) {
+                                binding?.tvArticleTitle?.text = data.judul
+                                binding?.tvArticleContent?.text = data.konten
                             }
                         }
                     }
                     is Resource.Error -> {
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT)
+                            .show()
+                        binding?.progressBar?.visibility = View.GONE
                     }
                     is Resource.Loading -> {
-
+                        binding?.progressBar?.visibility = View.VISIBLE
                     }
                 }
             }

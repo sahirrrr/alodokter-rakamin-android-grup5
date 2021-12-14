@@ -1,16 +1,16 @@
 package com.rakamin.alodokter.ui.article
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.databinding.FragmentArticleBinding
-import com.rakamin.alodokter.databinding.FragmentHomeBinding
+import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -62,6 +62,14 @@ class ArticleFragment : Fragment() {
             this?.setHasFixedSize(true)
             this?.adapter = articleAdapter
         }
+        articleAdapter.setOnItemClickCallback(object: ArticleAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: ArticleModel) {
+                val id = data.id as Int
+                val action = ArticleFragmentDirections.actionArticleFragmentToArticleDetailFragment(id)
+                findNavController().navigate(action)
+            }
+
+        })
     }
 
     override fun onDestroyView() {

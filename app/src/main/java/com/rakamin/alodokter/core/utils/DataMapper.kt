@@ -114,14 +114,5 @@ object DataMapper {
             return listArticle
         }
     }
-    fun tes1(data: ArticleResult): List<ArticleEntity>{
-        val listArticle = ArrayList<ArticleEntity>()
-        with(data){
-            val article = ArticleEntity(
-                id, penulis, foto, updatedAt, konten, createdAt, judul
-            )
-            listArticle.add(article)
-        }
-        return listArticle
-    }
+
 }

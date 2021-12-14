@@ -14,12 +14,12 @@
             android:id="@+id/iv_article_photo"
             android:layout_width="@dimen/dimens_0"
             android:layout_height="173dp"
+            android:contentDescription="@string/image_article"
             android:scaleType="fitXY"
-            tools:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/image_article" />
+            tools:src="@drawable/ic_launcher_background" />
 
         <ImageView
             android:id="@+id/iv_back_button"
@@ -27,25 +27,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_16"
+            android:contentDescription="@string/icon_back"
             app:layout_constraintStart_toStartOf="@+id/iv_article_photo"
             app:layout_constraintTop_toTopOf="@+id/iv_article_photo"
-            app:srcCompat="@drawable/ic_back_arrow"
-            android:contentDescription="@string/icon_back" />
+            app:srcCompat="@drawable/ic_back_arrow" />
 
         <TextView
             android:id="@+id/tv_article_title"
-            android:textSize="@dimen/font_20"
-            android:textColor="@color/text_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_24"
             android:layout_marginEnd="@dimen/dimens_16"
             android:fontFamily="@font/poppins_medium"
-            tools:text="@string/dummy_article_title"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_article_photo" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_article_photo"
+            tools:text="@string/dummy_article_title" />
 
         <View
             android:id="@+id/divider"
@@ -62,16 +62,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
-            android:fontFamily="@font/poppins_medium"
-            tools:text="@string/dummy_article_content"
-            android:textSize="14sp"
-            android:lineSpacingExtra="8dp"
             android:layout_marginTop="@dimen/dimens_16"
             android:layout_marginEnd="@dimen/dimens_16"
-            tools:textColor="@color/text_grey"
+            android:fontFamily="@font/poppins_medium"
+            android:lineSpacingExtra="8dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            tools:text="@string/dummy_article_content"
+            tools:textColor="@color/text_grey" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tv_article_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

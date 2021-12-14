@@ -1,18 +1,18 @@
 package com.rakamin.alodokter.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
-import com.rakamin.alodokter.core.utils.EXTRA_DATA
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
+import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import org.koin.android.ext.android.inject
@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
                         val dataArray = showProfile.data
                         if (dataArray != null) {
                             for (data in dataArray) {
-                                binding?.progressBar?.visibility = View.GONE
+//                                binding?.progressBar?.visibility = View.GONE
                                 binding?.tvName?.text = data.nama
                             }
                         }
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
                         binding?.tvName?.text = getString(R.string.guest_user)
-                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
@@ -106,7 +106,16 @@ class HomeFragment : Fragment() {
             this?.setHasFixedSize(true)
             this?.adapter = articleAdapter
         }
+        articleAdapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: ArticleModel) {
+                val id = data.id as Int
+                val action2 = HomeFragmentDirections.actionHomeToDetailFragment(id)
+                findNavController().navigate(action2)
+            }
+
+        })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

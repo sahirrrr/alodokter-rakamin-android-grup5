@@ -33,7 +33,7 @@ interface ApiService {
     @GET("article/detail/{id_article}")
     fun getArticleById(
         @Path("id_article") id_article: Int
-    ): Flowable<ArticleResult>
+    ): Flowable<ArticleResponse>
 
 }
 
