@@ -35,4 +35,8 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
     override fun userLogout() {
         alodokterRepositoryImp.userLogout()
     }
+
+    override fun articleSearch(query: String): Flowable<Resource<List<ArticleModel>>> {
+        return alodokterRepositoryImp.articleSearch(query)
+    }
 }

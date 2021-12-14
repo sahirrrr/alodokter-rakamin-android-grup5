@@ -22,4 +22,6 @@ interface IAlodokterRepository {
 
     fun userLogout()
 
+    fun articleSearch(query: String) : Flowable<Resource<List<ArticleModel>>>
+
 }

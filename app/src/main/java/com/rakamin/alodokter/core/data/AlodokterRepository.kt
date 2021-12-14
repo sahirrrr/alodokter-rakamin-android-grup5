@@ -151,10 +151,36 @@ class AlodokterRepository(
         }.asFlowAble()
 
 
+    override fun articleSearch(query: String): Flowable<Resource<List<ArticleModel>>> =
+        object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
+            override fun loadFromDB(): Flowable<List<ArticleModel>> {
+                return localDataSource.searchArticle(query)
+                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
+            }
+
+            override fun shouldFetch(data: List<ArticleModel>?): Boolean {
+                return true
+            }
+
+            override fun saveCallResult(data: ArticleResponse) {
+                val article = DataMapper.mapArticleResponseToArticleEntities(data)
+                localDataSource.insertArticle(article).subscribeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+
+            override fun createCall(): Flowable<ApiResponse<ArticleResponse>> {
+                return remoteDataSource.articleSearch(query)
+            }
+
+        }.asFlowAble()
+
     override fun userLogout() {
         localDataSource.userLogout()
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
+
 }

@@ -23,4 +23,6 @@ class LocalDataSource(private val dao: AlodokterDao) {
     fun userLogout() = dao.userLogout()
 
     fun getArticleById(id: Int) : Flowable<List<ArticleEntity>> = dao.getArticleById(id)
+
+    fun searchArticle(query: String) : Flowable<List<ArticleEntity>> = dao.searchArticle(query)
 }

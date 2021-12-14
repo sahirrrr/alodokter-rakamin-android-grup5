@@ -8,4 +8,5 @@ class ArticleViewModel(private val alodokterUseCase: AlodokterUseCase) : ViewMod
 
     fun getArticle() = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getArticle())
     fun getArticleById(id: Int) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getArticleById(id))
+    fun articleSearch(query: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.articleSearch(query))
 }

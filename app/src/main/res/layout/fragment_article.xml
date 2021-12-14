@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <SearchView
-        android:id="@+id/sv_doctor"
+        android:id="@+id/sv_article"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimens_16"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sv_doctor"
+        app:layout_constraintTop_toBottomOf="@id/sv_article"
         tools:listitem="@layout/item_article" />
 
     <ProgressBar

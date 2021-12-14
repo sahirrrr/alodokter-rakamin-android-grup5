@@ -35,5 +35,10 @@ interface ApiService {
         @Path("id_article") id_article: Int
     ): Flowable<ArticleResponse>
 
+    @GET("article/search/{judul}")
+    fun articleSearch(
+        @Path("judul") query : String
+    ): Flowable<ArticleResponse>
+
 }
 

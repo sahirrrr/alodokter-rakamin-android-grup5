@@ -22,5 +22,6 @@ data class ArticleEntity(
     val createdAt: String? = null,
 
 
+    @ColumnInfo(name = "judul")
     val judul: String? = null
 )

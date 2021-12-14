@@ -22,4 +22,6 @@ interface AlodokterUseCase {
     fun postRegister(name: String, email: String, password: String, passwordConfirmation: String) : Flowable<Resource<List<RegisterModel>>>
 
     fun userLogout()
+
+    fun articleSearch(query: String) : Flowable<Resource<List<ArticleModel>>>
 }

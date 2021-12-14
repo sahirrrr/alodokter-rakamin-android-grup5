@@ -77,7 +77,7 @@ class ProfileFragment : Fragment() {
                         binding?.progressBar?.visibility = View.GONE
                         binding?.tvName?.text = getString(R.string.guest_user)
                         binding?.tvNumber?.text = ""
-                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
