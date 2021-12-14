@@ -37,6 +37,8 @@
     <string name="dummy_title">Pentingan mengajarkan kesehatan gigi dan mulut</string>
     <string name="personal_data">Personal Data</string>
     <string name="help">Help</string>
+    <string name="buat_janji">Buat Janji</string>
+    <string name="pekerjaan_dokter">Spesialis Jantung - RSIA Bunda Jakarta</string>
     <string name="log_out">Log Out</string>
     <string name="label_name">Sahir Syatha</string>
     <string name="label_number">+6287785255146</string>
@@ -65,6 +67,8 @@ Ditulis oleh:
 
 Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
 (Dokter spesialis Bedah)</string>
+    <string name="consulting_service">Consulting services from</string>
+    <string name="dummy_price_booking">IDR 300.000</string>
     <string name="image_article">Image Article</string>
     <string name="icon_back">Icon Back</string>
     <string name="illustration_login">Illustration Login</string>
@@ -83,4 +87,5 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="save">Save</string>
     <string name="reset_password">Reset Password</string>
     <string name="already_have_an_account_login">Already have an account ? <b>Login</b></string>
+    <string name="booking">Book</string>
 </resources>
