@@ -12,6 +12,8 @@
     <color name="primary">#3570D2</color>
 
     <color name="button">#004EC0</color>
+    <color name="search">#EAF2FF</color>
+    <color name="article">#FAFAFA</color>
     <color name="text_black">#14142B</color>
     <color name="text_grey">#6A6A6A</color>
 
