@@ -1,8 +1,10 @@
 package com.rakamin.alodokter.domain.usecase
 
+import android.view.Display
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.domain.model.RegisterModel
 import io.reactivex.Flowable
 import java.util.concurrent.Flow
@@ -23,5 +25,5 @@ interface AlodokterUseCase {
 
     fun userLogout()
 
-    fun articleSearch(query: String) : Flowable<Resource<List<ArticleModel>>>
+    fun articleSearch(query: String) : Flowable<Resource<List<Model>>>
 }

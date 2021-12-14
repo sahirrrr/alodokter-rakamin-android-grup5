@@ -6,6 +6,7 @@ import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.*
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
@@ -151,26 +152,26 @@ class AlodokterRepository(
         }.asFlowAble()
 
 
-    override fun articleSearch(query: String): Flowable<Resource<List<ArticleModel>>> =
-        object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
-            override fun loadFromDB(): Flowable<List<ArticleModel>> {
+    override fun articleSearch(query: String): Flowable<Resource<List<Model>>> =
+        object : NetworkBoundResource<List<Model>, List<SearchResponseItem>>() {
+            override fun loadFromDB(): Flowable<List<Model>> {
                 return localDataSource.searchArticle(query)
-                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
+                    .map { DataMapper.mapArticleEntitiesToDomain2(it) }
             }
 
-            override fun shouldFetch(data: List<ArticleModel>?): Boolean {
+            override fun shouldFetch(data: List<Model>?): Boolean {
                 return true
             }
 
-            override fun saveCallResult(data: ArticleResponse) {
-                val article = DataMapper.mapArticleResponseToArticleEntities(data)
+            override fun saveCallResult(data: List<SearchResponseItem>) {
+                val article = DataMapper.mapArticleResponseToArticleEntities2(data)
                 localDataSource.insertArticle(article).subscribeOn(Schedulers.io())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
             }
 
-            override fun createCall(): Flowable<ApiResponse<ArticleResponse>> {
+            override fun createCall(): Flowable<ApiResponse<List<SearchResponseItem>>> {
                 return remoteDataSource.articleSearch(query)
             }
 

@@ -16,6 +16,7 @@ import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.databinding.FragmentArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import com.rakamin.alodokter.ui.adapter.SearchAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -54,6 +55,7 @@ class ArticleFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 svArticle.clearFocus()
                 if (query != null){
+                    Log.d("Query", "onQueryTextSubmit: $query")
                     search(query)
                 }
                 else {
@@ -77,9 +79,11 @@ class ArticleFragment : Fragment() {
                 when(searchResult){
                     is Resource.Success -> {
                         val result = searchResult.data
-                        articleAdapter.setArticle(result)
-                        articleAdapter.notifyDataSetChanged()
+                        searchAdapter.setArticle(result)
+                        searchAdapter.notifyDataSetChanged()
                         searchResult()
+                        binding?.progressBar?.visibility = View.GONE
+
                     }
                     is Resource.Error -> {
                         Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
@@ -139,8 +143,16 @@ class ArticleFragment : Fragment() {
         with(binding?.rvArticle) {
             this?.layoutManager = LinearLayoutManager(context)
             this?.setHasFixedSize(true)
-            this?.adapter = articleAdapter
+            this?.adapter = searchAdapter
         }
+        searchAdapter.setOnItemClickCallback(object: SearchAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Model) {
+                val id = data.id as Int
+                val action = ArticleFragmentDirections.actionArticleFragmentToArticleDetailFragment(id)
+                findNavController().navigate(action)
+            }
+
+        })
     }
 
     override fun onDestroyView() {

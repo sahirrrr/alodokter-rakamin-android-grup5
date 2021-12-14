@@ -14,17 +14,18 @@ import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.ui.article.ArticleFragmentDirections
 import com.rakamin.alodokter.ui.home.HomeFragmentDirections
 import java.util.ArrayList
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
-    private val listArticle = ArrayList<ArticleModel>()
+    private val listArticle = ArrayList<Model>()
     private lateinit var onItemClickCallback: OnItemClickCallback
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
-    fun setArticle(article: List<ArticleModel>?) {
+    fun setArticle(article: List<Model>?) {
         if (article == null) return
         this.listArticle.clear()
         this.listArticle.addAll(article)
@@ -47,7 +48,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: ArticleModel) {
+        fun bind(article: Model) {
             with(binding) {
                 tvTag.text = article.judul
                 tvTitleArticle.text = article.konten
@@ -62,7 +63,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         }
     }
     interface OnItemClickCallback {
-        fun onItemClicked(data: ArticleModel)
+        fun onItemClicked(data: Model)
 
     }
 }

@@ -2,6 +2,7 @@ package com.rakamin.alodokter.domain.usecase
 
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
@@ -36,7 +37,7 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
         alodokterRepositoryImp.userLogout()
     }
 
-    override fun articleSearch(query: String): Flowable<Resource<List<ArticleModel>>> {
+    override fun articleSearch(query: String): Flowable<Resource<List<Model>>> {
         return alodokterRepositoryImp.articleSearch(query)
     }
 }
