@@ -1,24 +1,24 @@
 package com.rakamin.alodokter.ui.adapter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.ui.article.ArticleFragment
+import com.rakamin.alodokter.ui.home.HomeFragment
 import java.util.ArrayList
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     private val listArticle = ArrayList<ArticleModel>()
-    private lateinit var onItemClickCallback: OnItemClickCallback
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
 
     fun setArticle(article: List<ArticleModel>?) {
         if (article == null) return
@@ -52,15 +52,11 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
             }
             itemView.setOnClickListener { view ->
                 val mBundle = Bundle()
-                article.id?.let { mBundle.putInt("ID_ARTICLE", it) }
-                view.findNavController().navigate(R.id.action_articleFragment_to_articleDetailFragment, mBundle)
+                article.id?.let { mBundle.putInt(ID_ARTICLE, it) }
+                Log.d("TAG", "bind: ${article.id}")
+                view.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
             }
-
         }
-    }
-    interface OnItemClickCallback {
-        fun onItemClicked(data: ArticleModel)
-
     }
 }
 

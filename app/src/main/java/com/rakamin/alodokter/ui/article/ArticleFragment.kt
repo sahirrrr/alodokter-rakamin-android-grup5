@@ -24,7 +24,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ArticleFragment : Fragment() {
 
     private val viewModel: ArticleViewModel by viewModel()
-    private val articleAdapter = ArticleAdapter()
+    private val searchAdapter = SearchAdapter()
 
     private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding
@@ -84,8 +84,7 @@ class ArticleFragment : Fragment() {
                         binding?.progressBar?.visibility = View.GONE
                         val result = searchResult.data
                         val newResult = DataMapper.mapArticleSearchResponseToDomain(result)
-                        articleAdapter.setArticle(newResult)
-                        articleAdapter.notifyDataSetChanged()
+                        searchAdapter.setArticle(newResult)
                         showRvArticle()
                     }
                 }
@@ -99,7 +98,7 @@ class ArticleFragment : Fragment() {
                 when(article) {
                     is Resource.Success -> {
                         val articles = article.data
-                        articleAdapter.setArticle(articles)
+                        searchAdapter.setArticle(articles)
                         binding?.progressBar?.visibility = View.GONE
                         showRvArticle()
                     }
@@ -119,7 +118,7 @@ class ArticleFragment : Fragment() {
         with(binding?.rvArticle) {
             this?.layoutManager = LinearLayoutManager(context)
             this?.setHasFixedSize(true)
-            this?.adapter = articleAdapter
+            this?.adapter = searchAdapter
         }
     }
 
