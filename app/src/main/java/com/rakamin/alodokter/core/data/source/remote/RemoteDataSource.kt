@@ -84,8 +84,8 @@ class RemoteDataSource(private val apiService: ApiService) {
         return responseBody.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    fun articleSearch(query : String) : Flowable<ApiResponse<ArticleResponse>>{
-        val responseBody = PublishSubject.create<ApiResponse<ArticleResponse>>()
+    fun articleSearch(query : String) : Flowable<ApiResponse<List<ArticleSearchResponse>>>{
+        val responseBody = PublishSubject.create<ApiResponse<List<ArticleSearchResponse>>>()
         val client = apiService.articleSearch(query)
         client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
             .take(1)

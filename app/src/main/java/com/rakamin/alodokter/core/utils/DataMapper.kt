@@ -5,6 +5,7 @@ import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
+import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.*
 import com.rakamin.alodokter.domain.model.RegisterModel
 import java.util.ArrayList
@@ -112,6 +113,16 @@ object DataMapper {
                 listArticle.add(article)
             }
             return listArticle
+        }
+    }
+
+    fun mapArticleSearchResponseToDomain(data: List<ArticleSearchResponse>): List<ArticleModel> {
+        return data.map {
+            with(it) {
+                ArticleModel(
+                    id, penulis, foto, updatedAt, konten, createdAt, judul
+                )
+            }
         }
     }
 
