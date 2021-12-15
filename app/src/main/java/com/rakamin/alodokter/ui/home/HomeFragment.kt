@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -79,7 +80,6 @@ class HomeFragment : Fragment() {
         })
     }
 
-
     private fun showArticleList() {
         viewModel.getArticle().observe(viewLifecycleOwner,{ article ->
             if (article != null) {
@@ -106,14 +106,6 @@ class HomeFragment : Fragment() {
             this?.setHasFixedSize(true)
             this?.adapter = articleAdapter
         }
-        articleAdapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: ArticleModel) {
-                val id = data.id as Int
-                val action2 = HomeFragmentDirections.actionHomeToDetailFragment(id)
-                findNavController().navigate(action2)
-            }
-
-        })
     }
 
 

@@ -1,8 +1,9 @@
 package com.rakamin.alodokter.domain.repository
 
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ArticleSearchResponse
 import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import io.reactivex.Flowable
@@ -23,6 +24,6 @@ interface IAlodokterRepository {
 
     fun userLogout()
 
-    fun articleSearch(query: String) : Flowable<Resource<List<Model>>>
+    fun articleSearch(query: String): Flowable<ApiResponse<List<ArticleSearchResponse>>>
 
 }

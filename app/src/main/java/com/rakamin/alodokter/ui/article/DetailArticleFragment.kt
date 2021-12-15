@@ -10,24 +10,21 @@ import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.FragmentArticleBinding
 import com.rakamin.alodokter.databinding.FragmentDetailArticleBinding
 import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class DetailArticleFragment : Fragment() {
+
     private val viewModel: ArticleViewModel by viewModel()
+
     private var _binding: FragmentDetailArticleBinding? = null
     private val binding get() = _binding
     private var root: View? = null
-    private val args: DetailArticleFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentDetailArticleBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
@@ -35,9 +32,8 @@ class DetailArticleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val idArticle = args.id
+        val idArticle = requireArguments().getInt(ID_ARTICLE)
         showArticle(idArticle)
-
     }
 
     private fun showArticle(id: Int) {
@@ -63,13 +59,7 @@ class DetailArticleFragment : Fragment() {
                         binding?.progressBar?.visibility = View.VISIBLE
                     }
                 }
-                Log.e("DetailArticleFragment", "showArticle: ${article.data}")
-
             }
-
-
         })
-
     }
-
 }

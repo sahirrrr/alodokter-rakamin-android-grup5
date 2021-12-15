@@ -5,14 +5,14 @@ import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
+import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.*
-import com.rakamin.alodokter.domain.model.Model
 import com.rakamin.alodokter.domain.model.RegisterModel
 import java.util.ArrayList
 
 object DataMapper {
 
-    fun mapUserEntitiesToDomain(data: List<UserEntity>): List<UserModel> {
+    fun mapUserEntitiesToDomain(data : List<UserEntity>) : List<UserModel> {
         return data.map {
             with(it) {
                 UserModel(
@@ -22,7 +22,7 @@ object DataMapper {
         }
     }
 
-    fun mapLoginResponseToEntities(data: LoginResponse): List<UserEntity> {
+    fun mapLoginResponseToEntities(data : LoginResponse) : List<UserEntity> {
         val userLogin = ArrayList<UserEntity>()
         with(data.user) {
             val user = UserEntity(
@@ -64,7 +64,7 @@ object DataMapper {
         return userRegister
     }
 
-    fun mapProfileResponseToEntities(data: ProfileResponse): List<UserEntity> {
+    fun mapProfileResponseToEntities(data : ProfileResponse) : List<UserEntity> {
         val userProfile = ArrayList<UserEntity>()
         with(data) {
             val user = UserEntity(
@@ -97,21 +97,6 @@ object DataMapper {
         }
     }
 
-
-    fun mapArticleEntitiesToDomain2(data: List<ArticleEntity>): List<Model> {
-        return data.map {
-            Model(
-                it.id,
-                it.penulis,
-                it.foto,
-                it.updatedAt,
-                it.konten,
-                it.createdAt,
-                it.judul
-            )
-        }
-    }
-
     fun mapArticleResponseToArticleEntities(data: ArticleResponse): List<ArticleEntity> {
         val listArticle = ArrayList<ArticleEntity>()
         with(data.data) {
@@ -131,17 +116,13 @@ object DataMapper {
         }
     }
 
-    fun mapArticleResponseToArticleEntities2(data: List<SearchResponseItem>): List<ArticleEntity> {
+    fun mapArticleSearchResponseToDomain(data: List<ArticleSearchResponse>): List<ArticleModel> {
         return data.map {
-            ArticleEntity(
-                it.id,
-                it.penulis,
-                it.foto,
-                it.updatedAt,
-                it.konten,
-                it.createdAt,
-                it.judul
-            )
+            with(it) {
+                ArticleModel(
+                    id, penulis, foto, updatedAt, konten, createdAt, judul
+                )
+            }
         }
     }
 

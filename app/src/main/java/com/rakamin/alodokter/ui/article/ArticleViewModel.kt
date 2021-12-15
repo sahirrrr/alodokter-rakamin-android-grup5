@@ -7,6 +7,8 @@ import com.rakamin.alodokter.domain.usecase.AlodokterUseCase
 class ArticleViewModel(private val alodokterUseCase: AlodokterUseCase) : ViewModel() {
 
     fun getArticle() = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getArticle())
+
     fun getArticleById(id: Int) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getArticleById(id))
+
     fun articleSearch(query: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.articleSearch(query))
 }
