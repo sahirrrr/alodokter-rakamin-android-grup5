@@ -11,3 +11,4 @@ const val EXTRA_DATA = "extra_data"
 
 // Article Constants
 const val ID_ARTICLE = "id_article"
+

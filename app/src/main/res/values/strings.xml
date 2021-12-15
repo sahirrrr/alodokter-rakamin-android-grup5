@@ -85,4 +85,7 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="already_have_an_account_login">Already have an account ? <b>Login</b></string>
     <string name="toast_error">Oops! something went wrong</string>
     <string name="article_search_query">Search for article…</string>
+    <string name="fetch_article_failed">Fetch Article Failed</string>
+    <string name="fetch_article_empty">Fetch Article empty</string>
+    <string name="empty_search">Empty Search!</string>
 </resources>

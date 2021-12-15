@@ -3,11 +3,10 @@ package com.rakamin.alodokter.domain.usecase
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ArticleSearchResponse
-import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.domain.model.RegisterModel
+import com.rakamin.alodokter.domain.model.UserModel
 import io.reactivex.Flowable
-import java.util.concurrent.Flow
 
 interface AlodokterUseCase {
 

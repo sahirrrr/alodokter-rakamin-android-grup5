@@ -1,18 +1,17 @@
 package com.rakamin.alodokter.core.utils
 
-import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
-import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
-import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
+import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.core.data.source.remote.response.*
+import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.domain.model.RegisterModel
-import java.util.ArrayList
+import com.rakamin.alodokter.domain.model.UserModel
+import java.util.*
 
 object DataMapper {
 
-    fun mapUserEntitiesToDomain(data : List<UserEntity>) : List<UserModel> {
+    fun mapUserEntitiesToDomain(data: List<UserEntity>): List<UserModel> {
         return data.map {
             with(it) {
                 UserModel(
@@ -22,7 +21,7 @@ object DataMapper {
         }
     }
 
-    fun mapLoginResponseToEntities(data : LoginResponse) : List<UserEntity> {
+    fun mapLoginResponseToEntities(data: LoginResponse): List<UserEntity> {
         val userLogin = ArrayList<UserEntity>()
         with(data.user) {
             val user = UserEntity(
@@ -64,7 +63,7 @@ object DataMapper {
         return userRegister
     }
 
-    fun mapProfileResponseToEntities(data : ProfileResponse) : List<UserEntity> {
+    fun mapProfileResponseToEntities(data: ProfileResponse): List<UserEntity> {
         val userProfile = ArrayList<UserEntity>()
         with(data) {
             val user = UserEntity(
