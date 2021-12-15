@@ -72,6 +72,21 @@
             app:layout_constraintTop_toBottomOf="@+id/divider"
             tools:text="@string/dummy_article_content"
             tools:textColor="@color/text_grey" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_16"
+            android:id="@+id/tv_article_writer"
+            app:layout_constraintTop_toBottomOf="@id/tv_article_content"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_article_updated"
+            android:layout_marginStart="@dimen/dimens_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_article_writer"
+            app:layout_constraintStart_toStartOf="parent"/>
+
 
         <ProgressBar
             android:id="@+id/progress_bar"

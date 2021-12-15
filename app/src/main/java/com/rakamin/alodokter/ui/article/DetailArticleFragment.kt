@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.Helper
 import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.FragmentDetailArticleBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -35,6 +37,7 @@ class DetailArticleFragment : Fragment() {
         val idArticle = requireArguments().getInt(ID_ARTICLE)
         showArticle(idArticle)
     }
+
     private fun showArticle(id: Int) {
         viewModel.getArticleById(id).observe(viewLifecycleOwner, { article ->
             if (article != null) {
@@ -46,6 +49,17 @@ class DetailArticleFragment : Fragment() {
                             for (data in articles) {
                                 binding?.tvArticleTitle?.text = data.judul
                                 binding?.tvArticleContent?.text = data.konten
+                                val timeCreated = data.createdAt?.let { Helper.dateFormatter(it) }
+                                val timeUpdated = data.updatedAt?.let { Helper.dateFormatter(it) }
+                                binding?.tvArticleWriter?.text = (
+                                        getString(
+                                            R.string.article_writer,
+                                            data.penulis,
+                                            timeCreated
+                                        )
+                                        )
+                                binding?.tvArticleUpdated?.text =
+                                    getString(R.string.article_updated, timeUpdated)
                             }
                         }
                     }

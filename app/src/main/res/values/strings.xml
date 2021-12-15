@@ -53,7 +53,6 @@
     <string name="label_skip_login">Skip Login..</string>
     <string name="dummy_article_title">Pentingnya mengajarkan kesehatan gigi dan mulut</string>
     <string name="dummy_article_content">Siapa bilang orang yang diabetes tidak boleh makan seafood? Padahal, ada beberapa jenis seafood yang justru bermanfaat untuk penderita diabetes, lho. Meski begitu, penderita diabetes memang harus bijak dalam mengonsumsi seafood sesuai porsi yang disarankan.
-
 Seafood dikenal sebagai sumber protein, lemak baik, vitamin, dan mineral. Lemak baik yang terkandung dalam seafood, yaitu asam lemak omega-3, dinilai baik untuk menjaga kesehatan jantung dan pembuluh darah (kardiovaskular), yang sering kali menjadi masalah pada penderita diabetes.
 Pilihan Seafood untuk Penderita Diabetes
 Sebagai sumber protein dan lemak baik, seafood sangat baik untuk dikonsumsi, termasuk oleh penderita diabetes.  Salah satu jenis seafood yang dianjurkan adalah ikan. Konsumsilah ikan paling tidak 2 kali dalam seminggu.Berikut adalah beberapa pilihan ikan laut dan makanan laut lainnya yang bisa dimasukkan dalam daftar menu makan bagi penderita diabetes:
@@ -88,4 +87,6 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="fetch_article_failed">Fetch Article Failed</string>
     <string name="fetch_article_empty">Fetch Article empty</string>
     <string name="empty_search">Empty Search!</string>
+    <string name="article_writer">Penulis : %1$s - %2$s</string>
+    <string name="article_updated">Terakhir diperbarui : %1$s</string>
 </resources>

@@ -45,6 +45,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                 Glide.with(itemView.context)
                     .load(R.drawable.ic_article_image)
                     .into(ivArticle)
+
                 itemView.setOnClickListener { view ->
                     val mBundle = Bundle()
                     article.id?.let { mBundle.putInt(ID_ARTICLE, it) }
