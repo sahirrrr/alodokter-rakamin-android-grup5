@@ -1,19 +1,15 @@
 package com.rakamin.alodokter.ui.article
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.navArgs
+import androidx.fragment.app.Fragment
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.ID_ARTICLE
-import com.rakamin.alodokter.databinding.FragmentArticleBinding
 import com.rakamin.alodokter.databinding.FragmentDetailArticleBinding
-import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailArticleFragment : Fragment() {
@@ -24,7 +20,11 @@ class DetailArticleFragment : Fragment() {
     private val binding get() = _binding
     private var root: View? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentDetailArticleBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
@@ -35,7 +35,6 @@ class DetailArticleFragment : Fragment() {
         val idArticle = requireArguments().getInt(ID_ARTICLE)
         showArticle(idArticle)
     }
-
     private fun showArticle(id: Int) {
         viewModel.getArticleById(id).observe(viewLifecycleOwner, { article ->
             if (article != null) {
@@ -51,7 +50,11 @@ class DetailArticleFragment : Fragment() {
                         }
                     }
                     is Resource.Error -> {
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.fetch_article_failed),
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                         binding?.progressBar?.visibility = View.GONE
                     }

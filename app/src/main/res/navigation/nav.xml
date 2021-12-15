@@ -89,7 +89,7 @@
             app:destination="@+id/articleFragment">
         </action>
         <action
-            android:id="@+id/action_home_to_detailFragment"
+            android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@+id/detailArticleFragment">
         </action>
 

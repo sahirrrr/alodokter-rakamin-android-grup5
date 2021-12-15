@@ -4,9 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
+import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single

@@ -2,7 +2,6 @@ package com.rakamin.alodokter.session
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.rakamin.alodokter.R
 
 class SessionManager(context: Context) {
 

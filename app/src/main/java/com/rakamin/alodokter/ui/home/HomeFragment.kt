@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
-import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import org.koin.android.ext.android.inject
@@ -64,7 +63,6 @@ class HomeFragment : Fragment() {
                         val dataArray = showProfile.data
                         if (dataArray != null) {
                             for (data in dataArray) {
-//                                binding?.progressBar?.visibility = View.GONE
                                 binding?.tvName?.text = data.nama
                             }
                         }
@@ -92,7 +90,7 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.fetch_article_failed), Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
