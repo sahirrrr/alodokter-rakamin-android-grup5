@@ -83,29 +83,4 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="save">Save</string>
     <string name="reset_password">Reset Password</string>
     <string name="already_have_an_account_login">Already have an account ? <b>Login</b></string>
-    <string name="detail_doctor">Detail Doctor</string>
-    <string name="dr_bagas">Dr.Bagas</string>
-    <string name="spesialis_price">Spesialis Jantung - IDR 300.000</string>
-    <string name="about_doctor">About Doctor</string>
-    <string name="text_about_doctor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent amet massa velit vel lacinia.</string>
-    <string name="location">Location</string>
-    <string name="rs_name">RSIA Bunda Jakarta</string>
-    <string name="address">Jl. Teuku Cik Ditiro No.28, RT.9/RW.2, Gondangdia, Kec. Menteng</string>
-    <string name="education">Education</string>
-    <string name="ugm">Universitas Gadjah Mada</string>
-    <string name="dokter_spesialis_anestesiologi">Dokter Spesialis Anestesiologi</string>
-    <string name="book_appointment">Book Appointment</string>
-    <string name="patient">Patient</string>
-    <string name="number_patient">100+</string>
-    <string name="experience">Experience</string>
-    <string name="years">5 Years</string>
-    <string name="rating">Rating</string>
-    <string name="rating_number">4.6</string>
-    <string name="doctor_photo">Doctor photo</string>
-    <string name="icon_location">Icon Location</string>
-
-    <string name="specialist_price">%1$s - %2$s</string>
-    <string name="schedule">Schedule</string>
-    <string name="date">Monday, 28 December 2021</string>
-    <string name="time">jam 12</string>>
 </resources>

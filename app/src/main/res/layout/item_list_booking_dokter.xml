@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimens_16"
+    android:background="@drawable/bg_booking_dokter">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_doctor"
+        android:layout_width="@dimen/dimens_60"
+        android:layout_height="@dimen/dimens_60"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginBottom="@dimen/dimens_16"
+        tools:src="@drawable/ic_launcher_background"
+        app:layout_goneMarginBottom="@dimen/dimens_16"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:riv_corner_radius="@dimen/dimens_60"/>
+
+    <TextView
+        android:id="@+id/tv_doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_8"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/text_black"
+        tools:text="@string/doctor_name"
+        app:layout_constraintStart_toEndOf="@+id/iv_doctor"
+        app:layout_constraintTop_toTopOf="@id/iv_doctor"
+        app:layout_constraintBottom_toTopOf="@id/tv_doctor_specialist"/>
+
+    <TextView
+        android:id="@+id/tv_doctor_specialist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_8"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="@dimen/font_14"
+        tools:text="@string/pekerjaan_dokter"
+        android:textColor="@color/text_black"
+        app:layout_constraintTop_toBottomOf="@id/tv_doctor_name"
+        app:layout_constraintStart_toEndOf="@+id/iv_doctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_doctor"/>
+
+    <TextView
+        android:id="@+id/tv_consulting_services"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_12"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/text_grey"
+        tools:text="@string/consulting_service"
+        app:layout_constraintTop_toBottomOf="@id/iv_doctor"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_price_booking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_4"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginBottom="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="@dimen/font_16"
+        tools:text="@string/dummy_price_booking"
+        android:textColor="@color/text_black"
+        app:layout_constraintTop_toBottomOf="@id/tv_consulting_services"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_book"
+        style="@style/buttonRounded"
+        android:layout_width="@dimen/dimens_136"
+        android:layout_height="@dimen/dimens_58"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_48"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:backgroundTint="@color/secondary"
+        android:text="@string/booking"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tv_price_booking" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
