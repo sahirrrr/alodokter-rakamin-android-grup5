@@ -2,6 +2,7 @@ package com.rakamin.alodokter.domain.usecase
 
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.DetailDoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
@@ -23,7 +24,11 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
     override fun getProfile(idUser: String): Flowable<Resource<List<UserModel>>> {
         return alodokterRepositoryImp.getProfile(idUser)   
     }
-    
+
+    override fun getDoctorDetail(idDoctor: String): Flowable<Resource<List<DetailDoctorModel>>> {
+        return alodokterRepositoryImp.getDoctorDetail(idDoctor)
+    }
+
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> {
         return alodokterRepositoryImp.getArticle()
     }

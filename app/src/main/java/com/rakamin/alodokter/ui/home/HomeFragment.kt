@@ -1,6 +1,7 @@
 package com.rakamin.alodokter.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val idUser = sessionRepository.getIdUser()
-        binding?.tvName?.text = idUser.toString()
 
         showArticleList()
         showProfile(idUser)

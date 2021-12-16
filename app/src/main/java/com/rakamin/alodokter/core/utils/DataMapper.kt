@@ -1,14 +1,13 @@
 package com.rakamin.alodokter.core.utils
 
 import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
+import com.rakamin.alodokter.core.data.source.local.entity.DetailDoctorEntity
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.*
+import com.rakamin.alodokter.domain.model.DetailDoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import java.util.ArrayList
 
@@ -83,6 +82,38 @@ object DataMapper {
             userProfile.add(user)
         }
         return userProfile
+    }
+
+    fun mapDetailDoctorEntitiesToDomain(data: List<DetailDoctorEntity>) : List<DetailDoctorModel> {
+        return data.map {
+            with(it) {
+                DetailDoctorModel(
+                    id, nama, about, hargaKonsul, spesialis, lokasi, edukasi, jurusan, fakultas, rating, jumlahPasien, jumlahPengalaman
+                )
+            }
+        }
+    }
+
+    fun mapDetailDoctorResponseToEntities(data: DetailDoctorResponse) : List<DetailDoctorEntity> {
+        val doctorProfile = ArrayList<DetailDoctorEntity>()
+        with(data) {
+            val doctor = DetailDoctorEntity(
+                this.id,
+                this.nama,
+                this.about,
+                this.hargaKonsul,
+                this.spesialis,
+                this.lokasi,
+                this.edukasi,
+                this.jurusan,
+                this.fakultas,
+                this.rating,
+                this.jumlahPasien,
+                this.jumlahPengalaman,
+            )
+            doctorProfile.add(doctor)
+        }
+        return doctorProfile
     }
 
     fun mapArticleEntitiesToDomain(data: List<ArticleEntity>): List<ArticleModel> {

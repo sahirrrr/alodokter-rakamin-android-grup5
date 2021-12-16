@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
+import com.rakamin.alodokter.core.data.source.local.entity.DetailDoctorEntity
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -25,6 +26,12 @@ interface AlodokterDao {
 
     @Query("select * from register_table")
     fun getUserRegister() : Flowable<List<RegisterEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertDoctorDetail(detailDoctor: List<DetailDoctorEntity>) : Completable
+
+    @Query("select * from doctor_table WHERE id = :idDoctor")
+    fun getDoctorDetail(idDoctor: String) : Flowable<List<DetailDoctorEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertArticle(article: List<ArticleEntity>) : Completable

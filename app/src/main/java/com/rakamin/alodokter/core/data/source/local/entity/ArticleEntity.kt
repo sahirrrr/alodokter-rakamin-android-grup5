@@ -19,6 +19,5 @@ data class ArticleEntity(
 
     val createdAt: String? = null,
 
-
     val judul: String? = null
 )
