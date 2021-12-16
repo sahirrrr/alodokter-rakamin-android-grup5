@@ -30,5 +30,12 @@ interface ApiService {
 
     @GET("article")
     fun getArticles(): Flowable<ArticleResponse>
+
+    @FormUrlEncoded
+    @POST("password/forgot")
+    fun postForgotPassword(
+        @Field("email") email: String
+    ) : Flowable<ForgotPasswordResponse>
+
 }
 

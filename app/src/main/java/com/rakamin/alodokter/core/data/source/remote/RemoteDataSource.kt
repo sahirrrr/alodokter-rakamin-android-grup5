@@ -28,7 +28,7 @@ class RemoteDataSource(private val apiService: ApiService) {
         return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    fun getUserProfile(idUser : String) : Flowable<ApiResponse<ProfileResponse>> {
+    fun getUserProfile(idUser: String): Flowable<ApiResponse<ProfileResponse>> {
         val responseResult = PublishSubject.create<ApiResponse<ProfileResponse>>()
         val client = apiService.showProfile(idUser)
         client
@@ -43,7 +43,12 @@ class RemoteDataSource(private val apiService: ApiService) {
         return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    fun postUserRegister(name: String, email: String, password: String, passwordConfirmation: String) : Flowable<ApiResponse<RegisterResponse>> {
+    fun postUserRegister(
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ): Flowable<ApiResponse<RegisterResponse>> {
         val responseResult = PublishSubject.create<ApiResponse<RegisterResponse>>()
         val client = apiService.postRegister(name, email, password, passwordConfirmation)
         client
@@ -78,12 +83,26 @@ class RemoteDataSource(private val apiService: ApiService) {
         val client = apiService.getArticles()
         client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
             .take(1)
-            .subscribe ({
+            .subscribe({
                 responseBody.onNext(ApiResponse.Success(it))
-            },{
-            responseBody.onNext(ApiResponse.Error(it.message.toString()))
-        })
+            }, {
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
         return responseBody.toFlowable(BackpressureStrategy.BUFFER)
+    }
 
+    fun postForgotPassword(email: String): Flowable<ApiResponse<ForgotPasswordResponse>> {
+        val responseResult = PublishSubject.create<ApiResponse<ForgotPasswordResponse>>()
+        val client = apiService.postForgotPassword(email)
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            }, { error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
+            })
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 }

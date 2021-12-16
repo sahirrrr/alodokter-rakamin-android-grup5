@@ -41,4 +41,5 @@ interface AlodokterDao {
 
     @Query ("DELETE FROM user_table")
     fun userLogout() : Single<Int>
+
 }

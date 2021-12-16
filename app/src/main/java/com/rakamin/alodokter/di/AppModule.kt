@@ -2,6 +2,7 @@ package com.rakamin.alodokter.di
 
 import com.rakamin.alodokter.domain.usecase.AlodokterInteractor
 import com.rakamin.alodokter.domain.usecase.AlodokterUseCase
+import com.rakamin.alodokter.ui.login.ForgotPasswordViewModel
 import com.rakamin.alodokter.ui.article.ArticleViewModel
 import com.rakamin.alodokter.ui.booking.DoctorViewModel
 import com.rakamin.alodokter.ui.home.HomeViewModel
@@ -22,4 +23,5 @@ val viewModelModule = module {
     viewModel { ArticleViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { DoctorViewModel(get()) }
+    viewModel { ForgotPasswordViewModel(get()) }
 }
