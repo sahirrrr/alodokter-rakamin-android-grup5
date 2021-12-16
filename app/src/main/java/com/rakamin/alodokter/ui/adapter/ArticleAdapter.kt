@@ -32,9 +32,8 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
         holder.bind(article)
     }
 
-    override fun getItemCount(): Int {
-        return listArticle.size
-    }
+    override fun getItemCount(): Int = listArticle.size
+
 
     inner class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -48,8 +47,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                 itemView.setOnClickListener { view ->
                     val mBundle = Bundle()
                     article.id?.let { mBundle.putInt(ID_ARTICLE, it) }
-                    view.findNavController()
-                        .navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
+                    view.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
                 }
             }
         }

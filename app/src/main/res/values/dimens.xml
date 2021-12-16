@@ -47,4 +47,10 @@
     <dimen name="dimens_60">60dp</dimen>
     <dimen name="dimens_100">100dp</dimen>
     <dimen name="dimens_64">64dp</dimen>
+    <dimen name="dimens_363">363dp</dimen>
+    <dimen name="dimens_173">173dp</dimen>
+    <dimen name="dimens_250">250dp</dimen>
+    <dimen name="dimens_200">200dp</dimen>
+    <dimen name="dimens_75">75dp</dimen>
+    <dimen name="dimens_0_5">0.5dp</dimen>
 </resources>

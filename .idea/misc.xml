@@ -19,21 +19,44 @@
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_booking.xml" value="0.1824074074074074" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_detail_article.xml" value="0.14" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_edit_profile.xml" value="0.17827868852459017" />
-        <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_login.xml" value="0.16" />
-        <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_on_boarding.xml" value="0.33" />
+        <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_on_boarding.xml" value="0.6500691562932227" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_profile.xml" value="0.17827868852459017" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_register.xml" value="0.17827868852459017" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_splash.xml" value="0.25" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/fragment_status_dialog.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/Administrator/Desktop/alodokter/alodokter-final-project/alodokter-rakamin-android-grup5/app/src/main/res/layout/item_article.xml" value="0.19" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_appointment_today.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_detail_doctor.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_icon_location.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_info_doctor.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_schedule.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_schedule_detail.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_search.xml" value="0.2305921052631579" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bg_search_2.xml" value="0.2305921052631579" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/drawable/ic_login.xml" value="0.2305921052631579" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/activity_main.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_article.xml" value="0.22039473684210525" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_booking.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_detail_article.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_detail_doctor.xml" value="0.21419437340153452" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_doctor.xml" value="0.25" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_edit_profile.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_forgot_password.xml" value="0.33489583333333334" />
-        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_home.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_login.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_on_boarding.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_profile.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_register.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_register_failed.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_register_success.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_splash.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/fragment_status_dialog.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/item_article.xml" value="0.22039473684210525" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/item_schedule_doctor.xml" value="0.33" />
+        <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/layout/item_time_doctor.xml" value="0.5" />
         <entry key="..\:/Users/Sahir/AndroidStudioProjects/Alodokter/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3489583333333333" />
       </map>
     </option>

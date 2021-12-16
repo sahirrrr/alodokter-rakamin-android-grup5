@@ -38,6 +38,4 @@ interface AlodokterDao {
     @Query("SELECT * FROM article_table WHERE id_article = :id")
     fun getArticleById(id: Int) : Flowable<List<ArticleEntity>>
 
-    @Query("SELECT * FROM article_table WHERE judul = :query")
-    fun searchArticle(query: String) : Flowable<List<ArticleEntity>>
 }

@@ -9,16 +9,12 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.utils.DataMapper
-import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.FragmentArticleBinding
-import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.ui.adapter.ArticleAdapter
 import com.rakamin.alodokter.ui.adapter.SearchAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -31,11 +27,7 @@ class ArticleFragment : Fragment() {
     private val binding get() = _binding
     private var root: View? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
@@ -61,11 +53,7 @@ class ArticleFragment : Fragment() {
                     search(query)
                     binding?.progressBar?.visibility = View.VISIBLE
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.empty_search),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), getString(R.string.empty_search), Toast.LENGTH_SHORT).show()
                 }
                 return true
             }
@@ -82,24 +70,20 @@ class ArticleFragment : Fragment() {
                 when (searchResult) {
                     is ApiResponse.Empty -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fetch_article_empty),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_empty_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
                     }
                     is ApiResponse.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fetch_article_empty),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
                         binding?.progressBar?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_error_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
                         binding?.progressBar?.visibility = View.GONE
+                        binding?.ivEmptyStateArticle?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.GONE
                         val result = searchResult.data
                         val newResult = DataMapper.mapArticleSearchResponseToDomain(result)
                         searchAdapter.setArticle(newResult)
@@ -115,19 +99,18 @@ class ArticleFragment : Fragment() {
             if (article != null) {
                 when (article) {
                     is Resource.Success -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.ivEmptyStateArticle?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.GONE
                         val articles = article.data
                         searchAdapter.setArticle(articles)
-                        binding?.progressBar?.visibility = View.GONE
                         showRvArticle()
                     }
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fetch_article_failed),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_error_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
@@ -141,7 +124,6 @@ class ArticleFragment : Fragment() {
             this?.setHasFixedSize(true)
             this?.adapter = searchAdapter
         }
-
     }
 
     override fun onDestroyView() {

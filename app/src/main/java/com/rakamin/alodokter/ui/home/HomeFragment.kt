@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
-import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
 import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
@@ -90,7 +89,9 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(requireContext(), getString(R.string.fetch_article_failed), Toast.LENGTH_SHORT).show()
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_error_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
@@ -105,7 +106,6 @@ class HomeFragment : Fragment() {
             this?.adapter = articleAdapter
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
