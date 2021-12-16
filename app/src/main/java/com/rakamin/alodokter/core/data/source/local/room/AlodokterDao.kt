@@ -13,22 +13,25 @@ import io.reactivex.Single
 interface AlodokterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserData(login: List<UserEntity>) : Completable
+    fun insertUserData(login: List<UserEntity>): Completable
 
     @Query("select * from user_table")
-    fun getUserData() : Flowable<List<UserEntity>>
+    fun getUserData(): Flowable<List<UserEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserRegister(login: List<RegisterEntity>) : Completable
+    fun insertUserRegister(login: List<RegisterEntity>): Completable
 
     @Query("select * from register_table")
-    fun getUserRegister() : Flowable<List<RegisterEntity>>
+    fun getUserRegister(): Flowable<List<RegisterEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticle(article: List<ArticleEntity>) : Completable
+    fun insertArticle(article: List<ArticleEntity>): Completable
 
     @Query("SELECT * FROM article_table")
-    fun getArticle() : Flowable<List<ArticleEntity>>
+    fun getArticle(): Flowable<List<ArticleEntity>>
+
+    @Query("SELECT * FROM article_table WHERE id_article = :id")
+    fun getArticleById(id: Int) : Flowable<List<ArticleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDoctor(listDoctor: List<ListDoctorEntity>): Completable
@@ -44,4 +47,5 @@ interface AlodokterDao {
 
     @Query ("DELETE FROM user_table")
     fun userLogout() : Single<Int>
+
 }

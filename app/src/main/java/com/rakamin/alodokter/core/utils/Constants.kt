@@ -11,3 +11,7 @@ const val EXTRA_DATA = "extra_data"
 
 // Doctor Constants
 const val ID_DOCTOR = "id_doctor"
+
+// Article Constants
+const val ID_ARTICLE = "id_article"
+

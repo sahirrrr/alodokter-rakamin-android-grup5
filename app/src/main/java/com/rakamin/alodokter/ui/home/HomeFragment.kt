@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val idUser = sessionRepository.getIdUser()
+        binding?.tvName?.text = idUser.toString()
 
         showArticleList()
         showProfile(idUser)
@@ -71,7 +72,7 @@ class HomeFragment : Fragment() {
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
                         binding?.tvName?.text = getString(R.string.guest_user)
-                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
@@ -92,7 +93,9 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_error_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }

@@ -4,10 +4,13 @@ import com.rakamin.alodokter.core.data.source.local.entity.*
 import com.rakamin.alodokter.core.data.source.remote.response.*
 import com.rakamin.alodokter.domain.model.*
 import java.util.ArrayList
+import com.rakamin.alodokter.core.data.source.remote.response.*
+
+import java.util.*
 
 object DataMapper {
 
-    fun mapUserEntitiesToDomain(data : List<UserEntity>) : List<UserModel> {
+    fun mapUserEntitiesToDomain(data: List<UserEntity>): List<UserModel> {
         return data.map {
             with(it) {
                 UserModel(
@@ -17,7 +20,7 @@ object DataMapper {
         }
     }
 
-    fun mapLoginResponseToEntities(data : LoginResponse) : List<UserEntity> {
+    fun mapLoginResponseToEntities(data: LoginResponse): List<UserEntity> {
         val userLogin = ArrayList<UserEntity>()
         with(data.user) {
             val user = UserEntity(
@@ -59,7 +62,7 @@ object DataMapper {
         return userRegister
     }
 
-    fun mapProfileResponseToEntities(data : ProfileResponse) : List<UserEntity> {
+    fun mapProfileResponseToEntities(data: ProfileResponse): List<UserEntity> {
         val userProfile = ArrayList<UserEntity>()
         with(data) {
             val user = UserEntity(
@@ -87,7 +90,8 @@ object DataMapper {
                 it.updatedAt,
                 it.konten,
                 it.createdAt,
-                it.judul
+                it.judul,
+                it.kategori
             )
         }
     }
@@ -103,11 +107,22 @@ object DataMapper {
                     it?.updatedAt,
                     it?.konten,
                     it?.createdAt,
-                    it?.judul
+                    it?.judul,
+                    it?.kategori
                 )
                 listArticle.add(article)
             }
             return listArticle
+        }
+    }
+
+    fun mapArticleSearchResponseToDomain(data: List<ArticleSearchResponse>): List<ArticleModel> {
+        return data.map {
+            with(it) {
+                ArticleModel(
+                    id, penulis, foto, updatedAt, konten, createdAt, judul,kategori
+                )
+            }
         }
     }
 

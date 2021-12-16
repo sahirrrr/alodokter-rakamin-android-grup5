@@ -57,4 +57,10 @@
     <dimen name="dimens_200">200dp</dimen>
     <dimen name="dimens_92">92dp</dimen>>
     <dimen name="dimens_117">117</dimen>
+    <dimen name="dimens_363">363dp</dimen>
+    <dimen name="dimens_173">173dp</dimen>
+    <dimen name="dimens_250">250dp</dimen>
+    <dimen name="dimens_200">200dp</dimen>
+    <dimen name="dimens_75">75dp</dimen>
+    <dimen name="dimens_0_5">0.5dp</dimen>
 </resources>

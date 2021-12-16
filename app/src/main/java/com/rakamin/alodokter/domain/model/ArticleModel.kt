@@ -13,5 +13,7 @@ data class ArticleModel(
 
     val createdAt: String? = null,
 
-    val judul: String? = null
+    val judul: String? = null,
+
+    val kategori: String? = null
 )
