@@ -66,6 +66,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_16"
             android:layout_marginEnd="@dimen/dimens_16"

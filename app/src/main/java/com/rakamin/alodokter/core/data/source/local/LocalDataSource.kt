@@ -21,4 +21,5 @@ class LocalDataSource(private val dao: AlodokterDao) {
     fun getArticles() : Flowable<List<ArticleEntity>> = dao.getArticle()
 
     fun userLogout() = dao.userLogout()
+
 }

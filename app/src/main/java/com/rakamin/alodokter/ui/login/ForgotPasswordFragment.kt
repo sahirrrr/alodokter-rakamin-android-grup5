@@ -1,60 +1,86 @@
 package com.rakamin.alodokter.ui.login
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
+import com.rakamin.alodokter.databinding.FragmentForgotPasswordBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ForgotPasswordFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ForgotPasswordFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel: ForgotPasswordViewModel by viewModel()
+
+    private var _binding: FragmentForgotPasswordBinding? = null
+    private val binding get() = _binding
+    private var root: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forgot_password, container, false)
+        _binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
+        root = binding?.root
+        return root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ForgotPasswordFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ForgotPasswordFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    @SuppressLint("CheckResult")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val emailStream = binding?.edtEmail?.let {
+            RxTextView.textChanges(it)
+                .skipInitialValue()
+                .map { email ->
+                    !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                }
+        }
+        emailStream?.subscribe { it ->
+            showEmailExistAlert(it)
+        }
+
+        binding?.btnSendInstruction?.setOnClickListener {
+            val email = binding?.edtEmail?.text.toString().trim()
+
+            userForgotPassword(email)
+        }
+    }
+
+    private fun userForgotPassword(email: String) {
+        viewModel.userForgotPassword(email).observe(viewLifecycleOwner, { userForgotPassword ->
+            if (userForgotPassword != null) {
+                when (userForgotPassword) {
+                    is ApiResponse.Success -> {
+                        val response = userForgotPassword.data
+                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    is ApiResponse.Error -> {
+                        Toast.makeText(
+                            requireContext(),
+                            userForgotPassword.errorMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
+        })
+    }
+
+    private fun showEmailExistAlert(isNotValid: Boolean) {
+        binding?.edtEmail?.error = if (isNotValid) getString(R.string.email_not_valid) else null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        root = null
     }
 }
