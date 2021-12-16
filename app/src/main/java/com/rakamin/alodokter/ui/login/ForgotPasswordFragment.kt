@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
@@ -44,6 +45,10 @@ class ForgotPasswordFragment : Fragment() {
         }
         emailStream?.subscribe { it ->
             showEmailExistAlert(it)
+        }
+
+        binding?.ivBack?.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         binding?.btnSendInstruction?.setOnClickListener {
