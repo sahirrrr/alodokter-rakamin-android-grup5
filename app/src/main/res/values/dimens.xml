@@ -47,4 +47,8 @@
     <dimen name="dimens_60">60dp</dimen>
     <dimen name="dimens_100">100dp</dimen>
     <dimen name="dimens_64">64dp</dimen>
+    <dimen name="dimens_92">92dp</dimen>
+    <dimen name="dimens_136">136dp</dimen>
+    <dimen name="dimens_117">117</dimen>
+
 </resources>

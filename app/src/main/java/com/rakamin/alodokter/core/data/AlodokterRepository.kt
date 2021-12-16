@@ -3,13 +3,10 @@ package com.rakamin.alodokter.core.data
 import com.rakamin.alodokter.core.data.source.local.LocalDataSource
 import com.rakamin.alodokter.core.data.source.remote.RemoteDataSource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ForgotPasswordResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.*
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.DetailDoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
@@ -108,7 +105,30 @@ class AlodokterRepository(
                 return remoteDataSource.getUserProfile(idUser)
             }
         }.asFlowAble()
-           
+
+    override fun getDoctorDetail(idDoctor: String): Flowable<Resource<List<DetailDoctorModel>>> =
+        object : NetworkBoundResource<List<DetailDoctorModel>, DetailDoctorResponse>() {
+            override fun loadFromDB(): Flowable<List<DetailDoctorModel>> {
+                return localDataSource.getDoctorDetail(idDoctor).map { DataMapper.mapDetailDoctorEntitiesToDomain(it) }
+            }
+
+            override fun shouldFetch(data: List<DetailDoctorModel>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+
+            override fun saveCallResult(data: DetailDoctorResponse) {
+                val doctorProfile = DataMapper.mapDetailDoctorResponseToEntities(data)
+                localDataSource.insertDoctorDetail(doctorProfile)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+
+            override fun createCall(): Flowable<ApiResponse<DetailDoctorResponse>> {
+                return remoteDataSource.getDoctorDetail(idDoctor)
+            }
+        }.asFlowAble()
+
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> =
         object : NetworkBoundResource<List<ArticleModel>, ArticleResponse>() {
             override fun loadFromDB(): Flowable<List<ArticleModel>> {
