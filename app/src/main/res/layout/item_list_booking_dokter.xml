@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dimens_16"
-    android:background="@drawable/bg_booking_dokter">
+    android:background="@drawable/bg_schedule_detail">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_doctor"

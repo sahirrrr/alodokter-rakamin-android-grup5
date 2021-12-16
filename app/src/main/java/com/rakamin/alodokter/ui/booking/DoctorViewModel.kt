@@ -6,5 +6,9 @@ import com.rakamin.alodokter.domain.usecase.AlodokterUseCase
 
 class DoctorViewModel(private val alodokterUseCase: AlodokterUseCase): ViewModel() {
 
+    fun getDoctor() = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getDoctor())
+
     fun doctorProfile(idDoctor: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getDoctorDetail(idDoctor))
+
+    fun doctorSearch(query: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.searchDoctor(query))
 }

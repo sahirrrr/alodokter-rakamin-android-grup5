@@ -17,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ForgotPasswordFragment : Fragment() {
 
-    private val viewModel: ForgotPasswordViewModel by viewModel()
+    private val viewModel: LoginViewModel by viewModel()
 
     private var _binding: FragmentForgotPasswordBinding? = null
     private val binding get() = _binding
@@ -64,15 +64,16 @@ class ForgotPasswordFragment : Fragment() {
                 when (userForgotPassword) {
                     is ApiResponse.Success -> {
                         val response = userForgotPassword.data
-                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                     }
                     is ApiResponse.Error -> {
-                        Toast.makeText(
-                            requireContext(),
+                        Toast.makeText(requireContext(),
                             userForgotPassword.errorMessage,
                             Toast.LENGTH_SHORT
                         ).show()
+                    }
+                    is ApiResponse.Empty -> {
+
                     }
                 }
             }

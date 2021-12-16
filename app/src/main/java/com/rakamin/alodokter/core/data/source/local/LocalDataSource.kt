@@ -1,8 +1,6 @@
 package com.rakamin.alodokter.core.data.source.local
 
-import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
-import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
+import com.rakamin.alodokter.core.data.source.local.entity.*
 import com.rakamin.alodokter.core.data.source.local.room.AlodokterDao
 import io.reactivex.Flowable
 
@@ -19,6 +17,14 @@ class LocalDataSource(private val dao: AlodokterDao) {
     fun insertArticle(article : List<ArticleEntity>) = dao.insertArticle(article)
 
     fun getArticles() : Flowable<List<ArticleEntity>> = dao.getArticle()
+
+    fun insertDoctor(listDoctor: List<ListDoctorEntity>) = dao.insertDoctor(listDoctor)
+
+    fun getDoctor() : Flowable<List<ListDoctorEntity>> = dao.getDoctor()
+
+    fun insertDoctorDetail(detailDoctor: List<DetailDoctorEntity>) = dao.insertDoctorDetail(detailDoctor)
+
+    fun getDoctorDetail(idDoctor: String) = dao.getDoctorDetail(idDoctor)
 
     fun userLogout() = dao.userLogout()
 }

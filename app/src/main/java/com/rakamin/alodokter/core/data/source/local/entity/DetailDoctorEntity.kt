@@ -4,9 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.rakamin.alodokter.core.data.source.remote.response.ScheduleItem
 
-@Entity(tableName = "doctor_table")
+@Entity(tableName = "detail_doctor_table")
 data class DetailDoctorEntity(
-
     @PrimaryKey
     val id: Int? = null,
 

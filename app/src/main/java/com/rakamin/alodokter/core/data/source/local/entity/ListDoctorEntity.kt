@@ -3,7 +3,7 @@ package com.rakamin.alodokter.core.data.source.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "doctor_table")
+@Entity(tableName = "list_doctor_table")
 data class ListDoctorEntity (
     @PrimaryKey
     val id: Int? = null,

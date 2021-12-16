@@ -3,6 +3,7 @@ package com.rakamin.alodokter.ui.adapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
@@ -48,9 +49,8 @@ class ListBookingDokterAdapter: RecyclerView.Adapter<ListBookingDokterAdapter.Vi
 
                 itemView.setOnClickListener { view ->
                     val mBundle = Bundle()
-                    listDoctor.id?.let { mBundle.putInt(ID_DOCTOR, it) }
-                   // view.findNavController()
-                        //.navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
+                    listDoctor.id?.let { mBundle.putString(ID_DOCTOR, it.toString()) }
+                    view.findNavController().navigate(R.id.action_navigation_booking_to_detailDoctorFragment, mBundle)
                 }
             }
         }

@@ -324,8 +324,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_schedule"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/dimens_0"
+            android:layout_height="@dimen/dimens_100"
             android:layout_marginTop="@dimen/dimens_8"
             android:layout_marginStart="@dimen/dimens_16"
             tools:listitem="@layout/item_schedule_doctor"

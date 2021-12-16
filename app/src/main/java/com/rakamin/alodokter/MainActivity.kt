@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 destination.id == R.id.loginFragment ||
                 destination.id == R.id.registerFragment ||
                 destination.id == R.id.onBoardingFragment ||
-                destination.id == R.id.doctorFragment ||
+                destination.id == R.id.detailDoctorFragment ||
                 destination.id == R.id.articleFragment ||
                 destination.id == R.id.forgotPasswordFragment ||
                 destination.id == R.id.editProfileFragment

@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.Helper
+import com.rakamin.alodokter.core.utils.ID_DOCTOR
 import com.rakamin.alodokter.databinding.FragmentDetailDoctorBinding
 import com.rakamin.alodokter.ui.adapter.ScheduleDoctorAdapter
 import com.rakamin.alodokter.ui.adapter.TimeDoctorAdapter
@@ -19,7 +21,6 @@ class DetailDoctorFragment: Fragment() {
 
     private val viewModel: DoctorViewModel by viewModel()
     private val scheduleDoctorAdapter = ScheduleDoctorAdapter()
-    private val timeDoctorAdapter = TimeDoctorAdapter()
 
     private var _binding: FragmentDetailDoctorBinding? = null
     private val binding get() = _binding
@@ -34,7 +35,14 @@ class DetailDoctorFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        doctorDetail("1")
+        val doctorId = requireArguments().getString(ID_DOCTOR)
+        if (doctorId != null) {
+            doctorDetail(doctorId)
+        }
+
+        binding?.ivWhiteBack?.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun doctorDetail(idDoctor: String) {
@@ -52,8 +60,8 @@ class DetailDoctorFragment: Fragment() {
                                 binding?.tvSpesialisPrice?.text = getString(R.string.specialist_price, data.spesialis, price)
 
                                 binding?.tvNumberPatient?.text = data.jumlahPasien.toString()
-                                binding?.tvNumberExperience?.text = data.jumlahPengalaman.toString()
-                                binding?.tvNumberRating?.text = data.rating.toString()
+                                binding?.tvNumberExperience?.text = getString(R.string.experience_years ,data.jumlahPengalaman)
+                                binding?.tvNumberRating?.text = data.rating?.toDouble().toString()
 
                                 binding?.tvDescAboutDoctor?.text = data.about
                                 binding?.tvLocationName?.text = data.rumahSakit
