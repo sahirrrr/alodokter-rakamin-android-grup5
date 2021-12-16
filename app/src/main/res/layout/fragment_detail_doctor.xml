@@ -310,6 +310,30 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_location_name" />
 
         <TextView
+            android:id="@+id/tv_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_16"
+            android:layout_marginTop="@dimen/dimens_32"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/schedule"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_18"
+            app:layout_constraintTop_toBottomOf="@id/tv_location_address"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_schedule"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/dimens_8"
+            android:layout_marginStart="@dimen/dimens_16"
+            tools:listitem="@layout/item_schedule_doctor"
+            app:layout_constraintTop_toBottomOf="@id/tv_schedule"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
             android:id="@+id/tv_education"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -320,7 +344,7 @@
             android:textSize="@dimen/font_18"
             android:text="@string/education"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_location_address" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_schedule" />
 
         <TextView
             android:id="@+id/tv_university_name"

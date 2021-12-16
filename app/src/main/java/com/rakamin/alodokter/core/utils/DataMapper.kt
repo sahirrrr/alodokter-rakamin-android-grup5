@@ -88,7 +88,21 @@ object DataMapper {
         return data.map {
             with(it) {
                 DetailDoctorModel(
-                    id, nama, about, hargaKonsul, spesialis, lokasi, edukasi, jurusan, fakultas, rating, jumlahPasien, jumlahPengalaman
+                    id,
+                    nama,
+                    about,
+                    spesialis,
+                    hargaKonsul,
+                    jumlahPasien,
+                    jumlahPengalaman,
+                    rating,
+                    lokasi,
+                    rumahSakit,
+                    alamat,
+                    schedule,
+                    edukasi,
+                    fakultas,
+                    jurusan
                 )
             }
         }
@@ -101,15 +115,18 @@ object DataMapper {
                 this.id,
                 this.nama,
                 this.about,
-                this.hargaKonsul,
                 this.spesialis,
-                this.lokasi,
-                this.edukasi,
-                this.jurusan,
-                this.fakultas,
-                this.rating,
+                this.hargaKonsul,
                 this.jumlahPasien,
                 this.jumlahPengalaman,
+                this.rating,
+                this.lokasi,
+                this.rumahSakit,
+                this.alamat,
+                this.schedule,
+                this.edukasi,
+                this.fakultas,
+                this.jurusan
             )
             doctorProfile.add(doctor)
         }

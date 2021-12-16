@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.Helper
 import com.rakamin.alodokter.databinding.FragmentDetailDoctorBinding
+import com.rakamin.alodokter.ui.adapter.ScheduleDoctorAdapter
+import com.rakamin.alodokter.ui.adapter.TimeDoctorAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailDoctorFragment: Fragment() {
 
     private val viewModel: DoctorViewModel by viewModel()
+    private val scheduleDoctorAdapter = ScheduleDoctorAdapter()
+    private val timeDoctorAdapter = TimeDoctorAdapter()
 
     private var _binding: FragmentDetailDoctorBinding? = null
     private val binding get() = _binding
@@ -51,7 +56,12 @@ class DetailDoctorFragment: Fragment() {
                                 binding?.tvNumberRating?.text = data.rating.toString()
 
                                 binding?.tvDescAboutDoctor?.text = data.about
-                                binding?.tvLocationName?.text = data.lokasi
+                                binding?.tvLocationName?.text = data.rumahSakit
+                                binding?.tvLocationAddress?.text = data.alamat
+
+                                scheduleDoctorAdapter.setSchedule(data.schedule)
+                                showRvSchedule()
+
                                 binding?.tvUniversityName?.text = data.edukasi
                                 binding?.tvMajor?.text = data.fakultas
                             }
@@ -65,6 +75,14 @@ class DetailDoctorFragment: Fragment() {
                 }
             }
         })
+    }
+
+    private fun showRvSchedule() {
+        with(binding?.rvSchedule) {
+            this?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            this?.setHasFixedSize(true)
+            this?.adapter = scheduleDoctorAdapter
+        }
     }
 
     override fun onDestroyView() {
