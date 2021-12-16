@@ -46,10 +46,10 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: ArticleModel) {
             with(binding) {
-                tvTag.text = article.judul
-                tvTitleArticle.text = article.konten
+                tvTag.text = article.kategori
+                tvTitleArticle.text = article.judul
                 Glide.with(itemView.context)
-                    .load(R.drawable.ic_article_image)
+                    .load(article.foto)
                     .into(ivArticle)
             }
             itemView.setOnClickListener { view ->

@@ -40,12 +40,11 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(article: ArticleModel) {
             with(binding) {
-                tvTag.text = article.judul
-                tvTitleArticle.text = article.konten
+                tvTag.text = article.kategori
+                tvTitleArticle.text = article.judul
                 Glide.with(itemView.context)
-                    .load(R.drawable.ic_article_image)
+                    .load(article.foto)
                     .into(ivArticle)
-
                 itemView.setOnClickListener { view ->
                     val mBundle = Bundle()
                     article.id?.let { mBundle.putInt(ID_ARTICLE, it) }

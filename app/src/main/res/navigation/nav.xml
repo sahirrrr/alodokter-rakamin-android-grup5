@@ -63,11 +63,6 @@
         android:name="com.rakamin.alodokter.ui.article.DetailArticleFragment"
         android:label="detail_article_fragment"
         tools:layout="@layout/fragment_detail_article">
-        <argument
-            android:name="id"
-            app:argType="integer"
-            android:defaultValue="2"/>
-
     </fragment>
     <fragment
         android:id="@+id/articleFragment"

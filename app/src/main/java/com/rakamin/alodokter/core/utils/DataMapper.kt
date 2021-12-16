@@ -91,7 +91,8 @@ object DataMapper {
                 it.updatedAt,
                 it.konten,
                 it.createdAt,
-                it.judul
+                it.judul,
+                it.kategori
             )
         }
     }
@@ -107,7 +108,8 @@ object DataMapper {
                     it?.updatedAt,
                     it?.konten,
                     it?.createdAt,
-                    it?.judul
+                    it?.judul,
+                    it?.kategori
                 )
                 listArticle.add(article)
             }
@@ -119,7 +121,7 @@ object DataMapper {
         return data.map {
             with(it) {
                 ArticleModel(
-                    id, penulis, foto, updatedAt, konten, createdAt, judul
+                    id, penulis, foto, updatedAt, konten, createdAt, judul,kategori
                 )
             }
         }

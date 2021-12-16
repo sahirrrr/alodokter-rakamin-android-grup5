@@ -22,5 +22,8 @@ data class ArticleSearchResponse(
 	val id: Int? = null,
 
 	@field:SerializedName("judul")
-	val judul: String? = null
+	val judul: String? = null,
+
+	@field:SerializedName("kategori")
+	val kategori: String? = null
 )

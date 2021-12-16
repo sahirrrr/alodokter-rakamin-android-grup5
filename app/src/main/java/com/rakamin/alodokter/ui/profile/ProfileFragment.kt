@@ -33,8 +33,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
-         showProfile()
+        val idUser = sessionRepository.getIdUser().toString()
+
+        showProfile(idUser)
         
         binding?.btnLogout?.setOnClickListener {
             userLogout()
@@ -54,13 +55,13 @@ class ProfileFragment : Fragment() {
         }
 
         builder.setNegativeButton("Cancel") {_,_ -> }
-        builder.setTitle("Logout From Alodokter?")
-        builder.setMessage("You Can Login Back anytime you want")
+        builder.setTitle(getString(R.string.profile_logout))
+        builder.setMessage(getString(R.string.profile_login_back_message))
         builder.create().show()
     }
 
-    private fun showProfile() {
-        viewModel.userProfile("1").observe(viewLifecycleOwner,{ showProfile ->
+    private fun showProfile(idUser: String) {
+        viewModel.userProfile(idUser).observe(viewLifecycleOwner,{ showProfile ->
             if (showProfile != null) {
                 when(showProfile) {
                     is Resource.Success -> {

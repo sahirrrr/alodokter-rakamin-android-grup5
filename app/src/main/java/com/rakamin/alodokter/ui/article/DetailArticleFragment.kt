@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.text.HtmlCompat
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.Helper
@@ -47,19 +50,32 @@ class DetailArticleFragment : Fragment() {
                         binding?.progressBar?.visibility = View.GONE
                         if (articles != null) {
                             for (data in articles) {
-                                binding?.tvArticleTitle?.text = data.judul
-                                binding?.tvArticleContent?.text = data.konten
-                                val timeCreated = data.createdAt?.let { Helper.dateFormatter(it) }
-                                val timeUpdated = data.updatedAt?.let { Helper.dateFormatter(it) }
-                                binding?.tvArticleWriter?.text = (
-                                        getString(
-                                            R.string.article_writer,
-                                            data.penulis,
-                                            timeCreated
-                                        )
-                                        )
-                                binding?.tvArticleUpdated?.text =
-                                    getString(R.string.article_updated, timeUpdated)
+                                with(binding) {
+                                    this?.tvArticleTitle?.text = data.judul
+                                    this?.tvArticleContent?.text = data.konten
+                                    val timeCreated =
+                                        data.createdAt?.let { Helper.dateFormatter(it) }
+                                    val timeUpdated =
+                                        data.updatedAt?.let { Helper.dateFormatter(it) }
+                                    this?.tvArticleUpdated?.text =
+                                        getString(R.string.article_updated, timeUpdated)
+                                    this?.tvArticleWriter?.text = (
+                                            getString(
+                                                R.string.article_writer,
+                                                data.penulis,
+                                                timeCreated
+                                            )
+                                            )
+                                    this?.ivArticlePhoto?.let {
+                                        Glide.with(requireContext())
+                                            .load(data.foto)
+                                            .into(it)
+                                    }
+                                    this?.ivBackButton?.setOnClickListener {
+                                        findNavController()
+                                            .navigateUp()
+                                    }
+                                }
                             }
                         }
                     }
