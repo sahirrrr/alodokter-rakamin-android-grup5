@@ -1,11 +1,11 @@
 package com.rakamin.alodokter.domain.usecase
 
-import androidx.room.Query
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
-import com.rakamin.alodokter.core.data.source.remote.response.DoctorSearchResponse
+import com.rakamin.alodokter.core.data.source.remote.response.DoctorResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ListDoctorResponse
 import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.domain.model.DoctorModel
+import com.rakamin.alodokter.domain.model.ListDoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
@@ -32,15 +32,11 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
         return alodokterRepositoryImp.getArticle()
     }
 
-    override fun getDoctor(): Flowable<Resource<List<DoctorModel>>>{
+    override fun getDoctor(): Flowable<Resource<List<ListDoctorModel>>> {
         return alodokterRepositoryImp.getDoctor()
     }
 
-    override fun getDoctorById(id: Int): Flowable<Resource<List<DoctorModel>>>{
-        return alodokterRepositoryImp.getDoctorById(id)
-    }
-
-    override fun searchDoctor(query: String): Flowable<ApiResponse<List<DoctorSearchResponse>>>{
+    override fun searchDoctor(query: String): Flowable<ApiResponse<List<DoctorResponse>>> {
         return alodokterRepositoryImp.searchDoctor(query)
     }
 

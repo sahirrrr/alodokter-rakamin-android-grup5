@@ -10,8 +10,8 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.load.engine.Resource
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.databinding.FragmentListBookingDokterBinding
@@ -27,11 +27,7 @@ class ListBookingDokterFragment : Fragment() {
     private val binding get() = _binding
     private var root: View? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentListBookingDokterBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
@@ -46,7 +42,7 @@ class ListBookingDokterFragment : Fragment() {
 
     private fun doctorSearch() {
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val svListDoctor = binding?.svListDokter
+        val svListDoctor = binding?.svDoctor
 
         svListDoctor?.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
 
@@ -57,11 +53,7 @@ class ListBookingDokterFragment : Fragment() {
                     search(query)
                     binding?.progressBar?.visibility = View.VISIBLE
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.empty_search),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), getString(R.string.empty_search), Toast.LENGTH_SHORT).show()
                 }
                 return true
             }
@@ -78,26 +70,24 @@ class ListBookingDokterFragment : Fragment() {
                 when (searchResult) {
                     is ApiResponse.Empty -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fetch_doctor_empty),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        binding?.rvBookingDokter?.visibility = View.GONE
+                        binding?.tvEmptyStateDoctorDesc?.text = getString(R.string.empty_state_doctor_empty_desc)
+                        binding?.ivEmptyStateDoctor?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateDoctorDesc?.visibility = View.VISIBLE
                     }
                     is ApiResponse.Error -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fetch_doctor_empty),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
                         binding?.progressBar?.visibility = View.GONE
+                        binding?.rvBookingDokter?.visibility = View.GONE
+                        binding?.tvEmptyStateDoctorDesc?.text = getString(R.string.empty_state_doctor_error_desc)
+                        binding?.ivEmptyStateDoctor?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateDoctorDesc?.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
                         binding?.progressBar?.visibility = View.GONE
+                        binding?.ivEmptyStateDoctor?.visibility = View.GONE
+                        binding?.tvEmptyStateDoctorDesc?.visibility = View.GONE
                         val result = searchResult.data
-                        val newResult = DataMapper.mapDoctorSearchResponeToDomain(result)
+                        val newResult = DataMapper.mapDoctorSearchResponseToDomain(result)
                         doctorAdapter.setDoctor(newResult)
                         showRvBookingDokter()
                     }
@@ -109,23 +99,20 @@ class ListBookingDokterFragment : Fragment() {
     private fun showDoctorList(){
         viewModel.getDoctor().observe(viewLifecycleOwner, {doctor ->
             if (doctor != null) {
-                when (doctor){
-                    is com.rakamin.alodokter.core.data.Resource.Success -> {
-                        val doctor = doctor.data
-                            doctorAdapter.setDoctor(doctor)
+                when (doctor) {
+                    is Resource.Success -> {
+                        val doctorData = doctor.data
+                        doctorAdapter.setDoctor(doctorData)
                         binding?.progressBar?.visibility = View.GONE
                         showRvBookingDokter()
                     }
-                    is com.rakamin.alodokter.core.data.Resource.Error ->{
+                    is Resource.Error ->{
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.fetch_doctor_empty),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        binding?.tvEmptyStateDoctorDesc?.text = getString(R.string.empty_state_doctor_error_desc)
+                        binding?.ivEmptyStateDoctor?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateDoctorDesc?.visibility = View.VISIBLE
                     }
-                    is  com.rakamin.alodokter.core.data.Resource.Loading -> binding?.progressBar?.visibility = View.GONE
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.GONE
                 }
             }
         })

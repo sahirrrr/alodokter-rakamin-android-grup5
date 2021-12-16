@@ -59,55 +59,47 @@ class RemoteDataSource(private val apiService: ApiService) {
     }
     
     fun getArticle(): Flowable<ApiResponse<ArticleResponse>> {
-        val responseBody = PublishSubject.create<ApiResponse<ArticleResponse>>()
+        val responseResult = PublishSubject.create<ApiResponse<ArticleResponse>>()
         val client = apiService.getArticles()
-        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
             .take(1)
-            .subscribe ({
-                responseBody.onNext(ApiResponse.Success(it))
-            },{
-            responseBody.onNext(ApiResponse.Error(it.message.toString()))
-        })
-        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
-
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            }, { error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
+            })
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    fun getDataDoctor(): Flowable<ApiResponse<DoctorResponse>>{
-        val responseBody = PublishSubject.create<ApiResponse<DoctorResponse>>()
+    fun getDataDoctor(): Flowable<ApiResponse<ListDoctorResponse>>{
+        val responseResult = PublishSubject.create<ApiResponse<ListDoctorResponse>>()
         val client = apiService.getDoctor()
-        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
             .take(1)
-            .subscribe({
-                responseBody.onNext(ApiResponse.Success(it))
-            },{
-                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            },{ error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
             })
-        return responseBody.toFlowable((BackpressureStrategy.BUFFER))
+        return responseResult.toFlowable((BackpressureStrategy.BUFFER))
     }
 
-    fun getDoctorById(id: Int) : Flowable<ApiResponse<DoctorResponse>>{
-        val responseBody = PublishSubject.create<ApiResponse<DoctorResponse>>()
-        val client = apiService.getDocterById(id)
-        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                responseBody.onNext((ApiResponse.Success(it)))
-            },{
-                responseBody.onNext(ApiResponse.Error(it.message.toString()))
-            })
-        return responseBody.toFlowable((BackpressureStrategy.BUFFER))
-    }
-
-    fun searchDoctor(query : String): Flowable<ApiResponse<List<DoctorSearchResponse>>>{
-        val responseBody = PublishSubject.create<ApiResponse<List<DoctorSearchResponse>>>()
+    fun searchDoctor(query : String): Flowable<ApiResponse<List<DoctorResponse>>>{
+        val responseResult = PublishSubject.create<ApiResponse<List<DoctorResponse>>>()
         val client = apiService.searchDoctor(query)
-        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
             .take(1)
-            .subscribe({
-                responseBody.onNext(ApiResponse.Success(it))
-            },{
-                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            .subscribe({ response ->
+                responseResult.onNext(if (response != null) ApiResponse.Success(response) else ApiResponse.Empty )
+            },{ error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
             })
-        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 }

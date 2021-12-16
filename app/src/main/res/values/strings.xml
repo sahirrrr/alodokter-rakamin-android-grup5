@@ -90,4 +90,7 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="booking">Book</string>
     <string name="empty_search">Empty Search!</string>
     <string name="fetch_doctor_empty">Fetch Doctor List Failed</string>
+    <string name="empty_state_doctor">Empty State Doctor</string>
+    <string name="empty_state_doctor_empty_desc">"Hmmm look like there’s no doctor to be found. "</string>
+    <string name="empty_state_doctor_error_desc">Something went wrong, please try again later.</string>
 </resources>

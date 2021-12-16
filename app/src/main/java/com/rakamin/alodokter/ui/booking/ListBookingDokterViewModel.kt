@@ -9,7 +9,5 @@ class ListBookingDokterViewModel (private val alodokterUseCase: AlodokterUseCase
 
     fun getDoctor() = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getDoctor())
 
-    fun getDoctorById(id: Int) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getDoctorById(id))
-
     fun doctorSearch(query: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.searchDoctor(query))
 }

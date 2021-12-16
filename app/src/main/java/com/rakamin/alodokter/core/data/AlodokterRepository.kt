@@ -6,7 +6,7 @@ import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.*
 import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.domain.model.DoctorModel
+import com.rakamin.alodokter.domain.model.ListDoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
@@ -103,7 +103,7 @@ class AlodokterRepository(
 
             override fun saveCallResult(data: ArticleResponse) {
                 val article = DataMapper.mapArticleResponseToArticleEntities(data)
-                localDataSource.insertArticle(article).subscribeOn(Schedulers.io())
+                localDataSource.insertArticle(article)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
@@ -114,57 +114,30 @@ class AlodokterRepository(
             }
         }.asFlowAble()
 
-    override fun getDoctor(): Flowable<Resource<List<DoctorModel>>> =
-        object : NetworkBoundResource<List<DoctorModel>, DoctorResponse>() {
+    override fun getDoctor(): Flowable<Resource<List<ListDoctorModel>>> =
+        object : NetworkBoundResource<List<ListDoctorModel>, ListDoctorResponse>() {
+            override fun loadFromDB(): Flowable<List<ListDoctorModel>> {
+                return localDataSource.getDoctor().map { DataMapper.mapDoctorEntitiesToDomain(it) }
+            }
 
-            override fun shouldFetch(data: List<DoctorModel>?): Boolean {
+            override fun shouldFetch(data: List<ListDoctorModel>?): Boolean {
                 return true
             }
 
-            override fun saveCallResult(data: DoctorResponse) {
+            override fun saveCallResult(data: ListDoctorResponse) {
                 val doctor = DataMapper.mapDoctorResponseToDoctorEntities(data)
-                localDataSource.insertDoctor(doctor).subscribeOn(Schedulers.io())
+                localDataSource.insertDoctor(doctor)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
             }
 
-            override fun createCall(): Flowable<ApiResponse<DoctorResponse>> {
+            override fun createCall(): Flowable<ApiResponse<ListDoctorResponse>> {
                 return remoteDataSource.getDataDoctor()
             }
-
-            override fun loadFromDB(): Flowable<List<DoctorModel>> {
-                return localDataSource.getDoctor()
-                    .map { DataMapper.mapDoctorEntitiesToDoMain(it)
-                    }
-            }
         }.asFlowAble()
 
-    override fun getDoctorById(id: Int): Flowable<Resource<List<DoctorModel>>> =
-        object : NetworkBoundResource<List<DoctorModel>, DoctorResponse>() {
-            override fun shouldFetch(data: List<DoctorModel>?): Boolean {
-                return true
-            }
-
-            override fun saveCallResult(data: DoctorResponse) {
-                val doctor = DataMapper.mapDoctorResponseToDoctorEntities(data)
-                localDataSource.insertDoctor(doctor).subscribeOn(Schedulers.io())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
-            }
-
-            override fun createCall(): Flowable<ApiResponse<DoctorResponse>> {
-                return remoteDataSource.getDoctorById(id)
-            }
-
-            override fun loadFromDB(): Flowable<List<DoctorModel>> {
-                return localDataSource.getDoctorById(id)
-                    .map { DataMapper.mapDoctorEntitiesToDoMain(it) }
-            }
-        }.asFlowAble()
-
-    override fun searchDoctor(query: String): Flowable<ApiResponse<List<DoctorSearchResponse>>> {
+    override fun searchDoctor(query: String): Flowable<ApiResponse<List<DoctorResponse>>> {
         return remoteDataSource.searchDoctor(query)
     }
 
@@ -174,6 +147,4 @@ class AlodokterRepository(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
-
-
 }

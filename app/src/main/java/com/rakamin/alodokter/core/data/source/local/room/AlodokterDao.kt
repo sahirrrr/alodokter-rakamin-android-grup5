@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.local.entity.DoctorEntity
+import com.rakamin.alodokter.core.data.source.local.entity.ListDoctorEntity
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -36,15 +36,9 @@ interface AlodokterDao {
     @Query ("DELETE FROM user_table")
     fun userLogout() : Single<Int>
 
-    @Query("SELECT * FROM doctor_table")
-    fun getDoctor() : Flowable<List<DoctorEntity>>
-
-    @Query("SELECT * FROM doctor_table WHERE id_doctor = :id")
-    fun getDoctorById(id: Int) : Flowable<List<DoctorEntity>>
-
-    @Query("SELECT * FROM doctor_table WHERE nama = :query")
-    fun searchDoctor(query: String) : Flowable<List<DoctorEntity>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDoctor(doctor: List<DoctorEntity>): Completable
+    fun insertDoctor(listDoctor: List<ListDoctorEntity>): Completable
+
+    @Query("SELECT * FROM doctor_table")
+    fun getDoctor() : Flowable<List<ListDoctorEntity>>
 }

@@ -52,4 +52,8 @@
     <dimen name="dimens_60">60dp</dimen>
     <dimen name="dimens_100">100dp</dimen>
     <dimen name="dimens_64">64dp</dimen>
+    <dimen name="dimens_136">136dp</dimen>
+    <dimen name="dimens_58">58dp</dimen>
+    <dimen name="dimens_250">250dp</dimen>
+    <dimen name="dimens_200">200dp</dimen>
 </resources>

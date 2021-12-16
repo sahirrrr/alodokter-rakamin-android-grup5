@@ -3,11 +3,11 @@ package com.rakamin.alodokter.core.utils
 import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.local.entity.DoctorEntity
+import com.rakamin.alodokter.core.data.source.local.entity.ListDoctorEntity
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
 import com.rakamin.alodokter.core.data.source.remote.response.*
-import com.rakamin.alodokter.domain.model.DoctorModel
+import com.rakamin.alodokter.domain.model.ListDoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import java.util.ArrayList
 
@@ -117,46 +117,40 @@ object DataMapper {
         }
     }
 
-    fun mapDoctorEntitiesToDoMain(data: List<DoctorEntity>): List<DoctorModel>{
+    fun mapDoctorEntitiesToDomain(data: List<ListDoctorEntity>): List<ListDoctorModel>{
         return data.map {
-            DoctorModel(
+            ListDoctorModel(
                 it.id,
                 it.nama,
                 it.spesialis,
-                it.harga_konsul,
-                it.rating,
-                it.lokasi,
-                it.createdAt,
-                it.updatedAt,
+                it.rumahSakit,
+                it.hargaKonsul,
             )
         }
     }
 
-    fun mapDoctorResponseToDoctorEntities(data: DoctorResponse): List<DoctorEntity>{
-        val listDoctor = ArrayList<DoctorEntity>()
-        with(data.data){
+    fun mapDoctorResponseToDoctorEntities(data: ListDoctorResponse): List<ListDoctorEntity>{
+        val listDoctor = ArrayList<ListDoctorEntity>()
+        with(data.data) {
             this?.map {
-                val doctor = DoctorEntity(
-                    it?.id,
-                    it?.nama,
-                    it?.spesialis,
-                    it?.hargaKonsul,
-                    it?.rating,
-                    it?.lokasi,
-                    it?.createdAt,
-                    it?.updatedAt,
+                val doctor = ListDoctorEntity(
+                    it.id,
+                    it.nama,
+                    it.spesialis,
+                    it.rumahSakit,
+                    it.hargaKonsul,
                 )
                 listDoctor.add(doctor)
             }
-            return listDoctor
         }
+        return listDoctor
     }
 
-    fun mapDoctorSearchResponeToDomain(data: List<DoctorSearchResponse>): List<DoctorModel>{
+    fun mapDoctorSearchResponseToDomain(data: List<DoctorResponse>): List<ListDoctorModel>{
         return data.map {
-            with(it){
-                DoctorModel(
-                    id, nama, spesialis, hargaKonsul, rating, lokasi, createdAt, updatedAt
+            with(it) {
+                ListDoctorModel(
+                    id, nama, spesialis, rumahSakit, hargaKonsul
                 )
             }
         }

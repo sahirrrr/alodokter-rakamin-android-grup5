@@ -29,17 +29,12 @@ interface ApiService {
     ): Flowable<RegisterResponse>
 
     @GET ("doctor")
-    fun getDoctor(): Flowable<DoctorResponse>
-
-    @GET("doctor/detail/{id_doctor}")
-    fun getDocterById(
-        @Path("id_doctor")id_doctor: Int
-    ): Flowable<DoctorResponse>
+    fun getDoctor(): Flowable<ListDoctorResponse>
 
     @GET("doctor/search/{nama}")
     fun searchDoctor(
         @Path("nama") query : String
-        ): Flowable<List<DoctorSearchResponse>>
+        ): Flowable<List<DoctorResponse>>
 
 }
 

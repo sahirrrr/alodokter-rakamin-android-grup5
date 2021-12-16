@@ -6,45 +6,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lis_booking_dokter">
 
-<TextView
-    android:id="@+id/tv_buat_janji"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dimens_16"
-    android:layout_marginTop="@dimen/dimens_16"
-    android:fontFamily="@font/poppins_medium"
-    android:textSize="@dimen/font_18"
-    android:text="@string/buat_janji"
-    android:textColor="@color/text_black"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/tv_buat_janji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="@dimen/font_18"
+        android:text="@string/buat_janji"
+        android:textColor="@color/text_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-<SearchView
-    android:id="@+id/sv_list_dokter"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dimens_16"
-    android:layout_marginTop="@dimen/dimens_24"
-    android:layout_marginEnd="@dimen/dimens_16"
-    android:background="@drawable/bg_search"
-    android:iconifiedByDefault="false"
-    android:queryHint="@string/query_hint"
-    android:searchIcon="@drawable/ic_search"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_buat_janji"/>
+    <SearchView
+        android:id="@+id/sv_doctor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginTop="@dimen/dimens_24"
+        android:layout_marginEnd="@dimen/dimens_16"
+        android:background="@drawable/bg_search"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/query_hint"
+        android:searchIcon="@drawable/ic_search"
+        android:theme="@style/AppSearchView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_buat_janji" />
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv_booking_dokter"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dimens_32"
-    app:layout_constraintTop_toBottomOf="@id/sv_list_dokter"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    tools:listitem="@layout/item_list_booking_dokter"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_booking_dokter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_16"
+        android:layout_marginStart="@dimen/dimens_16"
+        android:layout_marginEnd="@dimen/dimens_16"
+        app:layout_constraintTop_toBottomOf="@id/sv_doctor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_list_booking_dokter"/>
 
-<ProgressBar
+    <ImageView
+        android:id="@+id/iv_empty_state_doctor"
+        android:layout_width="@dimen/dimens_250"
+        android:layout_height="@dimen/dimens_200"
+        android:layout_marginTop="@dimen/dimens_200"
+        android:src="@drawable/ic_doctor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_empty_state_doctor_desc"
+        android:contentDescription="@string/empty_state_doctor"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_empty_state_doctor_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_200"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/font_14"
+        tools:text="@string/empty_state_doctor_empty_desc"
+        app:layout_constraintTop_toBottomOf="@id/iv_empty_state_doctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+    <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
