@@ -1,14 +1,13 @@
 package com.rakamin.alodokter.core.utils
 
 import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
 import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
+import com.rakamin.alodokter.core.data.source.local.entity.DoctorEntity
 import com.rakamin.alodokter.domain.model.ArticleModel
 import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.*
+import com.rakamin.alodokter.domain.model.DoctorModel
 import com.rakamin.alodokter.domain.model.RegisterModel
 import java.util.ArrayList
 
@@ -115,6 +114,51 @@ object DataMapper {
                 listArticle.add(article)
             }
             return listArticle
+        }
+    }
+
+    fun mapDoctorEntitiesToDoMain(data: List<DoctorEntity>): List<DoctorModel>{
+        return data.map {
+            DoctorModel(
+                it.id,
+                it.nama,
+                it.spesialis,
+                it.harga_konsul,
+                it.rating,
+                it.lokasi,
+                it.createdAt,
+                it.updatedAt,
+            )
+        }
+    }
+
+    fun mapDoctorResponseToDoctorEntities(data: DoctorResponse): List<DoctorEntity>{
+        val listDoctor = ArrayList<DoctorEntity>()
+        with(data.data){
+            this?.map {
+                val doctor = DoctorEntity(
+                    it?.id,
+                    it?.nama,
+                    it?.spesialis,
+                    it?.hargaKonsul,
+                    it?.rating,
+                    it?.lokasi,
+                    it?.createdAt,
+                    it?.updatedAt,
+                )
+                listDoctor.add(doctor)
+            }
+            return listDoctor
+        }
+    }
+
+    fun mapDoctorSearchResponeToDomain(data: List<DoctorSearchResponse>): List<DoctorModel>{
+        return data.map {
+            with(it){
+                DoctorModel(
+                    id, nama, spesialis, hargaKonsul, rating, lokasi, createdAt, updatedAt
+                )
+            }
         }
     }
 }

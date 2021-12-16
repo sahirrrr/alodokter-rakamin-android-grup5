@@ -3,10 +3,7 @@ package com.rakamin.alodokter.core.data.source.remote
 import android.annotation.SuppressLint
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.network.ApiService
-import com.rakamin.alodokter.core.data.source.remote.response.ArticleResponse
-import com.rakamin.alodokter.core.data.source.remote.response.LoginResponse
-import com.rakamin.alodokter.core.data.source.remote.response.ProfileResponse
-import com.rakamin.alodokter.core.data.source.remote.response.RegisterResponse
+import com.rakamin.alodokter.core.data.source.remote.response.*
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -73,5 +70,44 @@ class RemoteDataSource(private val apiService: ApiService) {
         })
         return responseBody.toFlowable(BackpressureStrategy.BUFFER)
 
+    }
+
+    fun getDataDoctor(): Flowable<ApiResponse<DoctorResponse>>{
+        val responseBody = PublishSubject.create<ApiResponse<DoctorResponse>>()
+        val client = apiService.getDoctor()
+        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                responseBody.onNext(ApiResponse.Success(it))
+            },{
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
+        return responseBody.toFlowable((BackpressureStrategy.BUFFER))
+    }
+
+    fun getDoctorById(id: Int) : Flowable<ApiResponse<DoctorResponse>>{
+        val responseBody = PublishSubject.create<ApiResponse<DoctorResponse>>()
+        val client = apiService.getDocterById(id)
+        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                responseBody.onNext((ApiResponse.Success(it)))
+            },{
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
+        return responseBody.toFlowable((BackpressureStrategy.BUFFER))
+    }
+
+    fun searchDoctor(query : String): Flowable<ApiResponse<List<DoctorSearchResponse>>>{
+        val responseBody = PublishSubject.create<ApiResponse<List<DoctorSearchResponse>>>()
+        val client = apiService.searchDoctor(query)
+        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                responseBody.onNext(ApiResponse.Success(it))
+            },{
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
+        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
     }
 }
