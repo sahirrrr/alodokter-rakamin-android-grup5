@@ -57,8 +57,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-
-            if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment || destination.id == R.id.onBoardingFragment) {
+            if(
+                destination.id == R.id.splashFragment ||
+                destination.id == R.id.loginFragment ||
+                destination.id == R.id.registerFragment ||
+                destination.id == R.id.onBoardingFragment ||
+                destination.id == R.id.detailDoctorFragment ||
+                destination.id == R.id.articleFragment ||
+                destination.id == R.id.detailArticleFragment||
+                destination.id == R.id.forgotPasswordFragment ||
+                destination.id == R.id.editProfileFragment
+            ) {
                 navView.visibility = View.GONE
                 window.statusBarColor = Color.TRANSPARENT
                 setLightStatusBar(true)

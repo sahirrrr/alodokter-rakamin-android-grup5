@@ -9,6 +9,12 @@ const val TAG_STATUS_DIALOG = "tag_status_dialog"
 // Login Constants
 const val EXTRA_DATA = "extra_data"
 
+// Doctor Constants
+const val ID_DOCTOR = "id_doctor"
+
 // Article Constants
 const val ID_ARTICLE = "id_article"
+
+// Search Constants
+const val EXTRA_QUERY = "extra_query"
 

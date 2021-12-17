@@ -1,12 +1,11 @@
 package com.rakamin.alodokter.core.utils
 
-import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
-import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
+import com.rakamin.alodokter.core.data.source.local.entity.*
 import com.rakamin.alodokter.core.data.source.remote.response.*
-import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.domain.model.RegisterModel
-import com.rakamin.alodokter.domain.model.UserModel
+import com.rakamin.alodokter.domain.model.*
+import java.util.ArrayList
+import com.rakamin.alodokter.core.data.source.remote.response.*
+
 import java.util.*
 
 object DataMapper {
@@ -127,4 +126,96 @@ object DataMapper {
         }
     }
 
+    fun mapDoctorEntitiesToDomain(data: List<ListDoctorEntity>): List<ListDoctorModel>{
+        return data.map {
+            ListDoctorModel(
+                it.id,
+                it.nama,
+                it.spesialis,
+                it.rumahSakit,
+                it.hargaKonsul,
+                it.foto
+            )
+        }
+    }
+
+    fun mapDoctorResponseToDoctorEntities(data: ListDoctorResponse): List<ListDoctorEntity>{
+        val listDoctor = ArrayList<ListDoctorEntity>()
+        with(data.data) {
+            this?.map {
+                val doctor = ListDoctorEntity(
+                    it.id,
+                    it.nama,
+                    it.spesialis,
+                    it.rumahSakit,
+                    it.hargaKonsul,
+                    it.foto
+                )
+                listDoctor.add(doctor)
+            }
+        }
+        return listDoctor
+    }
+
+    fun mapDetailDoctorEntitiesToDomain(data: List<DetailDoctorEntity>) : List<DetailDoctorModel> {
+        return data.map {
+            with(it) {
+                DetailDoctorModel(
+                    id,
+                    nama,
+                    about,
+                    spesialis,
+                    hargaKonsul,
+                    jumlahPasien,
+                    jumlahPengalaman,
+                    rating,
+                    lokasi,
+                    rumahSakit,
+                    alamat,
+                    schedule,
+                    edukasi,
+                    fakultas,
+                    jurusan,
+                    foto
+                )
+            }
+        }
+    }
+
+    fun mapDetailDoctorResponseToEntities(data: DetailDoctorResponse) : List<DetailDoctorEntity> {
+        val doctorProfile = ArrayList<DetailDoctorEntity>()
+        with(data) {
+            val doctor = DetailDoctorEntity(
+                this.id,
+                this.nama,
+                this.about,
+                this.spesialis,
+                this.hargaKonsul,
+                this.jumlahPasien,
+                this.jumlahPengalaman,
+                this.rating,
+                this.lokasi,
+                this.rumahSakit,
+                this.alamat,
+                this.schedule,
+                this.edukasi,
+                this.fakultas,
+                this.jurusan,
+                this.foto
+            )
+            doctorProfile.add(doctor)
+        }
+        return doctorProfile
+    }
+
+
+    fun mapDoctorSearchResponseToDomain(data: List<DoctorResponse>): List<ListDoctorModel>{
+        return data.map {
+            with(it) {
+                ListDoctorModel(
+                    id, nama, spesialis, rumahSakit, hargaKonsul, foto
+                )
+            }
+        }
+    }
 }

@@ -1,16 +1,23 @@
 package com.rakamin.alodokter.ui.home
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.EXTRA_DATA
+import com.rakamin.alodokter.core.utils.EXTRA_QUERY
 import com.rakamin.alodokter.databinding.FragmentHomeBinding
 import com.rakamin.alodokter.session.SessionRepository
 import com.rakamin.alodokter.ui.adapter.ArticleAdapter
@@ -37,11 +44,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idUser = sessionRepository.getIdUser()
-        binding?.tvName?.text = idUser.toString()
 
-        showArticleList()
+        val idUser = sessionRepository.getIdUser()
+
         showProfile(idUser)
+        doctorSearch()
+        showArticleList()
 
         binding?.tvSeeMore?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
@@ -62,6 +70,7 @@ class HomeFragment : Fragment() {
                         val dataArray = showProfile.data
                         if (dataArray != null) {
                             for (data in dataArray) {
+                                binding?.progressBar?.visibility = View.GONE
                                 binding?.tvName?.text = data.nama
                             }
                         }
@@ -73,6 +82,31 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
+            }
+        })
+    }
+
+    private fun doctorSearch() {
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val svListDoctor = binding?.svDoctor
+
+        svListDoctor?.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+
+        svListDoctor?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                svListDoctor.clearFocus()
+                if (query != null) {
+                    val mBundle = Bundle()
+                    mBundle.putString(EXTRA_QUERY, query)
+                    findNavController().navigate(R.id.action_navigation_home_to_navigation_booking, mBundle)
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.empty_search), Toast.LENGTH_SHORT).show()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
             }
         })
     }

@@ -87,16 +87,21 @@
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@+id/detailArticleFragment">
         </action>
-
-
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_booking"
+            app:destination="@id/navigation_booking" />
 
 
     </fragment>
     <fragment
         android:id="@+id/navigation_booking"
-        android:name="com.rakamin.alodokter.ui.booking.BookingFragment"
+        android:name="com.rakamin.alodokter.ui.booking.ListBookingDoctorFragment"
         android:title="@string/title_booking"
-        tools:layout="@layout/fragment_booking" />
+        tools:layout="@layout/fragment_list_booking_doctor" >
+        <action
+            android:id="@+id/action_navigation_booking_to_detailDoctorFragment"
+            app:destination="@id/detailDoctorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.rakamin.alodokter.ui.profile.ProfileFragment"
@@ -119,4 +124,9 @@
         android:name="com.rakamin.alodokter.ui.profile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/detailDoctorFragment"
+        android:name="com.rakamin.alodokter.ui.booking.DetailDoctorFragment"
+        android:label="fragment_detail_doctor"
+        tools:layout="@layout/fragment_detail_doctor" />
 </navigation>

@@ -10,6 +10,7 @@
 
     <!-- Custom Color -->
     <color name="primary">#3570D2</color>
+    <color name="secondary">#FA6D01</color>
 
     <color name="button">#004EC0</color>
     <color name="search">#EAF2FF</color>
