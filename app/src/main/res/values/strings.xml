@@ -91,4 +91,7 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="article_updated">Terakhir diperbarui : %1$s</string>
     <string name="profile_logout">Logout From Alodokter?</string>
     <string name="profile_login_back_message">You can login back anytime you want</string>
+    <string name="empty_state_article">Empty State Article</string>
+    <string name="empty_state_article_empty_desc">Hmmm look like there’s no article.</string>
+    <string name="empty_state_article_error_desc">Something went wrong, please try again later</string>
 </resources>

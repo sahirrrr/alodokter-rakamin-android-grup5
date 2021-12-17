@@ -1,23 +1,15 @@
 package com.rakamin.alodokter.ui.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
-import com.rakamin.alodokter.ui.article.ArticleFragmentDirections
-import com.rakamin.alodokter.ui.home.HomeFragmentDirections
 import java.util.ArrayList
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
@@ -39,9 +31,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         holder.bind(article)
     }
 
-    override fun getItemCount(): Int {
-        return listArticle.size
-    }
+    override fun getItemCount(): Int = listArticle.size
 
     inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: ArticleModel) {
