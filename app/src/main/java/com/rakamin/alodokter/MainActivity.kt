@@ -26,7 +26,16 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.splashFragment || destination.id == R.id.loginFragment || destination.id == R.id.registerFragment ||  destination.id == R.id.onBoardingFragment) {
+            if(
+                destination.id == R.id.splashFragment ||
+                destination.id == R.id.loginFragment ||
+                destination.id == R.id.registerFragment ||
+                destination.id == R.id.onBoardingFragment ||
+                destination.id == R.id.detailDoctorFragment ||
+                destination.id == R.id.articleFragment ||
+                destination.id == R.id.forgotPasswordFragment ||
+                destination.id == R.id.editProfileFragment
+            ) {
                 navView.visibility = View.GONE
             } else {
                 navView.visibility = View.VISIBLE

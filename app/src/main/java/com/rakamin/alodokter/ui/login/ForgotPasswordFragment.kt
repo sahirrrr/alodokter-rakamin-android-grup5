@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
@@ -16,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ForgotPasswordFragment : Fragment() {
 
-    private val viewModel: ForgotPasswordViewModel by viewModel()
+    private val viewModel: LoginViewModel by viewModel()
 
     private var _binding: FragmentForgotPasswordBinding? = null
     private val binding get() = _binding
@@ -46,6 +47,10 @@ class ForgotPasswordFragment : Fragment() {
             showEmailExistAlert(it)
         }
 
+        binding?.ivBack?.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding?.btnSendInstruction?.setOnClickListener {
             val email = binding?.edtEmail?.text.toString().trim()
 
@@ -59,15 +64,16 @@ class ForgotPasswordFragment : Fragment() {
                 when (userForgotPassword) {
                     is ApiResponse.Success -> {
                         val response = userForgotPassword.data
-                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                     }
                     is ApiResponse.Error -> {
-                        Toast.makeText(
-                            requireContext(),
+                        Toast.makeText(requireContext(),
                             userForgotPassword.errorMessage,
                             Toast.LENGTH_SHORT
                         ).show()
+                    }
+                    is ApiResponse.Empty -> {
+
                     }
                 }
             }

@@ -4,9 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.rakamin.alodokter.core.data.source.local.entity.UserEntity
-import com.rakamin.alodokter.core.data.source.local.entity.ArticleEntity
-import com.rakamin.alodokter.core.data.source.local.entity.RegisterEntity
+import com.rakamin.alodokter.core.data.source.local.entity.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -32,7 +30,18 @@ interface AlodokterDao {
     @Query("SELECT * FROM article_table")
     fun getArticle() : Flowable<List<ArticleEntity>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertDoctor(listDoctor: List<ListDoctorEntity>): Completable
+
+    @Query("SELECT * FROM list_doctor_table")
+    fun getDoctor() : Flowable<List<ListDoctorEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertDoctorDetail(detailDoctor: List<DetailDoctorEntity>) : Completable
+
+    @Query("select * from detail_doctor_table WHERE id = :idDoctor")
+    fun getDoctorDetail(idDoctor: String) : Flowable<List<DetailDoctorEntity>>
+
     @Query ("DELETE FROM user_table")
     fun userLogout() : Single<Int>
-
 }
