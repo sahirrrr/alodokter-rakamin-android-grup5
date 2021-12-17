@@ -31,37 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_home_fragment)
         navView.setupWithNavController(navController)
-        fun setLightStatusBar(status: Boolean) {
-            if (status){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    window?.insetsController?.setSystemBarsAppearance(
-                        APPEARANCE_LIGHT_STATUS_BARS,
-                        APPEARANCE_LIGHT_STATUS_BARS
-                    )
-                }
-            }
-            else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    window?.insetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
-                }
-            }
-
-        }
-        fun showStatusBar(status: Boolean){
-            if(status) {
-                WindowCompat.setDecorFitsSystemWindows(window, true)
-            }
-            else {
-                WindowCompat.setDecorFitsSystemWindows(window, false)
-            }
-        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(
                 destination.id == R.id.splashFragment ||
+                destination.id == R.id.onBoardingFragment ||
                 destination.id == R.id.loginFragment ||
                 destination.id == R.id.registerFragment ||
-                destination.id == R.id.onBoardingFragment ||
                 destination.id == R.id.detailDoctorFragment ||
                 destination.id == R.id.articleFragment ||
                 destination.id == R.id.detailArticleFragment||
@@ -71,25 +47,45 @@ class MainActivity : AppCompatActivity() {
                 navView.visibility = View.GONE
                 window.statusBarColor = Color.TRANSPARENT
                 setLightStatusBar(true)
+            } else {
+                navView.visibility = View.VISIBLE
+                window.statusBarColor = Color.TRANSPARENT
+                setLightStatusBar(true)
             }
+            
             when (destination.id) {
                 R.id.detailArticleFragment -> {
-                    showStatusBar(false)
+                    window.statusBarColor = Color.TRANSPARENT
                     setLightStatusBar(false)
                 }
 
                 R.id.splashFragment -> {
-                    navView.visibility = View.GONE
                     window.statusBarColor = getColor(R.color.primary)
                     setLightStatusBar(false)
                 }
-                else -> {
-                    navView.visibility = View.VISIBLE
-                    window.statusBarColor = Color.TRANSPARENT
-                    setLightStatusBar(true)
-                    showStatusBar(true)
-                }
             }
+        }
+    }
+
+    private fun setLightStatusBar(status: Boolean) {
+        if (status){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                window?.insetsController?.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS)
+            }
+        }
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                window?.insetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
+            }
+        }
+    }
+
+    private fun showStatusBar(status: Boolean){
+        if(status) {
+            WindowCompat.setDecorFitsSystemWindows(window, true)
+        }
+        else {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
         }
     }
 

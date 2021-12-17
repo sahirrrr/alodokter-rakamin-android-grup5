@@ -87,7 +87,7 @@
         android:id="@+id/btn_book"
         style="@style/buttonRounded"
         android:layout_width="@dimen/dimens_136"
-        android:layout_height="@dimen/dimens_58"
+        android:layout_height="@dimen/dimens_56"
         android:layout_marginStart="@dimen/dimens_16"
         android:layout_marginTop="@dimen/dimens_48"
         android:layout_marginEnd="@dimen/dimens_16"

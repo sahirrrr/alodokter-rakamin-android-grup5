@@ -37,7 +37,7 @@
         android:id="@+id/btn_get_started"
         style="@style/buttonRounded"
         android:layout_width="@dimen/dimens_150"
-        android:layout_height="@dimen/dimens_56"
+        android:layout_height="@dimen/dimens_64"
         android:layout_marginStart="@dimen/dimens_40"
         android:layout_marginTop="@dimen/dimens_40"
         app:backgroundTint="@color/secondary"
