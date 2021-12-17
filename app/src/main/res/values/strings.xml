@@ -1,16 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Alodokter</string>
     <string name="title_home">Home</string>
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
-    <string name="personal_data">Personal Data</string>
     <string name="label_sign_up">Sign Up</string>
     <string name="label_sign_with_email">Or Sign Up with email…</string>
-    <string name="label_fullname">Fullname</string>
+    <string name="label_full_name">Fullname</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
     <string name="label_confirm_password">Confirm Password</string>
-    <string name="label_register">Register</string>
     <string name="label_success">Success!</string>
     <string name="description_success">Your account has been created.</string>
     <string name="label_continue">Continue</string>
@@ -53,4 +51,71 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="label_skip_login">Skip Login..</string>
+    <string name="dummy_article_title">Pentingnya mengajarkan kesehatan gigi dan mulut</string>
+    <string name="dummy_article_content">Siapa bilang orang yang diabetes tidak boleh makan seafood? Padahal, ada beberapa jenis seafood yang justru bermanfaat untuk penderita diabetes, lho. Meski begitu, penderita diabetes memang harus bijak dalam mengonsumsi seafood sesuai porsi yang disarankan.
+
+Seafood dikenal sebagai sumber protein, lemak baik, vitamin, dan mineral. Lemak baik yang terkandung dalam seafood, yaitu asam lemak omega-3, dinilai baik untuk menjaga kesehatan jantung dan pembuluh darah (kardiovaskular), yang sering kali menjadi masalah pada penderita diabetes.
+Pilihan Seafood untuk Penderita Diabetes
+Sebagai sumber protein dan lemak baik, seafood sangat baik untuk dikonsumsi, termasuk oleh penderita diabetes.  Salah satu jenis seafood yang dianjurkan adalah ikan. Konsumsilah ikan paling tidak 2 kali dalam seminggu.Berikut adalah beberapa pilihan ikan laut dan makanan laut lainnya yang bisa dimasukkan dalam daftar menu makan bagi penderita diabetes:
+
+1. Salmon sebagai sumber omega-3
+Konsumsi ikan salmon sering kali direkomendasikan untuk penderita diabetes karena mengandung banyak asam lemak omega-3 yang bermanfaat untuk menjaga kesehatan otak, jantung, dan kulit. Namun mengingat harga salmon yang relatif mahal, penderita diabetes bisa memilih jenis ikan lainnya yang juga kaya akan asam lemak omega-3, seperti ikan tongkol atau ikan tuna.
+
+Ditulis oleh:
+
+Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
+(Dokter spesialis Bedah)</string>
+    <string name="image_article">Image Article</string>
+    <string name="icon_back">Icon Back</string>
+    <string name="illustration_login">Illustration Login</string>
+    <string name="icon_google">Icon Google</string>
+    <string name="icon_personal_data">Icon Personal Data</string>
+    <string name="icon_forward">Icon Forward</string>
+    <string name="icon_help">Icon Help</string>
+    <string name="illustration_register">Illustration Register</string>
+    <string name="btn_register">Register</string>
+    <string name="app_logo">App Logo</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="birthday">Birthday</string>
+    <string name="city">City</string>
+    <string name="save">Save</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="already_have_an_account_login">Already have an account ? <b>Login</b></string>
+    <string name="buat_janji">Buat Janji</string>
+    <string name="pekerjaan_dokter">Spesialis Jantung - RSIA Bunda Jakarta</string>
+    <string name="consulting_service">Consulting services from</string>
+    <string name="dummy_price_booking">IDR 300.000</string>
+    <string name="booking">Book</string>
+    <string name="empty_search">Empty Search!</string>
+    <string name="fetch_doctor_empty">Fetch Doctor List Failed</string>
+    <string name="empty_state_doctor">Empty State Doctor</string>
+    <string name="empty_state_doctor_empty_desc">"Hmmm look like there’s no doctor to be found. "</string>
+    <string name="empty_state_doctor_error_desc">Something went wrong, please try again later.</string>
+    <string name="detail_doctor">Detail Doctor</string>
+    <string name="dr_bagas">Dr.Bagas</string>
+    <string name="spesialis_price">Spesialis Jantung - IDR 300.000</string>
+    <string name="about_doctor">About Doctor</string>
+    <string name="text_about_doctor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent amet massa velit vel lacinia.</string>
+    <string name="location">Location</string>
+    <string name="rs_name">RSIA Bunda Jakarta</string>
+    <string name="address">Jl. Teuku Cik Ditiro No.28, RT.9/RW.2, Gondangdia, Kec. Menteng</string>
+    <string name="education">Education</string>
+    <string name="ugm">Universitas Gadjah Mada</string>
+    <string name="dokter_spesialis_anestesiologi">Dokter Spesialis Anestesiologi</string>
+    <string name="book_appointment">Book Appointment</string>
+    <string name="patient">Patient</string>
+    <string name="number_patient">100+</string>
+    <string name="experience">Experience</string>
+    <string name="experience_years">%1$d years</string>
+    <string name="years">5 Years</string>
+    <string name="rating">Rating</string>
+    <string name="rating_number">4.6</string>
+    <string name="doctor_photo">Doctor photo</string>
+    <string name="icon_location">Icon Location</string>
+    <string name="specialist_price">%1$s - %2$s</string>
+    <string name="schedule">Schedule</string>
+    <string name="date">Monday, 28 December 2021</string>
+    <string name="time">jam 12</string>
 </resources>
