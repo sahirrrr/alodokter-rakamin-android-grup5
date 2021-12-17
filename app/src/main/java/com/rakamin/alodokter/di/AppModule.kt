@@ -6,6 +6,7 @@ import com.rakamin.alodokter.ui.article.ArticleViewModel
 import com.rakamin.alodokter.ui.booking.DoctorViewModel
 import com.rakamin.alodokter.ui.home.HomeViewModel
 import com.rakamin.alodokter.ui.login.LoginViewModel
+import com.rakamin.alodokter.ui.profile.EditProfileViewModel
 import com.rakamin.alodokter.ui.profile.ProfileViewModel
 import com.rakamin.alodokter.ui.register.RegisterViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -22,4 +23,5 @@ val viewModelModule = module {
     viewModel { ArticleViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { DoctorViewModel(get()) }
+    viewModel { EditProfileViewModel(get()) }
 }

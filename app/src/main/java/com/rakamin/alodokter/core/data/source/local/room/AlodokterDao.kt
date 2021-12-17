@@ -15,6 +15,9 @@ interface AlodokterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUserData(login: List<UserEntity>) : Completable
 
+    @Insert()
+    fun editUserProfile(edit : List<UserEntity>) : Completable
+
     @Query("select * from user_table")
     fun getUserData() : Flowable<List<UserEntity>>
 

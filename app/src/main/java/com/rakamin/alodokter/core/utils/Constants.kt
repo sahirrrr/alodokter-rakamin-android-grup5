@@ -11,3 +11,6 @@ const val EXTRA_DATA = "extra_data"
 
 // Doctor Constants
 const val ID_DOCTOR = "id_doctor"
+
+// Edit User Profile Constant
+const val USER_DATA = "user_data"

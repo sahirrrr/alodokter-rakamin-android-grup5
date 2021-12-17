@@ -13,6 +13,21 @@ import io.reactivex.subjects.PublishSubject
 @SuppressLint("CheckResult")
 class RemoteDataSource(private val apiService: ApiService) {
 
+    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<ApiResponse<EditProfileResponse>> {
+        val responseResult = PublishSubject.create<ApiResponse<EditProfileResponse>>()
+        val client = apiService.putUserProfile(idUser, noHp, tglLahir, kotaKab)
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            }, {error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
+            })
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
     fun postUserLogin(email: String, password: String): Flowable<ApiResponse<LoginResponse>> {
         val responseResult = PublishSubject.create<ApiResponse<LoginResponse>>()
         val client = apiService.postLogin(email, password)
