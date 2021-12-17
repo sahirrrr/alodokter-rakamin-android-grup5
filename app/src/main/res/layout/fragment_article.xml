@@ -18,6 +18,7 @@
         android:textSize="@dimen/font_18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <SearchView
         android:id="@+id/sv_article"
         android:layout_width="0dp"
@@ -46,6 +47,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sv_article"
         tools:listitem="@layout/item_article" />
+
+    <ImageView
+        android:id="@+id/iv_empty_state_article"
+        android:layout_width="@dimen/dimens_250"
+        android:layout_height="@dimen/dimens_200"
+        android:layout_marginTop="@dimen/dimens_200"
+        android:src="@drawable/ic_article"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_empty_state_article_desc"
+        android:contentDescription="@string/empty_state_article"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_empty_state_article_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_200"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/font_14"
+        tools:text="@string/empty_state_article_empty_desc"
+        app:layout_constraintTop_toBottomOf="@id/iv_empty_state_article"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
