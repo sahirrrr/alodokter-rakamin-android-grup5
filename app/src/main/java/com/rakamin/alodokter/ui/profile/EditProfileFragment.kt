@@ -43,14 +43,17 @@ class EditProfileFragment : Fragment() {
                 if (putUserProfile != null) {
                     when(putUserProfile) {
                         is Resource.Success -> {
+                            binding?.progressBar?.visibility = View.GONE
                             mBundle.putBoolean(USER_DATA, true)
                             Toast.makeText(requireContext(), "Your profile has been update!", Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Error -> {
+                            binding?.progressBar?.visibility = View.GONE
                             mBundle.putBoolean(USER_DATA, false)
                             Toast.makeText(requireContext(), "Failed to update!", Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Loading -> {
+                            binding?.progressBar?.visibility = View.VISIBLE
                             Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
                         }
                     }
