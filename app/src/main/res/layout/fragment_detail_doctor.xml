@@ -62,10 +62,12 @@
 
         <TextView
             android:id="@+id/tv_doctor_name"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimens_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimens_20"
             android:layout_marginStart="@dimen/dimens_16"
+            android:layout_marginEnd="@dimen/dimens_16"
+            android:maxLines="1"
             android:fontFamily="@font/poppins_medium"
             tools:text="@string/dr_bagas"
             android:textColor="@color/text_black"
@@ -73,7 +75,8 @@
             android:elevation="@dimen/dimens_2"
             app:layout_constraintTop_toTopOf="@id/view_doctor_spesialis"
             app:layout_constraintStart_toStartOf="@id/view_doctor_spesialis"
-            app:layout_constraintBottom_toTopOf="@id/tv_spesialis_price"/>
+            app:layout_constraintBottom_toTopOf="@id/tv_spesialis_price"
+            app:layout_constraintEnd_toStartOf="@id/iv_photo_doctor"/>
 
         <TextView
             android:id="@+id/tv_spesialis_price"
@@ -92,8 +95,8 @@
 
         <ImageView
             android:id="@+id/iv_photo_doctor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimens_60"
+            android:layout_height="@dimen/dimens_60"
             android:layout_marginEnd="@dimen/dimens_16"
             tools:src="@drawable/doctor_image"
             android:elevation="@dimen/dimens_2"

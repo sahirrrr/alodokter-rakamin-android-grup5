@@ -157,11 +157,5 @@ class RemoteDataSource(private val apiService: ApiService) {
                 responseResult.onNext(ApiResponse.Error(error.message.toString()))
             })
         return responseResult.toFlowable(BackpressureStrategy.BUFFER)
-            .subscribe ({
-                responseBody.onNext(ApiResponse.Success(it))
-            },{
-            responseBody.onNext(ApiResponse.Error(it.message.toString()))
-        })
-        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
     }
 }

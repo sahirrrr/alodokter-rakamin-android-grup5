@@ -31,5 +31,7 @@ data class DetailDoctorModel(
 
     val fakultas: String? = null,
 
-    val jurusan: String? = null
+    val jurusan: String? = null,
+
+    val foto: String? = null
 )

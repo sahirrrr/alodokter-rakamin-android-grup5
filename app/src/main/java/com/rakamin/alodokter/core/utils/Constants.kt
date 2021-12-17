@@ -15,3 +15,6 @@ const val ID_DOCTOR = "id_doctor"
 // Article Constants
 const val ID_ARTICLE = "id_article"
 
+// Search Constants
+const val EXTRA_QUERY = "extra_query"
+

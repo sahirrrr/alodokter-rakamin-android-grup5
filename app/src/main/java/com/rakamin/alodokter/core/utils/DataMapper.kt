@@ -134,6 +134,7 @@ object DataMapper {
                 it.spesialis,
                 it.rumahSakit,
                 it.hargaKonsul,
+                it.foto
             )
         }
     }
@@ -148,6 +149,7 @@ object DataMapper {
                     it.spesialis,
                     it.rumahSakit,
                     it.hargaKonsul,
+                    it.foto
                 )
                 listDoctor.add(doctor)
             }
@@ -173,7 +175,8 @@ object DataMapper {
                     schedule,
                     edukasi,
                     fakultas,
-                    jurusan
+                    jurusan,
+                    foto
                 )
             }
         }
@@ -197,7 +200,8 @@ object DataMapper {
                 this.schedule,
                 this.edukasi,
                 this.fakultas,
-                this.jurusan
+                this.jurusan,
+                this.foto
             )
             doctorProfile.add(doctor)
         }
@@ -209,7 +213,7 @@ object DataMapper {
         return data.map {
             with(it) {
                 ListDoctorModel(
-                    id, nama, spesialis, rumahSakit, hargaKonsul
+                    id, nama, spesialis, rumahSakit, hargaKonsul, foto
                 )
             }
         }

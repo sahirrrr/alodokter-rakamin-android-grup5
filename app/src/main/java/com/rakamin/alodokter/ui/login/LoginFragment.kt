@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
@@ -58,7 +59,12 @@ class LoginFragment : Fragment() {
 
         binding?.tvSkipLogin?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
 
+        //Back press Close App
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // handle back event
+            activity?.finishAndRemoveTask()
         }
     }
 

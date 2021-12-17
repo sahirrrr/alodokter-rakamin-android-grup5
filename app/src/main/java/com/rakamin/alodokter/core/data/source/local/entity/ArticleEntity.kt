@@ -1,5 +1,6 @@
 package com.rakamin.alodokter.core.data.source.local.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -7,6 +8,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "article_table")
 data class ArticleEntity(
     @PrimaryKey
+    @ColumnInfo(name = "id_article")
     val id: Int? = null,
 
     val penulis: String? = null,

@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 destination.id == R.id.onBoardingFragment ||
                 destination.id == R.id.detailDoctorFragment ||
                 destination.id == R.id.articleFragment ||
+                destination.id == R.id.detailArticleFragment||
                 destination.id == R.id.forgotPasswordFragment ||
                 destination.id == R.id.editProfileFragment
             ) {

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.Helper
@@ -56,8 +57,14 @@ class DetailDoctorFragment: Fragment() {
                                 val price = Helper.convertToCurrency(data.hargaKonsul)
                                 binding?.progressBar?.visibility = View.GONE
 
+                                binding?.ivPhotoDoctor?.let {
+                                    Glide.with(requireContext())
+                                        .load(data.foto)
+                                        .into(it)
+                                }
                                 binding?.tvDoctorName?.text = data.nama
                                 binding?.tvSpesialisPrice?.text = getString(R.string.specialist_price, data.spesialis, price)
+
 
                                 binding?.tvNumberPatient?.text = data.jumlahPasien.toString()
                                 binding?.tvNumberExperience?.text = getString(R.string.experience_years ,data.jumlahPengalaman)

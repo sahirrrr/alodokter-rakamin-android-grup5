@@ -14,6 +14,7 @@ import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.utils.DataMapper
+import com.rakamin.alodokter.core.utils.EXTRA_QUERY
 import com.rakamin.alodokter.databinding.FragmentListBookingDoctorBinding
 import com.rakamin.alodokter.ui.adapter.ListBookingDokterAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,8 +37,15 @@ class ListBookingDoctorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showDoctorList()
-        doctorSearch()
+        if (arguments != null) {
+            val query = requireArguments().getString(EXTRA_QUERY)
+            if (query != null) {
+                search(query)
+            }
+        } else {
+            doctorSearch()
+            showDoctorList()
+        }
     }
 
     private fun doctorSearch() {
@@ -51,7 +59,6 @@ class ListBookingDoctorFragment : Fragment() {
                 svListDoctor.clearFocus()
                 if (query != null) {
                     search(query)
-                    binding?.progressBar?.visibility = View.VISIBLE
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.empty_search), Toast.LENGTH_SHORT).show()
                 }

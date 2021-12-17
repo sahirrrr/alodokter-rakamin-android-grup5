@@ -13,14 +13,6 @@ interface ApiService {
         @Field("password") password: String,
     ): Flowable<LoginResponse>
 
-    @GET("pasien/detail/{id_user}")
-    fun showProfile(
-        @Path("id_user") id_user: String
-    ): Flowable<ProfileResponse>
-
-    @GET("article")
-    fun getArticles(): Flowable<ArticleResponse>
-
     @FormUrlEncoded
     @POST("pasien/register")
     fun postRegister(
@@ -31,7 +23,9 @@ interface ApiService {
     ): Flowable<RegisterResponse>
 
     @GET("pasien/detail/{id_user}")
-    fun showProfile(@Path("id_user") id_user : String): Flowable<ProfileResponse>
+    fun showProfile(
+        @Path("id_user") id_user: String
+    ): Flowable<ProfileResponse>
 
     @GET("article")
     fun getArticles(): Flowable<ArticleResponse>
