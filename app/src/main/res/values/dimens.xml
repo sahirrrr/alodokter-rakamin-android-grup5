@@ -60,4 +60,5 @@
     <dimen name="dimens_363">363dp</dimen>
     <dimen name="dimens_173">173dp</dimen>
     <dimen name="dimens_0_5">0.5dp</dimen>
+    <dimen name="dimens_300">300dp</dimen>
 </resources>
