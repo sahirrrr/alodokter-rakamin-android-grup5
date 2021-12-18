@@ -14,13 +14,13 @@ object DataMapper {
         return data.map {
             with(it) {
                 UserModel(
-                    id, nama, email, jenisKelamin, umur, tanggalLahir, noHp, kabupatenKota, foto
+                    id, nama, email, jenisKelamin, umur, tanggalLahir, noHp, kabupatenKota, foto, token
                 )
             }
         }
     }
 
-    fun mapEditProfileResponseToEntities(data : EditProfileResponse): List<UserEntity> {
+    fun mapEditProfileResponseToEntities(data : LoginResponse): List<UserEntity> {
         val editUserProfile = ArrayList<UserEntity>()
         with(data.user) {
             val user = UserEntity(
@@ -32,7 +32,8 @@ object DataMapper {
                 this?.tanggalLahir,
                 this?.noHp,
                 this?.kabupatenKota,
-                this?.foto
+                this?.foto,
+                data.token
             )
             editUserProfile.add(user)
         }
@@ -51,7 +52,8 @@ object DataMapper {
                 this?.tanggalLahir,
                 this?.noHp,
                 this?.kabupatenKota,
-                this?.foto
+                this?.foto,
+                data.token
             )
             userLogin.add(user)
         }

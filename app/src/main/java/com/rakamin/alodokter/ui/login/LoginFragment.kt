@@ -79,7 +79,7 @@ class LoginFragment : Fragment() {
                                 binding?.progressBar?.visibility = View.GONE
                                 val mBundle = Bundle()
                                 data.id?.let { mBundle.putInt(EXTRA_DATA, it) }
-                                data.id?.let { sessionRepository.loginUser(it) }
+                                data.token?.let { data.id?.let { it1 -> sessionRepository.loginUser(it, it1) } }
                                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment, mBundle)
                                 Toast.makeText(requireContext(), "Login Successfully!", Toast.LENGTH_SHORT).show()
                             }

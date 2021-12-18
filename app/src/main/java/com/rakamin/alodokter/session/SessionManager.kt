@@ -7,6 +7,7 @@ class SessionManager(context: Context) {
 
     companion object {
         const val KEY_LOGIN = "isLogin"
+        const val KEY_TOKEN = "token"
         const val KEY_ID_USER = "idUser"
         const val KEY_ON_BOARDING = "onBoardingFinish"
     }
@@ -29,7 +30,9 @@ class SessionManager(context: Context) {
 
     val isLogin: Boolean = prefLogin.getBoolean(KEY_LOGIN, false)
     fun savToPreferences(key: String, value: Int) = editorLogin.putInt(key, value).commit()
+    fun savToPreferences(key: String, value: String) = editorLogin.putString(key, value).commit()
     val idUserLogin: Int = prefLogin.getInt(KEY_ID_USER, 0)
+    val tokenUser: String? = prefLogin.getString(KEY_TOKEN, null)
 
     fun createOnBoardingSession() {
         editorBoarding.putBoolean(KEY_ON_BOARDING, true)

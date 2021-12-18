@@ -336,6 +336,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <View
+            android:id="@+id/view_no_schedule"
+            android:layout_width="@dimen/dimens_250"
+            android:layout_height="@dimen/dimens_100"
+            android:layout_marginTop="@dimen/dimens_8"
+            android:layout_marginStart="@dimen/dimens_16"
+            android:background="@drawable/bg_schedule_detail"
+            app:layout_constraintTop_toBottomOf="@id/tv_schedule"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_desc_no_schedule"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_16"
+            android:layout_marginTop="@dimen/dimens_8"
+            android:layout_marginEnd="@dimen/dimens_16"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/no_schedule"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_14"
+            app:layout_constraintTop_toTopOf="@id/view_no_schedule"
+            app:layout_constraintEnd_toEndOf="@id/view_no_schedule"
+            app:layout_constraintStart_toStartOf="@id/view_no_schedule"
+            app:layout_constraintBottom_toBottomOf="@id/view_no_schedule"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/tv_education"
             android:layout_width="wrap_content"
@@ -396,6 +424,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/custom_progress"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

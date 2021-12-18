@@ -1,5 +1,9 @@
 package com.rakamin.alodokter.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class UserModel(
     val id: Int? = null,
 
@@ -18,4 +22,6 @@ data class UserModel(
     val kabupatenKota: String? = null,
 
     val foto: String? = null,
-)
+
+    val token: String? = null
+) : Parcelable

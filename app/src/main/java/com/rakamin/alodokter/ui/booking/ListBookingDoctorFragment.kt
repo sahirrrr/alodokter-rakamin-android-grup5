@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
@@ -28,6 +29,8 @@ class ListBookingDoctorFragment : Fragment() {
     private val binding get() = _binding
     private var root: View? = null
 
+    private var pressedTime: Long = 0
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentListBookingDoctorBinding.inflate(inflater, container, false)
         root = binding?.root
@@ -45,6 +48,17 @@ class ListBookingDoctorFragment : Fragment() {
         } else {
             doctorSearch()
             showDoctorList()
+        }
+
+        //Back press Close App
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // handle back event
+            if (pressedTime + 5000 > System.currentTimeMillis()) {
+                activity?.finishAndRemoveTask()
+            } else {
+                Toast.makeText(requireContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            pressedTime = System.currentTimeMillis()
         }
     }
 
@@ -72,6 +86,7 @@ class ListBookingDoctorFragment : Fragment() {
     }
 
     private fun search(query: String) {
+        binding?.progressBar?.visibility = View.VISIBLE
         viewModel.doctorSearch(query).observe(viewLifecycleOwner, { searchResult ->
             if (searchResult != null) {
                 when (searchResult) {
@@ -119,7 +134,7 @@ class ListBookingDoctorFragment : Fragment() {
                         binding?.ivEmptyStateDoctor?.visibility = View.VISIBLE
                         binding?.tvEmptyStateDoctorDesc?.visibility = View.VISIBLE
                     }
-                    is Resource.Loading -> binding?.progressBar?.visibility = View.GONE
+                    is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
             }
         })

@@ -19,12 +19,14 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
     }
 
     override fun putUserProfile(
+        accessToken: String,
         idUser: String,
+        name: String,
         noHp: String,
         tglLahir: String,
         kotaKab: String
     ): Flowable<Resource<List<UserModel>>> {
-        return alodokterRepositoryImp.putUserProfile(idUser, noHp, tglLahir, kotaKab)
+        return alodokterRepositoryImp.putUserProfile(accessToken, idUser, name, noHp, tglLahir, kotaKab)
     }
 
     override fun postRegister(name: String, email: String, password: String, passwordConfirmation: String): Flowable<Resource<List<RegisterModel>>> {
