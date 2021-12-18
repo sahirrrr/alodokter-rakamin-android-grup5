@@ -34,7 +34,7 @@ interface ApiService {
         @Field("no_hp") no_hp: String,
         @Field("tanggal_lahir") tanggal_lahir: String,
         @Field("kabupaten_kota") kabupaten_kota: String,
-    ) : Flowable<EditProfileResponse>
+    ) : Flowable<LoginResponse>
 
     @GET("article")
     fun getArticles(): Flowable<ArticleResponse>

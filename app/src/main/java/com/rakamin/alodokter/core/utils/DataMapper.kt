@@ -20,7 +20,7 @@ object DataMapper {
         }
     }
 
-    fun mapEditProfileResponseToEntities(data : EditProfileResponse): List<UserEntity> {
+    fun mapEditProfileResponseToEntities(data : LoginResponse): List<UserEntity> {
         val editUserProfile = ArrayList<UserEntity>()
         with(data.user) {
             val user = UserEntity(

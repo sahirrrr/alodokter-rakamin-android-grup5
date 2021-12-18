@@ -4,7 +4,6 @@ import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.DoctorResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ForgotPasswordResponse
-import com.rakamin.alodokter.core.data.source.remote.response.User
 import com.rakamin.alodokter.domain.model.*
 import com.rakamin.alodokter.core.data.source.remote.response.ArticleSearchResponse
 import io.reactivex.Flowable

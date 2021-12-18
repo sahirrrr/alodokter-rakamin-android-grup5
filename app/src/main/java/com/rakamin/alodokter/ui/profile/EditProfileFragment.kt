@@ -13,7 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class EditProfileFragment : Fragment() {
 
-    private val viewModel: EditProfileViewModel by viewModel()
+    private val viewModel: ProfileViewModel by viewModel()
 
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding

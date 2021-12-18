@@ -38,8 +38,8 @@ class AlodokterRepository(
             }
         }.asFlowAble()
 
-    override fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String
-    ): Flowable<Resource<List<UserModel>>> = object : NetworkBoundResource<List<UserModel>, EditProfileResponse>() {
+    override fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String): Flowable<Resource<List<UserModel>>> =
+        object : NetworkBoundResource<List<UserModel>, LoginResponse>() {
         override fun loadFromDB(): Flowable<List<UserModel>> {
             return localDataSource.getUserData().map { DataMapper.mapUserEntitiesToDomain(it) }
         }
@@ -48,7 +48,7 @@ class AlodokterRepository(
             return data == null || data.isEmpty()
         }
 
-        override fun saveCallResult(data: EditProfileResponse) {
+        override fun saveCallResult(data: LoginResponse) {
             val editProfile = DataMapper.mapEditProfileResponseToEntities(data)
             localDataSource.editUserProfile(editProfile)
                 .subscribeOn(Schedulers.io())
@@ -56,7 +56,7 @@ class AlodokterRepository(
                 .subscribe()
         }
 
-        override fun createCall(): Flowable<ApiResponse<EditProfileResponse>> {
+        override fun createCall(): Flowable<ApiResponse<LoginResponse>> {
             return remoteDataSource.putUserProfile(idUser, noHp, tglLahir, kotaKab)
         }
     }.asFlowAble()

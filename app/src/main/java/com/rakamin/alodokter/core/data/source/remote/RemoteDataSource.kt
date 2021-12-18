@@ -13,8 +13,8 @@ import io.reactivex.subjects.PublishSubject
 @SuppressLint("CheckResult")
 class RemoteDataSource(private val apiService: ApiService) {
 
-    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<ApiResponse<EditProfileResponse>> {
-        val responseResult = PublishSubject.create<ApiResponse<EditProfileResponse>>()
+    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<ApiResponse<LoginResponse>> {
+        val responseResult = PublishSubject.create<ApiResponse<LoginResponse>>()
         val client = apiService.putUserProfile(idUser, noHp, tglLahir, kotaKab)
         client
             .subscribeOn(Schedulers.computation())
