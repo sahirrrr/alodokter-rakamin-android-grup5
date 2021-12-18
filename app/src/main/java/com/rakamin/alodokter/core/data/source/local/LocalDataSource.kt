@@ -8,6 +8,8 @@ class LocalDataSource(private val dao: AlodokterDao) {
 
     fun insertUserData(login : List<UserEntity>)  = dao.insertUserData(login)
 
+    fun editUserProfile(edit : List<UserEntity>) = dao.editUserProfile(edit)
+
     fun getUserData() : Flowable<List<UserEntity>> = dao.getUserData()
 
     fun insertUserRegister(register : List<RegisterEntity>)  = dao.insertUserRegister(register)
