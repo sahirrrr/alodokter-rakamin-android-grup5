@@ -3,7 +3,6 @@ package com.rakamin.alodokter.ui.home
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.utils.EXTRA_DATA
@@ -33,6 +31,8 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding
     private var root : View? = null
+
+    private var pressedTime: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -58,7 +58,12 @@ class HomeFragment : Fragment() {
         //Back press Close App
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // handle back event
-            activity?.finishAndRemoveTask()
+            if (pressedTime + 5000 > System.currentTimeMillis()) {
+                activity?.finishAndRemoveTask()
+            } else {
+                Toast.makeText(requireContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            pressedTime = System.currentTimeMillis()
         }
     }
 
@@ -78,7 +83,6 @@ class HomeFragment : Fragment() {
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
                         binding?.tvName?.text = getString(R.string.guest_user)
-                        Toast.makeText(requireContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }

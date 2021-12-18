@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rakamin.alodokter.core.data.source.remote.response.ScheduleItem
+import com.rakamin.alodokter.core.utils.Helper
 import com.rakamin.alodokter.databinding.ItemScheduleDoctorBinding
 
 class ScheduleDoctorAdapter : RecyclerView.Adapter<ScheduleDoctorAdapter.ScheduleDoctorViewHolder>() {
@@ -33,7 +34,9 @@ class ScheduleDoctorAdapter : RecyclerView.Adapter<ScheduleDoctorAdapter.Schedul
     inner class ScheduleDoctorViewHolder(private val binding: ItemScheduleDoctorBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(schedule : ScheduleItem) {
             with(binding) {
-                tvDate.text = schedule.hari + schedule.tanggal
+                tvDate.text = schedule.hari?.let { schedule.tanggal?.let { it1 -> Helper.dateToDDMMYYYWithDay(
+                    it, it1
+                ) } }
                 val timeDoctorAdapter = TimeDoctorAdapter()
                 timeDoctorAdapter.setTime(schedule.docTime)
                 binding.rvTime.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL,false)

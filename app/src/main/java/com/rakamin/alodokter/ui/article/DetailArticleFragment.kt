@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
@@ -60,8 +57,8 @@ class DetailArticleFragment : Fragment() {
 
                                 val timeCreated = data.createdAt?.let { Helper.dateFormatter(it) }
                                 val timeUpdated = data.updatedAt?.let { Helper.dateFormatter(it) }
-                                binding?.tvArticleUpdated?.text = getString(R.string.article_updated, timeUpdated)
-                                binding?.tvArticleWriter?.text = (getString(R.string.article_writer, data.penulis, timeCreated))
+                                binding?.tvArticleUpdated?.text = getString(R.string.article_updated, timeUpdated?.let { Helper.dateToDDMMYYY(it) })
+                                binding?.tvArticleWriter?.text = (getString(R.string.article_writer, data.penulis, timeCreated?.let { Helper.dateToDDMMYYY(it) }))
 
                                 binding?.ivArticlePhoto?.let {
                                     Glide.with(requireContext())

@@ -15,7 +15,6 @@ import com.rakamin.alodokter.core.utils.Helper
 import com.rakamin.alodokter.core.utils.ID_DOCTOR
 import com.rakamin.alodokter.databinding.FragmentDetailDoctorBinding
 import com.rakamin.alodokter.ui.adapter.ScheduleDoctorAdapter
-import com.rakamin.alodokter.ui.adapter.TimeDoctorAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailDoctorFragment: Fragment() {
@@ -74,8 +73,17 @@ class DetailDoctorFragment: Fragment() {
                                 binding?.tvLocationName?.text = data.rumahSakit
                                 binding?.tvLocationAddress?.text = data.alamat
 
-                                scheduleDoctorAdapter.setSchedule(data.schedule)
-                                showRvSchedule()
+                                val schedule = data.schedule
+                                if (schedule != null) {
+                                    if (schedule.isNotEmpty()) {
+                                        scheduleDoctorAdapter.setSchedule(data.schedule)
+                                        showRvSchedule()
+                                    } else {
+                                        binding?.viewNoSchedule?.visibility = View.VISIBLE
+                                        binding?.tvDescNoSchedule?.text = getString(R.string.no_schedule, data.nama)
+                                        binding?.tvDescNoSchedule?.visibility = View.VISIBLE
+                                    }
+                                }
 
                                 binding?.tvUniversityName?.text = data.edukasi
                                 binding?.tvMajor?.text = data.fakultas

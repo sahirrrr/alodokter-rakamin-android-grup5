@@ -2,16 +2,19 @@ package com.rakamin.alodokter.ui.profile
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import com.rakamin.alodokter.core.data.Resource
 import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.databinding.FragmentProfileBinding
+import com.rakamin.alodokter.domain.model.UserModel
 import com.rakamin.alodokter.session.SessionRepository
 import io.reactivex.disposables.Disposables
 import org.koin.android.ext.android.inject
@@ -24,6 +27,8 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
     private var root : View? = null
+
+    private var pressedTime: Long = 0
 
     override fun onCreateView( inflater: LayoutInflater,  container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -41,6 +46,17 @@ class ProfileFragment : Fragment() {
         binding?.btnLogout?.setOnClickListener {
             userLogout()
         }
+
+        //Back press Close App
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // handle back event
+            if (pressedTime + 5000 > System.currentTimeMillis()) {
+                activity?.finishAndRemoveTask()
+            } else {
+                Toast.makeText(requireContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            pressedTime = System.currentTimeMillis()
+        }
     }
 
     private fun userLogout() {
@@ -51,6 +67,7 @@ class ProfileFragment : Fragment() {
 
             viewModel.userLogout()
             sessionRepository.logoutUser()
+            UserModel(id = null, nama = null, email = null, jenisKelamin = null, tanggalLahir = null, umur = null, noHp = null, kabupatenKota = null, foto = null)
 
             Toast.makeText(requireContext(), "Logout Success", Toast.LENGTH_SHORT).show()
         }
@@ -78,8 +95,8 @@ class ProfileFragment : Fragment() {
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
                         binding?.tvName?.text = getString(R.string.guest_user)
-                        binding?.tvNumber?.text = ""
-                        Toast.makeText(requireContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show()
+                        binding?.tvNumber?.text = "-"
+                        binding?.btnLogout?.visibility = View.GONE
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }

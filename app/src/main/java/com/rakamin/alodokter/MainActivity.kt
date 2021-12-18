@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rakamin.alodokter.databinding.ActivityMainBinding
@@ -27,10 +28,16 @@ class MainActivity : AppCompatActivity() {
         // hide action bar
         supportActionBar?.hide()
 
-        val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
+        val navView: BottomNavigationView? = binding?.bottomNavView
 
         val navController = findNavController(R.id.nav_host_home_fragment)
-        navView.setupWithNavController(navController)
+        navView?.setupWithNavController(navController)
+
+        navView?.setOnItemSelectedListener { item ->
+            if(item.itemId != navView.selectedItemId)
+                NavigationUI.onNavDestinationSelected(item, navController)
+            true
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(
@@ -44,22 +51,27 @@ class MainActivity : AppCompatActivity() {
                 destination.id == R.id.forgotPasswordFragment ||
                 destination.id == R.id.editProfileFragment
             ) {
-                navView.visibility = View.GONE
+                navView?.visibility = View.GONE
                 window.statusBarColor = Color.TRANSPARENT
                 setLightStatusBar(true)
             } else {
-                navView.visibility = View.VISIBLE
+                navView?.visibility = View.VISIBLE
                 window.statusBarColor = Color.TRANSPARENT
                 setLightStatusBar(true)
             }
             
             when (destination.id) {
                 R.id.detailArticleFragment -> {
-                    window.statusBarColor = Color.TRANSPARENT
+                    window.statusBarColor = getColor(R.color.primary)
                     setLightStatusBar(false)
                 }
 
                 R.id.splashFragment -> {
+                    window.statusBarColor = getColor(R.color.primary)
+                    setLightStatusBar(false)
+                }
+
+                R.id.detailDoctorFragment -> {
                     window.statusBarColor = getColor(R.color.primary)
                     setLightStatusBar(false)
                 }
@@ -77,15 +89,6 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 window?.insetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
             }
-        }
-    }
-
-    private fun showStatusBar(status: Boolean){
-        if(status) {
-            WindowCompat.setDecorFitsSystemWindows(window, true)
-        }
-        else {
-            WindowCompat.setDecorFitsSystemWindows(window, false)
         }
     }
 
