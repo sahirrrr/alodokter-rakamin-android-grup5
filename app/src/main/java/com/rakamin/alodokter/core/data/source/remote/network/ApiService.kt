@@ -23,7 +23,9 @@ interface ApiService {
     ): Flowable<RegisterResponse>
 
     @GET("pasien/detail/{id_user}")
-    fun showProfile(@Path("id_user") id_user : String): Flowable<ProfileResponse>
+    fun showProfile(
+        @Path("id_user") id_user: String
+    ): Flowable<ProfileResponse>
 
     @FormUrlEncoded
     @PUT("pasien/update/{id_user}")
@@ -36,6 +38,16 @@ interface ApiService {
 
     @GET("article")
     fun getArticles(): Flowable<ArticleResponse>
+
+    @GET("article/detail/{id_article}")
+    fun getArticleById(
+        @Path("id_article") id_article: Int
+    ): Flowable<ArticleResponse>
+
+    @GET("article/search/{judul}")
+    fun articleSearch(
+        @Path("judul") query : String
+    ): Flowable<List<ArticleSearchResponse>>
 
     @FormUrlEncoded
     @POST("password/forgot")
@@ -53,5 +65,6 @@ interface ApiService {
     fun searchDoctor(
         @Path("nama") query : String
     ): Flowable<List<DoctorResponse>>
+
 }
 

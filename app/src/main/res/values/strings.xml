@@ -16,7 +16,7 @@
     <string name="description_failed">Something went wrong</string>
     <string name="empty_field">Field cannot be empty</string>
     <string name="email_not_valid">Email not valid!</string>
-    <string name="password_minimal">Password length must be more than 6 characters1</string>
+    <string name="password_minimal">Password length must be more than 6 characters</string>
     <string name="password_not_match">The password confirmation does not match!</string>
     <string name="label_enter_name">Enter the email associated with your account and we’ll send an email with instruction to reset your password.</string>
     <string name="label_send_instruction">Send Instruction</string>
@@ -24,13 +24,13 @@
     <string name="email">Email</string>
     <string name="hello">Hello</string>
     <string name="guest_user">Guest User</string>
-    <string name="query_hint">Search for a doctor...</string>
-    <string name="appointment_today">Appointment Today</string>
+    <string name="query_hint">Search for a doctor…</string>
+    <string name="appointment_today">Upcoming Appointment</string>
     <string name="doctor_name">Dr. Bagas</string>
     <string name="doctor_specialist">Spesialis Jantung</string>
     <string name="icon_schedule">Icon Schedule</string>
     <string name="booking_schedule">Monday, 28 Des</string>
-    <string name="booking_time">11.00-12.30 PM</string>
+    <string name="booking_time">11.00–12.30 PM</string>
     <string name="article">Article</string>
     <string name="see_more">See More</string>
     <string name="dummy_tag">Kesehatan</string>
@@ -118,4 +118,16 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="schedule">Schedule</string>
     <string name="date">Monday, 28 December 2021</string>
     <string name="time">jam 12</string>
+    <string name="toast_error">Oops! something went wrong</string>
+    <string name="article_search_query">Search for article…</string>
+    <string name="fetch_article_failed">Fetch Article Failed</string>
+    <string name="fetch_article_empty">Fetch Article empty</string>
+    <string name="article_writer">Penulis : %1$s - %2$s</string>
+    <string name="article_updated">Terakhir diperbarui : %1$s</string>
+    <string name="profile_logout">Logout From Alodokter?</string>
+    <string name="profile_login_back_message">You can login back anytime you want</string>
+    <string name="empty_state_article">Empty State Article</string>
+    <string name="empty_state_article_empty_desc">Hmmm look like there’s no article.</string>
+    <string name="empty_state_article_error_desc">Something went wrong, please try again later</string>
+    <string name="empty_state_appointent_empty_desc">You have no upcoming appointment</string>
 </resources>

@@ -13,44 +13,47 @@
         <ImageView
             android:id="@+id/iv_article_photo"
             android:layout_width="@dimen/dimens_0"
-            android:layout_height="173dp"
+            android:layout_height="@dimen/dimens_300"
+            android:contentDescription="@string/image_article"
             android:scaleType="fitXY"
-            tools:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/image_article" />
+            tools:src="@drawable/ic_launcher_background" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/iv_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
-            android:layout_marginTop="@dimen/dimens_16"
+            android:padding="@dimen/dimens_10"
+            android:background="@drawable/bg_back_button"
+            android:hapticFeedbackEnabled="true"
+            android:layout_marginTop="@dimen/dimens_56"
+            android:contentDescription="@string/icon_back"
             app:layout_constraintStart_toStartOf="@+id/iv_article_photo"
             app:layout_constraintTop_toTopOf="@+id/iv_article_photo"
-            app:srcCompat="@drawable/ic_back_arrow"
-            android:contentDescription="@string/icon_back" />
+            app:srcCompat="@drawable/ic_back_arrow" />
 
         <TextView
             android:id="@+id/tv_article_title"
-            android:textSize="@dimen/font_20"
-            android:textColor="@color/text_black"
-            android:layout_width="379dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_16"
+            android:layout_marginTop="@dimen/dimens_24"
+            android:layout_marginEnd="@dimen/dimens_16"
             android:fontFamily="@font/poppins_medium"
-            tools:text="@string/dummy_article_title"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_article_photo" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_article_photo"
+            tools:text="@string/dummy_article_title" />
 
         <View
             android:id="@+id/divider"
-            android:layout_width="363dp"
-            android:layout_height="0.5dp"
+            android:layout_width="@dimen/dimens_363"
+            android:layout_height="@dimen/dimens_0_5"
             android:layout_marginTop="@dimen/dimens_16"
             android:background="@color/text_grey"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,16 +65,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/dummy_article_content"
-            android:textSize="14sp"
-            android:lineSpacingExtra="8dp"
             android:layout_marginTop="@dimen/dimens_16"
             android:layout_marginEnd="@dimen/dimens_16"
-            tools:textColor="@color/text_grey"
+            android:fontFamily="@font/poppins_medium"
+            android:lineSpacingExtra="@dimen/dimens_8"
+            android:textSize="@dimen/font_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider" />
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            tools:text="@string/dummy_article_content"
+            tools:textColor="@color/text_grey" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimens_16"
+            android:id="@+id/tv_article_writer"
+            app:layout_constraintTop_toBottomOf="@id/tv_article_content"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_article_updated"
+            android:layout_marginStart="@dimen/dimens_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_article_writer"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/iv_empty_state_article"
+            android:layout_width="@dimen/dimens_250"
+            android:layout_height="@dimen/dimens_200"
+            android:layout_marginTop="@dimen/dimens_200"
+            android:src="@drawable/ic_article"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_empty_state_article_desc"
+            android:contentDescription="@string/empty_state_article"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_empty_state_article_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimens_200"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/font_14"
+            tools:text="@string/empty_state_article_empty_desc"
+            app:layout_constraintTop_toBottomOf="@id/iv_empty_state_article"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

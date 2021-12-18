@@ -2,17 +2,7 @@ package com.rakamin.alodokter.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ArticleResponse(
-
-	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
-
-	@field:SerializedName("meta")
-	val meta: Meta? = null
-)
-
-data class DataItem(
-
+data class ArticleSearchResponse(
 	@field:SerializedName("penulis")
 	val penulis: String? = null,
 
@@ -36,13 +26,4 @@ data class DataItem(
 
 	@field:SerializedName("kategori")
 	val kategori: String? = null
-)
-
-data class Meta(
-
-	@field:SerializedName("total")
-	val total: Int? = null,
-
-	@field:SerializedName("count")
-	val count: Int? = null
 )

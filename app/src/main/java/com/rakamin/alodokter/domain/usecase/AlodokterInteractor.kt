@@ -1,10 +1,11 @@
 package com.rakamin.alodokter.domain.usecase
 
 import com.rakamin.alodokter.core.data.Resource
-import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.DoctorResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ForgotPasswordResponse
 import com.rakamin.alodokter.domain.model.*
+import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
+import com.rakamin.alodokter.core.data.source.remote.response.ArticleSearchResponse
 import com.rakamin.alodokter.domain.repository.IAlodokterRepository
 import io.reactivex.Flowable
 
@@ -40,6 +41,14 @@ class AlodokterInteractor(private val alodokterRepositoryImp: IAlodokterReposito
     
     override fun getArticle(): Flowable<Resource<List<ArticleModel>>> {
         return alodokterRepositoryImp.getArticle()
+    }
+
+    override fun articleSearch(query: String): Flowable<ApiResponse<List<ArticleSearchResponse>>> {
+        return alodokterRepositoryImp.articleSearch(query)
+    }
+
+    override fun getArticleById(id: Int): Flowable<Resource<List<ArticleModel>>> {
+        return alodokterRepositoryImp.getArticleById(id)
     }
 
     override fun getDoctor(): Flowable<Resource<List<ListDoctorModel>>> {

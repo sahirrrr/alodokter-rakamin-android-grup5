@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_home"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -81,7 +83,8 @@
         android:background="@drawable/bg_appointment_today"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_appointment_today" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_appointment_today"
+        android:visibility="gone"/>
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_doctor"
@@ -92,7 +95,8 @@
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="@id/view_appointment_today"
         app:layout_constraintTop_toTopOf="@id/view_appointment_today"
-        app:riv_corner_radius="50dp" />
+        app:riv_corner_radius="50dp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_doctor_name"
@@ -104,7 +108,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/font_16"
         app:layout_constraintStart_toEndOf="@id/iv_doctor"
-        app:layout_constraintTop_toTopOf="@id/iv_doctor" />
+        app:layout_constraintTop_toTopOf="@id/iv_doctor"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_doctor_specialist"
@@ -116,7 +121,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/font_14"
         app:layout_constraintBottom_toBottomOf="@id/iv_doctor"
-        app:layout_constraintStart_toEndOf="@id/iv_doctor" />
+        app:layout_constraintStart_toEndOf="@id/iv_doctor"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/view_schedule"
@@ -128,7 +134,8 @@
         android:background="@drawable/bg_schedule"
         app:layout_constraintEnd_toEndOf="@id/view_appointment_today"
         app:layout_constraintStart_toStartOf="@id/view_appointment_today"
-        app:layout_constraintTop_toBottomOf="@id/iv_doctor" />
+        app:layout_constraintTop_toBottomOf="@id/iv_doctor"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/ic_schedule"
@@ -142,7 +149,8 @@
         app:layout_constraintEnd_toStartOf="@id/tv_schedule"
         app:layout_constraintStart_toStartOf="@id/view_schedule"
         app:layout_constraintTop_toTopOf="@id/view_schedule"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_schedule"
@@ -156,7 +164,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_schedule"
         app:layout_constraintEnd_toStartOf="@+id/ic_time"
         app:layout_constraintStart_toEndOf="@id/ic_schedule"
-        app:layout_constraintTop_toTopOf="@id/view_schedule" />
+        app:layout_constraintTop_toTopOf="@id/view_schedule"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/ic_time"
@@ -169,7 +178,8 @@
         app:layout_constraintEnd_toStartOf="@id/tv_time"
         app:layout_constraintStart_toEndOf="@+id/tv_schedule"
         app:layout_constraintTop_toTopOf="@id/view_schedule"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_time"
@@ -183,7 +193,33 @@
         app:layout_constraintBottom_toBottomOf="@id/view_schedule"
         app:layout_constraintEnd_toEndOf="@id/view_schedule"
         app:layout_constraintStart_toEndOf="@id/ic_time"
-        app:layout_constraintTop_toTopOf="@id/view_schedule" />
+        app:layout_constraintTop_toTopOf="@id/view_schedule"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_empty_state_appointment"
+        android:layout_width="@dimen/dimens_250"
+        android:layout_height="@dimen/dimens_200"
+        android:contentDescription="@string/empty_state_article"
+        android:src="@drawable/ic_article"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/tv_empty_state_article_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_appointment_today" />
+
+    <TextView
+        android:id="@+id/tv_empty_state_appointment_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/empty_state_appointent_empty_desc"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/font_14"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_empty_state_appointment" />
 
     <TextView
         android:id="@+id/tv_article"
@@ -196,7 +232,7 @@
         android:textColor="@color/text_black"
         android:textSize="@dimen/font_18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_appointment_today" />
+        app:layout_constraintTop_toBottomOf="@id/tv_empty_state_article_desc" />
 
     <TextView
         android:id="@+id/tv_see_more"
@@ -218,19 +254,48 @@
         android:layout_marginStart="@dimen/dimens_16"
         android:layout_marginTop="@dimen/dimens_16"
         android:layout_marginEnd="@dimen/dimens_16"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_article"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_article" />
+
+    <ImageView
+        android:id="@+id/iv_empty_state_article"
+        android:layout_width="@dimen/dimens_250"
+        android:layout_height="@dimen/dimens_200"
+        android:layout_marginTop="@dimen/dimens_75"
+        android:src="@drawable/ic_article"
+        app:layout_constraintTop_toBottomOf="@id/tv_article"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_empty_state_article_desc"
+        android:contentDescription="@string/empty_state_article"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_empty_state_article_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_75"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/font_14"
+        tools:text="@string/empty_state_article_empty_desc"
+        app:layout_constraintTop_toBottomOf="@id/iv_empty_state_article"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/rv_article"
-        app:layout_constraintEnd_toEndOf="@id/rv_article"
-        app:layout_constraintStart_toStartOf="@+id/rv_article"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

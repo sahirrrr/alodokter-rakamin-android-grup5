@@ -47,7 +47,10 @@ data class DetailDoctorResponse(
 	val fakultas: String? = null,
 
 	@field:SerializedName("jurusan")
-	val jurusan: String? = null
+	val jurusan: String? = null,
+
+	@field:SerializedName("foto")
+	val foto: String? = null
 )
 
 data class ScheduleItem(

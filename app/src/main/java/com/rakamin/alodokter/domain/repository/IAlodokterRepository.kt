@@ -5,6 +5,10 @@ import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.data.source.remote.response.DoctorResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ForgotPasswordResponse
 import com.rakamin.alodokter.domain.model.*
+import com.rakamin.alodokter.core.data.source.remote.response.ArticleSearchResponse
+import com.rakamin.alodokter.domain.model.ArticleModel
+import com.rakamin.alodokter.domain.model.RegisterModel
+import com.rakamin.alodokter.domain.model.UserModel
 import io.reactivex.Flowable
 
 interface IAlodokterRepository {
@@ -25,9 +29,14 @@ interface IAlodokterRepository {
 
     fun getDoctor() : Flowable<Resource<List<ListDoctorModel>>>
 
+    fun getArticleById(id: Int) : Flowable<Resource<List<ArticleModel>>>
+
+    fun articleSearch(query: String): Flowable<ApiResponse<List<ArticleSearchResponse>>>
+
     fun getDoctorDetail(idDoctor: String) : Flowable<Resource<List<DetailDoctorModel>>>
 
     fun searchDoctor(query: String): Flowable<ApiResponse<List<DoctorResponse>>>
 
     fun userLogout()
+
 }

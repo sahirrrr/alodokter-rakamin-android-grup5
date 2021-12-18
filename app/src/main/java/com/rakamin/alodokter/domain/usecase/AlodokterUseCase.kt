@@ -6,8 +6,8 @@ import com.rakamin.alodokter.core.data.source.remote.response.DoctorResponse
 import com.rakamin.alodokter.core.data.source.remote.response.ForgotPasswordResponse
 import com.rakamin.alodokter.core.data.source.remote.response.User
 import com.rakamin.alodokter.domain.model.*
+import com.rakamin.alodokter.core.data.source.remote.response.ArticleSearchResponse
 import io.reactivex.Flowable
-import java.util.concurrent.Flow
 
 interface AlodokterUseCase {
 
@@ -24,6 +24,10 @@ interface AlodokterUseCase {
     fun getProfile(idUser: String) : Flowable<Resource<List<UserModel>>>
 
     fun getArticle() : Flowable<Resource<List<ArticleModel>>>
+
+    fun getArticleById(id : Int) : Flowable<Resource<List<ArticleModel>>>
+
+    fun articleSearch(query: String): Flowable<ApiResponse<List<ArticleSearchResponse>>>
 
     fun getDoctor() : Flowable<Resource<List<ListDoctorModel>>>
 

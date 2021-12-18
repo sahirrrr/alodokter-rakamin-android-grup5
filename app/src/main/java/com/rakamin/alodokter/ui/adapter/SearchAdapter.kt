@@ -12,8 +12,7 @@ import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
 import java.util.ArrayList
 
-class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
-
+class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     private val listArticle = ArrayList<ArticleModel>()
     fun setArticle(article: List<ArticleModel>?) {
         if (article == null) return
@@ -34,9 +33,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = listArticle.size
 
-
-    inner class ViewHolder(private val binding: ItemArticleBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: ArticleModel) {
             with(binding) {
                 tvTag.text = article.kategori
@@ -44,12 +41,13 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
                 Glide.with(itemView.context)
                     .load(article.foto)
                     .into(ivArticle)
-                itemView.setOnClickListener { view ->
-                    val mBundle = Bundle()
-                    article.id?.let { mBundle.putInt(ID_ARTICLE, it) }
-                    view.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
-                }
             }
+            itemView.setOnClickListener { view ->
+                val mBundle = Bundle()
+                article.id?.let { mBundle.putInt(ID_ARTICLE, it) }
+                view.findNavController().navigate(R.id.action_articleFragment_to_articleDetailFragment, mBundle)
+            }
+
         }
     }
 }

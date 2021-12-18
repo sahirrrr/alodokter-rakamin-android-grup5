@@ -10,5 +10,7 @@ data class ListDoctorModel(
 
     val rumahSakit: String? = null,
 
-    val hargaKonsul: Int? = null
+    val hargaKonsul: Int? = null,
+
+    val foto: String? = null
 )

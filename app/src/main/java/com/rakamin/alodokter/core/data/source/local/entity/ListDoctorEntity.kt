@@ -14,5 +14,7 @@ data class ListDoctorEntity (
 
     val rumahSakit: String? = null,
 
-    val hargaKonsul: Int? = null
+    val hargaKonsul: Int? = null,
+
+    val foto: String? = null
 )

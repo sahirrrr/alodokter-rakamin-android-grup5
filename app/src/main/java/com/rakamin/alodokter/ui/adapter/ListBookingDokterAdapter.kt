@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.utils.Helper
 import com.rakamin.alodokter.core.utils.ID_DOCTOR
 import com.rakamin.alodokter.databinding.ItemListBookingDokterBinding
 import com.rakamin.alodokter.domain.model.ListDoctorModel
@@ -42,9 +43,10 @@ class ListBookingDokterAdapter: RecyclerView.Adapter<ListBookingDokterAdapter.Vi
             with(binding) {
                 tvDoctorName.text = listDoctor.nama
                 tvDoctorSpecialist.text = listDoctor.spesialis
-                tvPriceBooking.text = listDoctor.hargaKonsul.toString()
+                val price = Helper.convertToCurrency(listDoctor.hargaKonsul)
+                tvPriceBooking.text = price
                 Glide.with(itemView.context)
-                    .load(R.drawable.ic_launcher_background)
+                    .load(listDoctor.foto)
                     .into(ivDoctor)
 
                 itemView.setOnClickListener { view ->
