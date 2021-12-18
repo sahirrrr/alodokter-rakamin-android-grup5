@@ -10,6 +10,7 @@ class ProfileViewModel (private val alodokterUseCase : AlodokterUseCase) : ViewM
 
     fun userProfile(idUser : String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getProfile(idUser))
 
-    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.putUserProfile(idUser, noHp, tglLahir, kotaKab))
+    fun putUserProfile(accessToken: String, idUser: String, name: String, noHp: String, tglLahir: String, kotaKab: String) = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.putUserProfile(accessToken, idUser, name, noHp, tglLahir, kotaKab))
 
+    val getUserData = LiveDataReactiveStreams.fromPublisher(alodokterUseCase.getUserData())
 }

@@ -30,7 +30,9 @@ interface ApiService {
     @FormUrlEncoded
     @PUT("pasien/update/{id_user}")
     fun putUserProfile(
+        @Header("Authorization:") accessToken: String,
         @Path("id_user") id_user: String,
+        @Field("nama") name: String,
         @Field("no_hp") no_hp: String,
         @Field("tanggal_lahir") tanggal_lahir: String,
         @Field("kabupaten_kota") kabupaten_kota: String,

@@ -42,6 +42,10 @@ class ProfileFragment : Fragment() {
         val idUser = sessionRepository.getIdUser().toString()
 
         showProfile(idUser)
+
+        binding?.viewProfile?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_editProfileFragment)
+        }
         
         binding?.btnLogout?.setOnClickListener {
             userLogout()

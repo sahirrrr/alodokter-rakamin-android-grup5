@@ -23,4 +23,6 @@ data class UserEntity(
     val kabupatenKota: String? = null,
 
     val foto: String? = null,
+
+    val token: String? = null
 )

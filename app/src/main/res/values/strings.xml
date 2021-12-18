@@ -132,4 +132,5 @@ Dr. Sonny Seputra M. Ked Klin, Sp.B FINACS
     <string name="empty_state_appointent_empty_desc">You have no upcoming appointment</string>
     <string name="no_schedule">%1$s have no schedule for this week.</string>
     <string name="date_schedule">%1$s, %2$s</string>
+    <string name="date_of_birth">Date of birth</string>
 </resources>

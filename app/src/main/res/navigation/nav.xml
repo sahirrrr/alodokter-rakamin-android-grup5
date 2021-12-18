@@ -108,7 +108,7 @@
         android:title="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            android:id="@+id/action_navigation_profile_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
         <action
             android:id="@+id/action_navigation_profile_to_loginFragment"

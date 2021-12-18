@@ -13,9 +13,9 @@ import io.reactivex.subjects.PublishSubject
 @SuppressLint("CheckResult")
 class RemoteDataSource(private val apiService: ApiService) {
 
-    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<ApiResponse<LoginResponse>> {
+    fun putUserProfile(accessToken: String ,idUser: String, name: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<ApiResponse<LoginResponse>> {
         val responseResult = PublishSubject.create<ApiResponse<LoginResponse>>()
-        val client = apiService.putUserProfile(idUser, noHp, tglLahir, kotaKab)
+        val client = apiService.putUserProfile(accessToken, idUser, name, noHp, tglLahir, kotaKab)
         client
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())

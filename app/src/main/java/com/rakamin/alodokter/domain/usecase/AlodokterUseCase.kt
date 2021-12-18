@@ -14,7 +14,7 @@ interface AlodokterUseCase {
 
     fun getUserData() : Flowable<List<UserModel>>
 
-    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<Resource<List<UserModel>>>
+    fun putUserProfile(accessToken: String, idUser: String, name: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<Resource<List<UserModel>>>
 
     fun postRegister(name: String, email: String, password: String, passwordConfirmation: String) : Flowable<Resource<List<RegisterModel>>>
 

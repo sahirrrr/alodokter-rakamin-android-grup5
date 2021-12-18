@@ -108,7 +108,7 @@
         android:layout_height="@dimen/dimens_60"
         android:layout_marginStart="@dimen/dimens_16"
         android:layout_marginTop="@dimen/dimens_24"
-        android:src="@drawable/photo"
+        android:src="@drawable/ic_profile_photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_corner_radius="@dimen/dimens_10" />
@@ -156,6 +156,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/custom_progress"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
