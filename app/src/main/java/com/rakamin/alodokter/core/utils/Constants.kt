@@ -11,3 +11,12 @@ const val EXTRA_DATA = "extra_data"
 
 // Doctor Constants
 const val ID_DOCTOR = "id_doctor"
+
+// Article Constants
+const val ID_ARTICLE = "id_article"
+
+// Search Constants
+const val EXTRA_QUERY = "extra_query"
+
+// Edit User Profile Constant
+const val USER_DATA = "user_data"

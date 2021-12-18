@@ -1,60 +1,93 @@
 package com.rakamin.alodokter.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rakamin.alodokter.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.utils.USER_DATA
+import com.rakamin.alodokter.databinding.FragmentEditProfileBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel: EditProfileViewModel by viewModel()
+
+    private var _binding: FragmentEditProfileBinding? = null
+    private val binding get() = _binding
+    private var root : View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
+        root = binding?.root
+        return root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        showProfile()
+
+        binding?.btnSave?.setOnClickListener {
+            val noHp = binding?.edtPhoneNumber?.text.toString().trim()
+            val tglLahir = binding?.edtBirthday?.text.toString().trim()
+            val kotaKab = binding?.edtCity?.text.toString().trim()
+
+            val mBundle = Bundle()
+            viewModel.putUserProfile("1", noHp, tglLahir, kotaKab).observe(viewLifecycleOwner, { putUserProfile ->
+                if (putUserProfile != null) {
+                    when(putUserProfile) {
+                        is Resource.Success -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            mBundle.putBoolean(USER_DATA, true)
+                            Toast.makeText(requireContext(), "Your profile has been update!", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            mBundle.putBoolean(USER_DATA, false)
+                            Toast.makeText(requireContext(), "Failed to update!", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Loading -> {
+                            binding?.progressBar?.visibility = View.VISIBLE
+                            Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+    private fun showProfile() {
+        viewModel.userProfile("1").observe(viewLifecycleOwner, { showProfile ->
+            if (showProfile != null) {
+                when(showProfile) {
+                    is Resource.Success -> {
+                        val dataArray = showProfile.data
+                        if (dataArray != null) {
+                            for (data in dataArray) {
+                                binding?.edtName?.hint = data.nama
+                                binding?.edtPhoneNumber?.hint = data.noHp
+                                binding?.edtBirthday?.hint = data.tanggalLahir
+                                binding?.edtCity?.hint = data.kabupatenKota
+                            }
+                        }
+                    }
+                    is Resource.Error -> {
+                        binding?.edtName?.hint = ""
+                        binding?.edtPhoneNumber?.hint = ""
+                        binding?.edtBirthday?.hint = ""
+                        binding?.edtCity?.hint = ""
+                        Toast.makeText(requireContext(), "Opps! something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Loading -> Toast.makeText(requireContext(), "Loading..", Toast.LENGTH_SHORT).show()
                 }
             }
+        })
     }
+
 }

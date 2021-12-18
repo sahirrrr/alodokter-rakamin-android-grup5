@@ -13,12 +13,6 @@ interface ApiService {
         @Field("password") password: String,
     ): Flowable<LoginResponse>
 
-    @GET("pasien/detail/{id_user}")
-    fun showProfile(@Path("id_user") id_user : String): Flowable<ProfileResponse>
-
-    @GET("article")
-    fun getArticles(): Flowable<ArticleResponse>
-  
     @FormUrlEncoded
     @POST("pasien/register")
     fun postRegister(
@@ -28,13 +22,49 @@ interface ApiService {
         @Field("password_confirmation") passwordConfirmation: String,
     ): Flowable<RegisterResponse>
 
+    @GET("pasien/detail/{id_user}")
+    fun showProfile(
+        @Path("id_user") id_user: String
+    ): Flowable<ProfileResponse>
+
+    @FormUrlEncoded
+    @PUT("pasien/update/{id_user}")
+    fun putUserProfile(
+        @Path("id_user") id_user: String,
+        @Field("no_hp") no_hp: String,
+        @Field("tanggal_lahir") tanggal_lahir: String,
+        @Field("kabupaten_kota") kabupaten_kota: String,
+    ) : Flowable<EditProfileResponse>
+
+    @GET("article")
+    fun getArticles(): Flowable<ArticleResponse>
+
+    @GET("article/detail/{id_article}")
+    fun getArticleById(
+        @Path("id_article") id_article: Int
+    ): Flowable<ArticleResponse>
+
+    @GET("article/search/{judul}")
+    fun articleSearch(
+        @Path("judul") query : String
+    ): Flowable<List<ArticleSearchResponse>>
+
+    @FormUrlEncoded
+    @POST("password/forgot")
+    fun postForgotPassword(
+        @Field("email") email: String
+    ) : Flowable<ForgotPasswordResponse>
+
     @GET ("doctor")
     fun getDoctor(): Flowable<ListDoctorResponse>
+
+    @GET("doctor/detail/{id_doctor}")
+    fun getDoctorDetail(@Path("id_doctor") id_doctor : String) : Flowable<DetailDoctorResponse>
 
     @GET("doctor/search/{nama}")
     fun searchDoctor(
         @Path("nama") query : String
-        ): Flowable<List<DoctorResponse>>
+    ): Flowable<List<DoctorResponse>>
 
 }
 

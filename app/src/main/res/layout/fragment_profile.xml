@@ -140,7 +140,7 @@
         android:id="@+id/btn_logout"
         style="@style/buttonRounded"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_56"
+        android:layout_height="@dimen/dimens_64"
         android:layout_marginStart="@dimen/dimens_16"
         android:layout_marginTop="@dimen/dimens_48"
         android:layout_marginEnd="@dimen/dimens_16"

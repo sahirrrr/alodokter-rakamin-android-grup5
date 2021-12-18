@@ -6,6 +6,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -95,7 +96,13 @@ class RegisterFragment : Fragment() {
             })
 
         invalidFieldStream.subscribe { isValid ->
-            binding?.btnRegister?.isEnabled = isValid
+            if (isValid) {
+                binding?.btnRegister?.isEnabled = true
+                binding?.btnRegister?.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.button))
+            } else {
+                binding?.btnRegister?.isEnabled = false
+                binding?.btnRegister?.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.text_grey))
+            }
         }
 
         binding?.btnRegister?.setOnClickListener {
@@ -122,6 +129,10 @@ class RegisterFragment : Fragment() {
                     }
                 }
             })
+        }
+
+        binding?.tvLogin?.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

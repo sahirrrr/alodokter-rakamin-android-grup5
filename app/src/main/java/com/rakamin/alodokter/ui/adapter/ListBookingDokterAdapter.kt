@@ -3,9 +3,11 @@ package com.rakamin.alodokter.ui.adapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.utils.Helper
 import com.rakamin.alodokter.core.utils.ID_DOCTOR
 import com.rakamin.alodokter.databinding.ItemListBookingDokterBinding
 import com.rakamin.alodokter.domain.model.ListDoctorModel
@@ -41,16 +43,16 @@ class ListBookingDokterAdapter: RecyclerView.Adapter<ListBookingDokterAdapter.Vi
             with(binding) {
                 tvDoctorName.text = listDoctor.nama
                 tvDoctorSpecialist.text = listDoctor.spesialis
-                tvPriceBooking.text = listDoctor.hargaKonsul.toString()
+                val price = Helper.convertToCurrency(listDoctor.hargaKonsul)
+                tvPriceBooking.text = price
                 Glide.with(itemView.context)
-                    .load(R.drawable.ic_launcher_background)
+                    .load(listDoctor.foto)
                     .into(ivDoctor)
 
                 itemView.setOnClickListener { view ->
                     val mBundle = Bundle()
-                    listDoctor.id?.let { mBundle.putInt(ID_DOCTOR, it) }
-                   // view.findNavController()
-                        //.navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
+                    listDoctor.id?.let { mBundle.putString(ID_DOCTOR, it.toString()) }
+                    view.findNavController().navigate(R.id.action_navigation_booking_to_detailDoctorFragment, mBundle)
                 }
             }
         }

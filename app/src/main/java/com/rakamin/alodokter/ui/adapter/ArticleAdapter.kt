@@ -1,18 +1,20 @@
 package com.rakamin.alodokter.ui.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rakamin.alodokter.R
+import com.rakamin.alodokter.core.utils.ID_ARTICLE
 import com.rakamin.alodokter.databinding.ItemArticleBinding
 import com.rakamin.alodokter.domain.model.ArticleModel
 import java.util.ArrayList
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
-    private val listArticle = ArrayList<ArticleModel>()
 
+    private val listArticle = ArrayList<ArticleModel>()
     fun setArticle(article: List<ArticleModel>?) {
         if (article == null) return
         this.listArticle.clear()
@@ -30,22 +32,26 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
         holder.bind(article)
     }
 
-    override fun getItemCount(): Int {
-        return listArticle.size
-    }
+    override fun getItemCount(): Int = listArticle.size
 
-    inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class ViewHolder(private val binding: ItemArticleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(article: ArticleModel) {
             with(binding) {
-                tvTag.text = article.judul
-                tvTitleArticle.text = article.konten
+                tvTag.text = article.kategori
+                tvTitleArticle.text = article.judul
                 Glide.with(itemView.context)
-                    .load(R.drawable.ic_article_image)
+                    .load(article.foto)
                     .into(ivArticle)
-            }
-            itemView.setOnClickListener {
-                Toast.makeText(itemView.context,"You Clicked ${article.judul}",Toast.LENGTH_SHORT).show()
+                itemView.setOnClickListener { view ->
+                    val mBundle = Bundle()
+                    article.id?.let { mBundle.putInt(ID_ARTICLE, it) }
+                    view.findNavController().navigate(R.id.action_homeFragment_to_detailFragment, mBundle)
+                }
             }
         }
     }
 }
+
+

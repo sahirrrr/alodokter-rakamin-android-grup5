@@ -1,24 +1,27 @@
 package com.rakamin.alodokter.ui.article
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
+import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
+import com.rakamin.alodokter.core.utils.DataMapper
 import com.rakamin.alodokter.databinding.FragmentArticleBinding
-import com.rakamin.alodokter.databinding.FragmentHomeBinding
-import com.rakamin.alodokter.ui.adapter.ArticleAdapter
+import com.rakamin.alodokter.ui.adapter.SearchAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class ArticleFragment : Fragment() {
 
     private val viewModel: ArticleViewModel by viewModel()
-    private val articleAdapter = ArticleAdapter()
+    private val searchAdapter = SearchAdapter()
 
     private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding
@@ -34,21 +37,80 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showArticleList()
+        articleSearch()
+    }
+
+    private fun articleSearch() {
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val svArticle = binding?.svArticle
+
+        svArticle?.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+
+        svArticle?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                svArticle.clearFocus()
+                if (query != null) {
+                    search(query)
+                    binding?.progressBar?.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.empty_search), Toast.LENGTH_SHORT).show()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+    }
+
+    private fun search(query: String) {
+        viewModel.articleSearch(query).observe(viewLifecycleOwner, { searchResult ->
+            if (searchResult != null) {
+                when (searchResult) {
+                    is ApiResponse.Empty -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_empty_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
+                    }
+                    is ApiResponse.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_error_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
+                    }
+                    is ApiResponse.Success -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        binding?.ivEmptyStateArticle?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.GONE
+                        val result = searchResult.data
+                        val newResult = DataMapper.mapArticleSearchResponseToDomain(result)
+                        searchAdapter.setArticle(newResult)
+                        showRvArticle()
+                    }
+                }
+            }
+        })
     }
 
     private fun showArticleList() {
-        viewModel.getArticle().observe(viewLifecycleOwner,{ article ->
+        viewModel.getArticle().observe(viewLifecycleOwner, { article ->
             if (article != null) {
-                when(article) {
+                when (article) {
                     is Resource.Success -> {
-                        val articles = article.data
-                        articleAdapter.setArticle(articles)
                         binding?.progressBar?.visibility = View.GONE
+                        binding?.ivEmptyStateArticle?.visibility = View.GONE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.GONE
+                        val articles = article.data
+                        searchAdapter.setArticle(articles)
                         showRvArticle()
                     }
                     is Resource.Error -> {
                         binding?.progressBar?.visibility = View.GONE
-                        Toast.makeText(requireContext(), "Fetch Article Failed", Toast.LENGTH_SHORT).show()
+                        binding?.tvEmptyStateArticleDesc?.text = getString(R.string.empty_state_article_error_desc)
+                        binding?.ivEmptyStateArticle?.visibility = View.VISIBLE
+                        binding?.tvEmptyStateArticleDesc?.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> binding?.progressBar?.visibility = View.VISIBLE
                 }
@@ -56,11 +118,11 @@ class ArticleFragment : Fragment() {
         })
     }
 
-    private fun showRvArticle(){
+    private fun showRvArticle() {
         with(binding?.rvArticle) {
             this?.layoutManager = LinearLayoutManager(context)
             this?.setHasFixedSize(true)
-            this?.adapter = articleAdapter
+            this?.adapter = searchAdapter
         }
     }
 

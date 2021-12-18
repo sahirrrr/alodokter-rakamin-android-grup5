@@ -66,6 +66,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_16"
             android:layout_marginEnd="@dimen/dimens_16"
@@ -88,7 +89,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/label_forgot_password"
+            android:id="@+id/tv_forgot_password"
             android:layout_width="118dp"
             android:layout_height="0dp"
             android:layout_marginStart="42dp"
@@ -108,7 +109,7 @@
             android:layout_marginStart="@dimen/dimens_16"
             android:layout_marginTop="@dimen/dimens_48"
             android:layout_marginEnd="@dimen/dimens_16"
-            android:backgroundTint="@color/button"
+            app:backgroundTint="@color/button"
             android:text="@string/label_login"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"

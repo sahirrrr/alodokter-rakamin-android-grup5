@@ -13,6 +13,21 @@ import io.reactivex.subjects.PublishSubject
 @SuppressLint("CheckResult")
 class RemoteDataSource(private val apiService: ApiService) {
 
+    fun putUserProfile(idUser: String, noHp: String, tglLahir: String, kotaKab: String) : Flowable<ApiResponse<EditProfileResponse>> {
+        val responseResult = PublishSubject.create<ApiResponse<EditProfileResponse>>()
+        val client = apiService.putUserProfile(idUser, noHp, tglLahir, kotaKab)
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            }, {error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
+            })
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
     fun postUserLogin(email: String, password: String): Flowable<ApiResponse<LoginResponse>> {
         val responseResult = PublishSubject.create<ApiResponse<LoginResponse>>()
         val client = apiService.postLogin(email, password)
@@ -57,7 +72,22 @@ class RemoteDataSource(private val apiService: ApiService) {
             })
         return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
-    
+
+    fun postForgotPassword(email: String): Flowable<ApiResponse<ForgotPasswordResponse>> {
+        val responseResult = PublishSubject.create<ApiResponse<ForgotPasswordResponse>>()
+        val client = apiService.postForgotPassword(email)
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            }, { error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
+            })
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
     fun getArticle(): Flowable<ApiResponse<ArticleResponse>> {
         val responseResult = PublishSubject.create<ApiResponse<ArticleResponse>>()
         val client = apiService.getArticles()
@@ -73,6 +103,32 @@ class RemoteDataSource(private val apiService: ApiService) {
         return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 
+    fun getArticleById(id: Int) : Flowable<ApiResponse<ArticleResponse>>{
+        val responseBody = PublishSubject.create<ApiResponse<ArticleResponse>>()
+        val client = apiService.getArticleById(id)
+        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                responseBody.onNext(ApiResponse.Success(it))
+            },{
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
+        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    fun articleSearch(query : String) : Flowable<ApiResponse<List<ArticleSearchResponse>>>{
+        val responseBody = PublishSubject.create<ApiResponse<List<ArticleSearchResponse>>>()
+        val client = apiService.articleSearch(query)
+        client.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                responseBody.onNext(ApiResponse.Success(it))
+            },{
+                responseBody.onNext(ApiResponse.Error(it.message.toString()))
+            })
+        return responseBody.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
     fun getDataDoctor(): Flowable<ApiResponse<ListDoctorResponse>>{
         val responseResult = PublishSubject.create<ApiResponse<ListDoctorResponse>>()
         val client = apiService.getDoctor()
@@ -86,6 +142,21 @@ class RemoteDataSource(private val apiService: ApiService) {
                 responseResult.onNext(ApiResponse.Error(error.message.toString()))
             })
         return responseResult.toFlowable((BackpressureStrategy.BUFFER))
+    }
+
+    fun getDoctorDetail(idDoctor: String): Flowable<ApiResponse<DetailDoctorResponse>> {
+        val responseResult = PublishSubject.create<ApiResponse<DetailDoctorResponse>>()
+        val client = apiService.getDoctorDetail(idDoctor)
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                responseResult.onNext(ApiResponse.Success(response))
+            }, { error ->
+                responseResult.onNext(ApiResponse.Error(error.message.toString()))
+            })
+        return responseResult.toFlowable(BackpressureStrategy.BUFFER)
     }
 
     fun searchDoctor(query : String): Flowable<ApiResponse<List<DoctorResponse>>>{

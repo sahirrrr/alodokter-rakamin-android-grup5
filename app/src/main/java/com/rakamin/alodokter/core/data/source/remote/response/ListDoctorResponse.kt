@@ -26,4 +26,7 @@ data class DoctorResponse(
     @field:SerializedName("rumah_sakit")
     val rumahSakit: String? = null,
 
+    @field:SerializedName("foto")
+    val foto: String? = null
+
 )

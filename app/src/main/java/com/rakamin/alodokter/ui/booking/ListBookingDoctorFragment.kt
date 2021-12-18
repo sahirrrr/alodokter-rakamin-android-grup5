@@ -14,21 +14,22 @@ import com.rakamin.alodokter.R
 import com.rakamin.alodokter.core.data.Resource
 import com.rakamin.alodokter.core.data.source.remote.network.ApiResponse
 import com.rakamin.alodokter.core.utils.DataMapper
-import com.rakamin.alodokter.databinding.FragmentListBookingDokterBinding
+import com.rakamin.alodokter.core.utils.EXTRA_QUERY
+import com.rakamin.alodokter.databinding.FragmentListBookingDoctorBinding
 import com.rakamin.alodokter.ui.adapter.ListBookingDokterAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ListBookingDokterFragment : Fragment() {
+class ListBookingDoctorFragment : Fragment() {
 
-    private val viewModel: ListBookingDokterViewModel by viewModel()
+    private val viewModel: DoctorViewModel by viewModel()
     private val doctorAdapter = ListBookingDokterAdapter()
 
-    private var _binding: FragmentListBookingDokterBinding? = null
+    private var _binding: FragmentListBookingDoctorBinding? = null
     private val binding get() = _binding
     private var root: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentListBookingDokterBinding.inflate(inflater, container, false)
+        _binding = FragmentListBookingDoctorBinding.inflate(inflater, container, false)
         root = binding?.root
         return root
     }
@@ -36,8 +37,15 @@ class ListBookingDokterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showDoctorList()
-        doctorSearch()
+        if (arguments != null) {
+            val query = requireArguments().getString(EXTRA_QUERY)
+            if (query != null) {
+                search(query)
+            }
+        } else {
+            doctorSearch()
+            showDoctorList()
+        }
     }
 
     private fun doctorSearch() {
@@ -51,7 +59,6 @@ class ListBookingDokterFragment : Fragment() {
                 svListDoctor.clearFocus()
                 if (query != null) {
                     search(query)
-                    binding?.progressBar?.visibility = View.VISIBLE
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.empty_search), Toast.LENGTH_SHORT).show()
                 }
