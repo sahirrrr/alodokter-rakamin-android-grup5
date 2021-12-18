@@ -27,6 +27,15 @@ interface ApiService {
         @Path("id_user") id_user: String
     ): Flowable<ProfileResponse>
 
+    @FormUrlEncoded
+    @PUT("pasien/update/{id_user}")
+    fun putUserProfile(
+        @Path("id_user") id_user: String,
+        @Field("no_hp") no_hp: String,
+        @Field("tanggal_lahir") tanggal_lahir: String,
+        @Field("kabupaten_kota") kabupaten_kota: String,
+    ) : Flowable<EditProfileResponse>
+
     @GET("article")
     fun getArticles(): Flowable<ArticleResponse>
 

@@ -20,7 +20,26 @@ object DataMapper {
         }
     }
 
-    fun mapLoginResponseToEntities(data: LoginResponse): List<UserEntity> {
+    fun mapEditProfileResponseToEntities(data : EditProfileResponse): List<UserEntity> {
+        val editUserProfile = ArrayList<UserEntity>()
+        with(data.user) {
+            val user = UserEntity(
+                this?.id,
+                this?.nama,
+                this?.email,
+                this?.jenisKelamin,
+                this?.umur,
+                this?.tanggalLahir,
+                this?.noHp,
+                this?.kabupatenKota,
+                this?.foto
+            )
+            editUserProfile.add(user)
+        }
+        return editUserProfile
+    }
+
+    fun mapLoginResponseToEntities(data : LoginResponse) : List<UserEntity> {
         val userLogin = ArrayList<UserEntity>()
         with(data.user) {
             val user = UserEntity(
